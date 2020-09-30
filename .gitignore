@@ -3,10 +3,10 @@
 .RData
 .Ruserdata
 001_WP1/001_Stream_Network/001_data_raw
-001_WP1/001_Stream_Network/03_data_processed
+001_WP1/001_Stream_Network/003_data_processed
 001_WP1/002_Geology/001_data_raw
-001_WP1/002_Geology/03_data_processed
+001_WP1/002_Geology/003_data_processed
 001_WP1/003_corine_land_cover/001_data_raw
-001_WP1/003_corine_land_cover/03_data_processed
+001_WP1/003_corine_land_cover/003_data_processed
 001_WP1/004_modelling_discharge/001_data_raw
-001_WP1/004_modelling_discharge/03_data_processed
+001_WP1/004_modelling_discharge/003_data_processed
