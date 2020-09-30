@@ -1,0 +1,5 @@
+07.09.19
+Its important to know where exactly the measuring stations lie to know whether: 
+- they are at least close to the rivers? 
+- are multiple measurments within one cell? 
+- where are the outliers? 
