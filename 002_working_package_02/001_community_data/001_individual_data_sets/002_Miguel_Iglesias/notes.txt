@@ -1,5 +1,0 @@
-19/02/19
-
-Sowohl Invertebraten als auch PA Daten sind schlecht aufgelöst. Diatomendaten in der clean version gut nutzbar.
-
-Chemicstry.xlsx von www.datossuperficiales.chebro.es runtergeladen. Entspricht allen chemischen Daten von 01/01/10 bis 31/12/14.
