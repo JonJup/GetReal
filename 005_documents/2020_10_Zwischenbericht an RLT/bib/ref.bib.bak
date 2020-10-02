@@ -1,0 +1,97 @@
+% Encoding: UTF-8
+
+@Article{Kahlert2020,
+  author          = {Kahlert, Maria and R{\"{u}}hland, Kathleen M. and Lavoie, Isabelle and Keck, Fran{\c{c}}ois and Saulnier-Talbot, Emilie and Bogan, Daniel and Brua, Robert B. and Campeau, St{\'{e}}phane and Christoffersen, Kirsten S. and Culp, Joseph M. and Karjalainen, Satu Maaria and Lento, Jennifer and Schneider, Susanne C. and Shaftel, Rebecca and Smol, John P.},
+  journal         = {Freshwater Biology},
+  title           = {{Biodiversity patterns of Arctic diatom assemblages in lakes and streams: Current reference conditions and historical context for biomonitoring}},
+  year            = {2020},
+  issn            = {13652427},
+  number          = {April 2019},
+  pages           = {1--25},
+  abstract        = {Comprehensive assessments of contemporary diatom distributions across the Arctic remain scarce. Furthermore, studies tracking species compositional differences across space and time, as well as diatom responses to climate warming, are mainly limited to paleolimnological studies due to a lack of routine monitoring in lakes and streams across vast areas of the Arctic. The study aims to provide a spatial assessment of contemporary species distributions across the circum-Arctic, establish contemporary biodiversity patterns of diatom assemblages to use as reference conditions for future biomonitoring assessments, and determine pre-industrial baseline conditions to provide historical context for modern diatom distributions. Diatom assemblages were assessed using information from ongoing regulatory monitoring programmes, individual research projects, and from surface sediment layers obtained from lake cores. Pre-industrial baseline conditions as well as the nature, direction and magnitude of changes in diatom assemblages over the past c. 200 years were determined by comparing surface sediment samples (i.e. containing modern assemblages) with a sediment interval deposited prior to the onset of significant anthropogenic activities (i.e. containing pre-1850 assemblages), together with an examination of diatoms preserved in contiguous samples from dated sediment cores. We identified several biotypes with distinct diatom assemblages using contemporary diatom data from both lakes and streams, including a biotype typical for High Arctic regions. Differences in diatom assemblage composition across circum-Arctic regions were gradual rather than abrupt. Species richness was lowest in High Arctic regions compared to Low Arctic and sub-Arctic regions, and higher in lakes than in streams. Dominant diatom taxa were not endemic to the Arctic. Species richness in both lakes and streams reached maximum values between 60°N and 75°N but was highly variable, probably reflecting differences in local and regional environmental factors and possibly sampling effort. We found clear taxon-specific differences between contemporary and pre-industrial samples that were often specific to both ecozone and lake depth. Regional patterns of species turnover ($\beta$-diversity) in the past c. 200 years revealed that regions of the Canadian High Arctic and the Hudson Bay Lowlands to the south showed most compositional change, whereas the easternmost regions of the Canadian Arctic changed least. As shown in previous Arctic diatom studies, global warming has already affected these remote high latitude ecosystems. Our results provide reference conditions for future environmental monitoring programmes in the Arctic. Furthermore, diatom taxa identification and harmonisation require improvement, starting with circum-Arctic intercalibrations. Despite the challenges posed by the remoteness of the Arctic, our study shows the need for routine monitoring programmes that have a wide geographical coverage for both streams and lakes.},
+  annote          = {Viele infos zu Arten},
+  doi             = {10.1111/fwb.13490},
+  file            = {:C$\backslash$:/Users/jonat/Documents/10{\_}Paper/Kahlert et al. - 2020 - Biodiversity patterns of Arctic diatom assemblages in lakes and streams Current reference conditions and histori.pdf:pdf},
+  keywords        = {circumpolar,diatom biotypes,environmental monitoring,global warming,paleolimnology},
+  mendeley-groups = {004{\_}Projekte/GetReal/WP2/Diatomen},
+}
+
+@Article{Lee2019,
+  author          = {Lee, Sylvia S. and Bishop, Ian W. and Spaulding, Sarah A. and Mitchell, Richard M. and Yuan, Lester L.},
+  journal         = {Ecological Indicators},
+  title           = {{Taxonomic harmonization may reveal a stronger association between diatom assemblages and total phosphorus in large datasets}},
+  year            = {2019},
+  issn            = {1470160X},
+  number          = {October 2018},
+  pages           = {166--174},
+  volume          = {102},
+  abstract        = {Diatom data have been collected in large-scale biological assessments in the United States, such as the U.S. Environmental Protection Agency's National Rivers and Streams Assessment (NRSA). However, the effectiveness of diatoms as indicators may suffer if inconsistent taxon identifications across different analysts obscure the relationships between assemblage composition and environmental variables. To reduce these inconsistencies, we harmonized the 2008–2009 NRSA data from nine analysts by updating names to current synonyms and by statistically identifying taxa with high analyst signal (taxa with more variation in relative abundance explained by the analyst factor, relative to environmental variables). We then screened a subset of samples with QA/QC data and combined taxa with mismatching identifications by the primary and secondary analysts. When these combined “slash groups” did not reduce analyst signal, we elevated taxa to the genus level or omitted taxa in difficult species complexes. We examined the variation explained by analyst in the original and revised datasets. Further, we examined how revising the datasets to reduce analyst signal can reduce inconsistency, thereby uncovering the variation in assemblage composition explained by total phosphorus (TP), an environmental variable of high priority for water managers. To produce a revised dataset with the greatest taxonomic consistency, we ultimately made 124 slash groups, omitted 7 taxa in the small naviculoid (e.g., Sellaphora atomoides) species complex, and elevated Nitzschia, Diploneis, and Tryblionella taxa to the genus level. Relative to the original dataset, the revised dataset had more overlap among samples grouped by analyst in ordination space, less variation explained by the analyst factor, and more than double the variation in assemblage composition explained by TP. Elevating all taxa to the genus level did not eliminate analyst signal completely, and analyst remained the most important predictor for the genera Sellaphora, Mayamaea, and Psammodictyon, indicating that these taxa present the greatest obstacle to consistent identification in this dataset. Although our process did not completely remove analyst signal, this work provides a method to minimize analyst signal and improve detection of diatom association with TP in large datasets involving multiple analysts. Examination of variation in assemblage data explained by analyst and taxonomic harmonization may be necessary steps for improving data quality and the utility of diatoms as indicators of environmental variables.},
+  doi             = {10.1016/j.ecolind.2019.01.061},
+  file            = {:C$\backslash$:/Users/jonat/Documents/10{\_}Paper/Lee et al. - 2019 - Taxonomic harmonization may reveal a stronger association between diatom assemblages and total phosphorus in large d.pdf:pdf},
+  keywords        = {Bioassessment,Data harmonization,Diatoms,Intercalibration,Random forest,Taxonomic inconsistency,Total phosphorus},
+  mendeley-groups = {004{\_}Projekte/GetReal/WP2/Diatomen},
+  publisher       = {Elsevier},
+  url             = {https://doi.org/10.1016/j.ecolind.2019.01.061},
+}
+
+@Article{lecointe1993omnidia,
+  author    = {Lecointe, C and Coste, Marine and Prygiel, J},
+  journal   = {Hydrobiologia},
+  title     = {“Omnidia”: software for taxonomy, calculation of diatom indices and inventories management},
+  year      = {1993},
+  number    = {1},
+  pages     = {509--513},
+  volume    = {269},
+  publisher = {Springer},
+}
+
+@Article{Mauch2017,
+  author          = {Mauch, E. and Schmedtje, Ursula and Maetze, A. and Fischer, F.},
+  journal         = {Informationsberichte des Bayerischen Landesamtes f{\"{u}}r Wasserwirtschaft},
+  title           = {{Taxaliste der Gew{\"{a}}sserorganismen Deutschlands}},
+  year            = {2017},
+  number          = {3},
+  volume          = {1},
+  mendeley-groups = {004{\_}Projekte/GetReal/WP2/Diatomen},
+}
+
+@Article{Rimet2019,
+  author          = {Rimet, Fr{\'{e}}d{\'{e}}ric and Gusev, Evgenuy and Kahlert, Maria and Kelly, Martyn G. and Kulikovskiy, Maxim and Maltsev, Yevhen and Mann, David G. and Pfannkuchen, Martin and Trobajo, Rosa and Vasselon, Valentin and Zimmermann, Jonas and Bouchez, Agn{\`{e}}s},
+  journal         = {Scientific Reports},
+  title           = {{Diat.barcode, an open-access curated barcode library for diatoms}},
+  year            = {2019},
+  issn            = {20452322},
+  number          = {1},
+  pages           = {1--12},
+  volume          = {9},
+  abstract        = {Diatoms (Bacillariophyta) are ubiquitous microalgae which produce a siliceous exoskeleton and which make a major contribution to the productivity of oceans and freshwaters. They display a huge diversity, which makes them excellent ecological indicators of aquatic ecosystems. Usually, diatoms are identified using characteristics of their exoskeleton morphology. DNA-barcoding is an alternative to this and the use of High-Throughput-Sequencing enables the rapid analysis of many environmental samples at a lower cost than analyses under microscope. However, to identify environmental sequences correctly, an expertly curated reference library is needed. Several curated libraries for protists exists; none, however are dedicated to diatoms. Diat.barcode is an open-access library dedicated to diatoms which has been maintained since 2012. Data come from two sources (1) the NCBI nucleotide database and (2) unpublished sequencing data of culture collections. Since 2017, several experts have collaborated to curate this library for rbcL, a chloroplast marker suitable for species-level identification of diatoms. For the latest version of the database (version 7), 605 of the 3482 taxonomical names originally assigned by the authors of the rbcL sequences were modified after curation. The database is accessible at https://www6.inra.fr/carrtel-collection{\_}eng/Barcoding-database.},
+  doi             = {10.1038/s41598-019-51500-6},
+  file            = {:C$\backslash$:/Users/jonat/Documents/10{\_}Paper/Rimet et al. - 2019 - Diat.barcode, an open-access curated barcode library for diatoms.pdf:pdf},
+  isbn            = {4159801951},
+  mendeley-groups = {004{\_}Projekte/GetReal/WP2/Diatomen},
+  pmid            = {31641158},
+}
+
+@Manual{gbif2020,
+  title  = {GBIF Home Page},
+  author = {GBIF.org},
+  year   = {2020},
+  url    = {https://www.gbif.org},
+}
+
+@Manual{guiry2020,
+  title  = {AlgaeBase. World-wide electronic publication, National University of Ireland, Galway.},
+  author = {Guiry, M.D. & Guiry, G.M.},
+  year   = {2020},
+  url    = {https://www.algaebase.org},
+}
+
+@Article{Chamberlain13,
+  author  = {{Scott Chamberlain} and {Eduard Szocs}},
+  journal = {F1000Research},
+  title   = {taxize - taxonomic search and retrieval in R},
+  year    = {2013},
+  url     = {https://f1000research.com/articles/2-191/v2},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

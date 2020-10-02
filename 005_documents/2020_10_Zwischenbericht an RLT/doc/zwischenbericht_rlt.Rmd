@@ -9,8 +9,8 @@ output:
     latex_engine: pdflatex
     number_sections: yes
     toc: no
-#bibliography: references.bib
-csl: bib/ecology_letters.csl
+bibliography: ../bib/ref.bib
+csl: ../bib/ecology_letters.csl
 mainfont: Times New Roman
 sansfont: Times New Roman
 fontsize: 12pt
@@ -23,6 +23,7 @@ always_allow_html: yes
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
 knitr::opts_chunk$set(cache = TRUE)
+pacman::p_load(ggplot2, dplyr)
 ```
 
 \clearpage
@@ -37,6 +38,17 @@ knitr::opts_chunk$set(cache = TRUE)
 Here we describe the methods we used to derive typical assemblages of macro-invertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
 
 # Harmonizing taxa names
+International diatom occurrence data sets require extensive harmonization because of the taxonomic resolution differing between data sets, different working groups using different nomenclatures, identification errors, and ongoing changes to the accepted nomenclature [@Kahlert2020]. Harmonization can reduce overall taxonomic resolution but also improve the detection of large-scale spatio-temporal patterns [@Lee2019]. We compared all our data sets against a series of databases that contain accepted names, synonyms with links to the respective accepted names and suggestions for grouping contentious taxa in larger complexes. If a taxon name was found in one of the databases the name was accepted, changed into the accepted name in case it was a synonym, or grouped into the respective complex. Once a taxon was found in a database, it would not be included in queries of subsequent databases. However, if the accepted name differed from the original one, the accepted name would be queried through all previous databases again. The results were also controlled visually for consistency. The following databases were used in the same order: 
+
+1.	Table S2 from [@Kahlert2020]
+2.	The taxon list associated with the OMNIDA software [@lecointe1993omnidia]
+3.	The German list of freshwater organisms [@Mauch2017]
+4.	The diat.barcode database [@Rimet2019]
+5.	The website algaebase.org [@guiry2020]
+6.	The global biodiversity information platform (gbif) [@gbif2020]
+
+
+The harmonization of macro-invertebrate data required less effort, and was achieved with gbif [@gbif2020] through the taxize R package [@Chamberlain13]. 
 
 # What is the optimal taxonmic level? 
 One result of the last progress review for Get Real (held on the 29.04.2020) was that taxa in the TA should be included on their respective optimal taxonomic level 
@@ -44,11 +56,22 @@ instead of using one level (e.g. Genus) for all. *Oligochaetes*, for example, ar
 they are common in a given river type. Thus, the question arises: given a data set, what is the optimal taxonomic level to represent a specific taxon?  
 To establish the optimal level, we used a hierarchical approach. First, we removed all observations from Phyla and Classes that were not present 
 in all data sets. We assumed that these represented differences in sampling rather than in communities. That left us with the classes Clitellata (Annelida), Insecta, Malacostraca (Arthropoda), Bivalvia and Gastropoda (Mollusca).  
-In the following, a higher taxonomic level refers to levels with higher resolution, i.e. species is the highest taxonomic level and kingdom the lowest. For each taxon, we calculated the percentage of observations that are represented at each higher level. For example, 4.12\% of observations from the order *Lepidoptera* are at the species level, 74.77\% at the genus level, 7.75\% at the family level, and 13,35\% at the order level. Now given a threshold X, which is to be determined, we would call a taxon optimally represented at a certain taxonomic level if less than X\% are represented by higher levels. For example, *Lepidoptera* would be represented on order level if X > 4,12 + 74,77 + 7,75 = 86,64\%. As there are no theoretical grounds on which to base such a threshold value we searched for noticeable patterns in the data (Figure 1). The most noticeable jump occurs between 85 and 86\%. It occurs because for X > 86 *Chironomidae* are represented at the family level. Hence, we used 85\% as threshold. Observations that were missed by this procedure, e.g. observations of *Chironomidae* at the family level, were included at their respective level.   
+In the following, a higher taxonomic level refers to levels with higher resolution, i.e. species is the highest taxonomic level and kingdom the lowest. For each taxon, we calculated the percentage of observations that are represented at each higher level. For example, 4.12\% of observations from the order *Lepidoptera* are at the species level, 74.77\% at the genus level, 7.75\% at the family level, and 13,35\% at the order level. Now given a threshold X, which is to be determined, we would call a taxon optimally represented at a certain taxonomic level if less than X\% are represented by higher levels. For example, *Lepidoptera* would be represented on order level if X > 4,12 + 74,77 + 7,75 = 86,64\%. As there are no theoretical grounds on which to base such a threshold value we searched for noticeable patterns in the data (Figure  \@ref(fig:mzb-thresh-plot) ). The most noticeable jump occurs between 85 and 86\%. It occurs because for X > 86 *Chironomidae* are represented at the family level. Hence, we used 85\% as threshold. Observations that were missed by this procedure, e.g. observations of *Chironomidae* at the family level, were included at their respective level.   
 
-```{r macroinvertebrates level plot}
-source("../r_code/test.R")
-print(vec_test)
+```{r mzb-thresh-plot, echo=FALSE, fig.align="center", fig.height=3, fig.cap="Number of taxa represented at a given taxonomic level as function of the threshold value"}
+plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data")
+plot_data %>% 
+        ggplot(aes(x = thresholds, y = number, col = taxon_level)) + 
+        geom_point() + 
+        geom_line() + 
+        ylab("Number of taxa") + 
+        xlab("theshold") + 
+        labs(col = "taxon level") + 
+        theme_minimal()
+  
 ```
+
 # Notes for Traits 
 CWM with B value then RR-VGLM (glm RDA)
+
+# References
