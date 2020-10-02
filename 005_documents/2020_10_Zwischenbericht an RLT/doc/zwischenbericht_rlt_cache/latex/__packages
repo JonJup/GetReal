@@ -2,3 +2,7 @@ base
 ggplot2
 dplyr
 knitr
+viridisLite
+viridis
+cowplot
+data.table

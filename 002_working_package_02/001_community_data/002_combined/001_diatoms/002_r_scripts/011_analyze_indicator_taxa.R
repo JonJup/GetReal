@@ -13,7 +13,7 @@
 pacman::p_load(dplyr, magrittr, data.table, stringr, taxize, purrr,
                ggplot2, here, viridis, fuzzySim, vegan, umap, Rtsne,
                ggrepel, ggthemr, ape)
-setwd(here("003_processed_data"))
+setwd(here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/"))
 
 ## -- functions 
 redundant <- function(x){
@@ -157,7 +157,7 @@ for (i in 1:(n_loop * n_loop)) {
 
     }
     
-    ## -- debug zon -- ## 
+    ## -- debug zone -- ## 
     # sen_out[river_type == rt_vector[4] & 
     #             B_threshold == b_loop[B_ind] & 
     #             A_threshold == a_loop[A_ind], 
@@ -197,10 +197,15 @@ out_comb <- rbindlist(out_list)
 sen_out$A_col <- factor(sen_out$A_threshold)
 sen_out$river_type %<>% str_remove_all(pattern = "RT")
 
+saveRDS(sen_out, "00x_plotdata_sensitivity_analysis.RDS")
+
 sensitivity_richness_total_plot     <- sen_out %>% ggplot(aes(x = B_threshold, y = n_species        , col = A_threshold)) +                                               geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + ggtitle("Richness - Total Change"  )      + facet_wrap(.~river_type) + scale_color_viridis() + ylab("species richness") + xlab("B Threshold") + labs(col = "A Threshold")  
 sensitivity_uniqueness_total_plot   <- sen_out %>% ggplot(aes(x = B_threshold, y = us_spe           , col = A_threshold)) + geom_hline(yintercept = 1/13, linetype = 2) + geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + ggtitle("Uniqueness - Total Change")      + facet_wrap(.~river_type) + scale_color_viridis() + ylab("uniqueness score") + xlab("B Threshold") + labs(col = "A Threshold")
 sensitivity_richness_percent_plot   <- sen_out %>% ggplot(aes(x = B_threshold, y = percent_change_b , col = A_threshold)) + geom_hline(yintercept = 0   , linetype = 2) + geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + ggtitle("Richness - Change in Percent")   + facet_wrap(.~river_type) + scale_color_viridis() + ylab("species richness") + xlab("B Threshold") + labs(col = "A Threshold")
 sensitivity_uniqueness_percent_plot <- sen_out %>% ggplot(aes(x = B_threshold, y = percent_change_us, col = A_threshold)) + geom_hline(yintercept = 0   , linetype = 2) + geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + ggtitle("Uniqueness - Change in Percent") + facet_wrap(.~river_type) + scale_color_viridis() + ylab("uniqueness score") + xlab("B Threshold") + labs(col = "A Threshold")
+
+
+
 
 plots      <- c("sensitivity_richness_total_plot", "sensitivity_uniqueness_total_plot", "sensitivity_richness_percent_plot", "sensitivity_uniqueness_percent_plot")
 file_names <- c("_sensitivity_analysis_species_richness_total", "_sensitivity_analysis_uniqueness_total", "_sensitivity_analysis_species_richness_percent", "_sensitivity_analysis_uniqueness_percent")

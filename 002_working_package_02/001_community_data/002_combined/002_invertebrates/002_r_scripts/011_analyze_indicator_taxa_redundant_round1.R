@@ -5,7 +5,7 @@
 # -------------------------------------- #
 
 # date written/ modified: 21.08.20 + 14.09 
-# date used: 21.08.20 + 14.09 + 30.
+# date used: 21.08.20 + 14.09 + 30. + 02.10
 # Jonathan Jupke 
 # Get Real WP2 
 # Macroinvertebrates 
@@ -39,8 +39,7 @@ pacman::p_load(ape, dplyr, magrittr, data.table,
                ggplot2, here, viridis, 
                fuzzySim, vegan, Rtsne,
                ggrepel)
-setwd(here("002_WP2/001_community_data/100_combined/002_invertebrates/003_processed_data"))
-
+setwd(here(... = "002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/"))
 ## -- functions -- ##  
 source("../002_r_scripts/F_001_Redundnat.R")
 
@@ -63,8 +62,8 @@ tm <- rbindlist(list(spe_t,
                      gen_t, 
                      foh_t))
 
-setwd("../003_processed_data/")
-saveRDS(file = paste0("08_", Sys.Date(),"_macroinvertebrate_typical_assemblages.RDS"),object =  tm)
+# setwd("../003_processed_data/")
+# saveRDS(file = paste0("08_", Sys.Date(),"_macroinvertebrate_typical_assemblages.RDS"),object =  tm)
 
 rt_vector <- unique(tm$group)
 (n_types   <- length(rt_vector))
@@ -182,7 +181,7 @@ for (i in 1:(n_loop * n_loop)) {
         
     }
     
-    ## -- debug zon -- ## 
+    ## -- debug zone -- ## 
     # sen_out[river_type == rt_vector[4] & 
     #             B_threshold == b_loop[B_ind] & 
     #             A_threshold == a_loop[A_ind], 
@@ -204,6 +203,7 @@ sen_out$river_type %<>% str_remove_all(pattern = "RT")
 sen_out$river_type %<>% factor(levels = c("1", "2_3", "4_5", "8_9", "10_11", "12","14", "15_16", "18"))
 sen_out[, n_taxa := n_species + n_genera + n_foh]
 
+#saveRDS(sen_out, "00x_for_plot_mzb_sa.RDS")
 
 (plot_sa_tr_spe     <- sen_out %>% ggplot(aes(x = B_threshold, y = n_species        , col = A_threshold)) + geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + ggtitle("Richness - Total Change"  )      + facet_wrap(.~river_type) + scale_color_viridis() + ylab("species richness") + xlab("B Threshold") + labs(col = "A Threshold"))  
 (plot_sa_tr_gen     <- sen_out %>% ggplot(aes(x = B_threshold, y = n_genera         , col = A_threshold)) + geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + ggtitle("Richness - Total Change"  )      + facet_wrap(.~river_type) + scale_color_viridis() + ylab("species richness") + xlab("B Threshold") + labs(col = "A Threshold"))  

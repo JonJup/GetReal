@@ -9,6 +9,9 @@ output:
     latex_engine: pdflatex
     number_sections: yes
     toc: no
+    includes: 
+        in_header: ../template/header.tex
+        
 bibliography: ../bib/ref.bib
 csl: ../bib/ecology_letters.csl
 mainfont: Times New Roman
@@ -23,10 +26,14 @@ always_allow_html: yes
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
 knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(fig.pos = 'H')
 pacman::p_load(
+        cowplot,
+        data.table,
         dplyr,
         ggplot2, 
-        knitr
+        knitr,
+        viridis
         )
 ```
 
@@ -97,11 +104,153 @@ data %>%
 rm(data)
 ```
 
-For each river type x taxon combination, you can find maps with the associated sampling sites [for macro-invertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/001_community_data/002_combined/002_invertebrates/004_plots/001_sampling_site_maps)
+For each river type x taxon combination, you can find maps with the associated sampling sites [for macro-invertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/001_community_data/002_combined/002_invertebrates/004_plots/001_sampling_site_maps) and [for diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/001_community_data/002_combined/001_diatoms/004_plots/sampling_maps).  
+Further analyses were conducted for all stream types with a high or medium degree of representation. More information on the river types is available in @LycheSolheim2019. In general, we have fewer sampling sites for diatoms than for macro-invertebrates which entails that the representation of stream types is generally lower. 
+
+# What is a typical Assemblage? 
+We derived TAs based on a rule that considered:    
+
+1. The probability of site $x$ belonging to stream type $z$ given that species $y$ is present (a measure of specificity, henceforth **A**)  
+2. The probability of species $y$ being present given that site $x$ belongs to stream type $z$ (a measure of commonness, henceforth **B**)  
+3. The Species Indicator Value   
+
+The Species Indicator Value [@Caceres2009; @Dufrene1997]  is the weighted product of **A** and **B** (see Equation \@ref(eq:label)) 
+\begin{equation}
+\sqrt{Indval} = \sqrt{A_g\times B} = \sqrt{\frac{\frac{n_p}{N_p}}{\Sigma_{k=1}^K\frac{n_k}{N_k}}\times\frac{n_p}{N_p}} (\#eq:label)
+\end{equation}
+
+where $N_p$ is the number of sites that belong to river type $p$ and $n_p$ the number of occurrences of the focal species in sites of type $p$. $K$ is the number of river types. **A** is weighted by the total number of occurrences to account for unequal sample sizes. The statistical significance of the Indicator Value can be assessed with permutation-based pseudo-p-values, which we did with 999 permutations.
+Here, we are not interested in indicator species for each community, but TAs. Hence, simply continuing with those species that have a pseudo-*p*-value below some significance level would not serve our purpose. A species that occurs at each site, across all stream types, highlights the difference: while it would not be indicative of any stream type (low specificity) it should be part of each TA. Hence, we need additional criteria to derive the TAs which can be based on **A**, **B**, and the pseudo-*p*-value of the indicator value. We used the following rules:  
+For macro-invertebrates:  
+Species were considered typical if  **B** > 0.25 or **B** > 0.20 and *p* < 0.05 or **A** > 0.80  
+Genera were considered typical if   **B** > 0.50 or **B** > 0.33 and *p* < 0.05 or **A** > 0.95   
+Families were considered typical if **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99  
+
+For diatoms:   
+Species where considered typical if **B** > 0.4 or **B** > 0.3 and *p* < 0.05 or **A** > 0.7.   
+Genera where considered typical if  **B** > 0.8 or **B** > 0.6 and *p* < 0.05 or **A** > 0.95.  
+
+Note that there was no we did not systematically optimize these thresholds. Such procedures would require optimization criteria, but we are not aware of a criterion that would work in this context. We acknowledge that TA could be (i) very similar in composition or (ii) harbor strongly differing numbers of taxa. Thus, parametrizing the rules in a way that would (i) maximize dissimilarity between assemblages or (ii) maximize the mean assemblage richness would not lead to what we consider a typical assemblage. It would be possible to try a cross-validation-type approach where each taxon is scored based on the number of random-site-subsets it is included in, but such an approach would also entail making essentially arbitrary numerical assumptions. We think the use of subjectively defined thresholds is justified, as long as they are clearly and openly communicated, to be what we define as “typical assemblages”. 
+
+However, we conducted a sensitivity analysis to see how much varying the parameters of the rules would alter the results. We altered the threshold values of **A** and **B**. The rules above contain two distinct **B** Threshold: $B_1$ which does not consider the pseudo-*p*-value (**B** > 0.25 for macro-invertebrate species and **B** > 0.40 for diatom species) and $B_2$ which does take the pseudo-*p*-value into account (*p* < 0.05 and **B** > 0.2 macro-invertebrate species and **B** > 0.30 for diatom species ). In the following simulations, the $B_2$ was always taken to be 25% below $B_1$. Henceforth, when referring to the threshold for *B*, we refer to $B_1$. For species, we varied the threshold for *B* in ten steps between 0.10 and 0.75 and that for **A** in ten steps between 0.5 and 1.0. For lower taxonomic levels these thresholds were raised. For genera, the threshold values of **A** and **B** were raised by a factor of 1.25 and 2 respectively. All levels family and and lower taxonomic levels were grouped in “families or lower” (fol). For fol, the thresholds were raised by factors of 1.5 and 3 respectively. The taxon richness and uniqueness scores of each TA were computed for all 100 combinations of these parameters and each taxonomic level. 
+Please note that results are only shown and discussed for the non-redundant TAs (see section \@ref(sec:redundancy)). Taxa richness decreased with increasing **A** and **B** threshold in macro-invertebrates and diatoms (Figure \@ref(fig:plot-sa-mzb)A and Figure \@ref(fig:plot-sa-dia)A), while the uniqueness scores increased with **B** thresholds but decreased with **A** thresholds ((Figure \@ref(fig:plot-sa-mzb)B and Figure \@ref(fig:plot-sa-dia)B)). Uniqueness scores decreased noticeably with very high **A** thresholds (> 0.9), indicating that taxa that are specific to certain river types are an important driver of TA differentiation. Note that graphs are only shown for all taxa levels combined. Plots for each taxon level separately are available [for macro-invertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/001_community_data/002_combined/002_invertebrates/004_plots/002_zwischenbericht). However, the general patterns visible in Figure 2 and Figure 3, hold for them as well. 
+
+ Species richness decreased with increasing A and B threshold (Figure 1 and Figure 2), while the uniqueness scores increased with B thresholds but decreased with A thresholds (Figure 3 and Figure 4). The rate of change in species richness along gradients in A and B threshold differed markedly between TAs but seemed to be correlated with overall species richness, i.e. more species-rich TA lost species more quickly than less species-rich ones. The TAs of RT03 and RT16 serve as examples at both extremes of our data set. Uniqueness scores decreased noticeably with very high A thresholds (> 0.9), indicating that taxa that are specific to certain river types are an important driver of TA differentiation. 
 
 
+\newpage
+```{r plot-sa-mzb, echo=FALSE, fig.align="center",fig.height=10, fig.width=10,fig.cap="Changes in taxon richness along a changing B threshold. Line color indicates the A threshold"}
+n_types = 9
+plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS")
+p1 <- plot_data %>%
+        ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) + 
+        geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
+        ggtitle("Macro-invertebrates - Richness - All Levels") + 
+        facet_wrap(. ~ river_type) + 
+        scale_color_viridis() + 
+        ylab("species richness") + 
+        xlab("B Threshold") + 
+        labs(col = "A Threshold")
+rm_id <- which(is.na(plot_data$us_gen))
+plot_data <- plot_data[-rm_id,]
+p2 <- plot_data %>% 
+        ggplot(aes(x = B_threshold, y = us_taxa, col = A_threshold)) + 
+        geom_hline(yintercept = 1/n_types, linetype = 2) + 
+        geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + 
+        ggtitle("Macro-invertebrates - Uniqueness - All levels") + 
+        facet_wrap(.~river_type) + scale_color_viridis() + ylab("uniqueness score") + 
+        xlab("B Threshold") + 
+        labs(col = "A Threshold")
+plot_grid(align='v', p1, p2, labels = c('A', 'B'), ncol = 1)
+rm(n_types, rm_id, plot_data, p1, p2)
+```
+\newpage
+```{r plot-sa-dia, echo=FALSE, fig.align="center",fig.height=10, fig.width=10,fig.cap="Changes in uniqueness score along a changing B threshold. Line color indicates the A threshold"}
+n_types = 13
+plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/00x_plotdata_sensitivity_analysis.RDS")
+plot_data[,n_taxa := n_genera + n_species]
+p1 <- plot_data %>%
+        ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) + 
+        geom_line(size = 1, alpha = 0.8, aes(group = A_col)) +
+        ggtitle("Diatoms - Richness - All Levels") + 
+        facet_wrap(. ~ river_type) + 
+        scale_color_viridis() + 
+        ylab("species richness") + 
+        xlab("B Threshold") + 
+        labs(col = "A Threshold")
+p2 <- plot_data %>% 
+        ggplot(aes(x = B_threshold, y = us_spe, col = A_threshold)) + 
+        geom_hline(yintercept = 1/n_types, linetype = 2) + 
+        geom_line(size = 1, alpha = 0.8, aes(group = A_col)) + 
+        ggtitle("Diatoms - Uniqueness - All levels") + 
+        facet_wrap(.~river_type) + scale_color_viridis() + ylab("uniqueness score") + 
+        xlab("B Threshold") + 
+        labs(col = "A Threshold")
+plot_grid(align='v', p1, p2, labels = c('A', 'B'), ncol = 1)
+rm(n_types, plot_data, p1, p2)
 
-Further analyses were conducted for all stream types with medium representation, as none were graded as good. More information on the river types is available in the accompanying publication. In general, we have fewer sampling sites for the diatoms than for the macroinvertebrates which entails that the representation of stream types is generally worse. Additionally, sites from France often outnumber all others due to the large amount of data we have from France. 
+```
+<!--\elandscape-->
+\newpage
+
+# Redundancy between typical assemblages {#sec:redundancy}
+
+We assessed to which degree the different TAs overlap (Table \@ref(tab:tbl-redundancy)). The degree of overlap is the percentage of taxa in a TA that is also present in the most similar (largest overlap) TA. Again, choosing a threshold above which we consider two assemblages to be redundant is somewhat arbitrary. We proceeded with 75\% but are open to other suggestions. This threshold leads to five redundant assemblages in macroinvertebrates and none in diatoms. Of the redundant TAs most belong to two river types that only differ in river size: RT02 and 03, 04 and 05, 08 and 09, as well as 10 and 11. The only exception is the combination of RT15 and 16. Both are high altitude river types that occur mainly in southern Europe, which differentiates them from the northern high altitude rivers in RT14. RT13 is also redundant with RT02 and 03 however joining it with these two river types led to a drastically reduced number of taxa in the TA, when compared to that of the combined river type RT02_03. Since RT13 represents an exceedingly rare river type we decided to omit it from the analysis and proceed with RT02_03 instead of RT02_03_13. a
+The new TAs resulted in overall lower degrees of overlap, none of which exceeds the 75% threshold. The largest overlaps were between RT8_9 and RT10_11, with 70%. 
+     
+
+```{r tbl-redundancy, echo=FALSE}
+data <- data.frame("River Type"=paste0("RT", 
+                                        c(1:6, 8:19)
+                                       ),
+                   "Macroinvertebrate"=c(
+                           "RT2+4 (25%)",    #RT1
+                           "RT3 (88.2%)",    #RT2
+                           "RT2 (68.2%)",        #RT3
+                           "RT3 (45.8%)",    #RT4
+                           "RT4 (83.3%)",    #RT5
+                           "",               #RT6
+                           "RT10 (77.8%)",    #RT8
+                           "RT8 (76.5%)", #RT9
+                           "RT11+18 (65.2%)", #RT10
+                           "RT10 (88.2%)", #RT11
+                           "RT9 (50.0%)",    #RT12
+                           "RT2 (87.5%)",    #RT13
+                           "RT16+18 (69.2%)",    #RT14
+                           "RT16 (85.7%)",    #RT15
+                           "RT9+10+11+15 (57.1%)",    #RT16
+                           "",      #RT17
+                           "RT10 (55.6%)",    #RT18
+                           ""     #RT19    
+                   ),
+                   "Diatoms"=c(
+                           "RT2 (62.9%)",    #RT1
+                           "RT1 (46.8%)",    #RT2
+                           "RT2 (48.7%)",    #RT3
+                           "RT2 (74.1%)",    #RT4
+                           "RT2 (62.5%)",    #RT5
+                           "RT12 (38.3%)",    #RT6
+                           "RT2 (71.4%)",    #RT8
+                           "RT5+8 (56%)", #RT9
+                           "", #RT10
+                           "", #RT11
+                           "RT6 (40.9%)",    #RT12
+                           "",    #RT13
+                           "",    #RT14
+                           "",    #RT15
+                           "RT18 (56.5%)",    #RT16
+                           "RT1 (63%)",      #RT17
+                           "RT1 (71.4%)",    #RT18
+                           "RT17 (68.4%)"    #RT19
+                           )
+
+)
+data %>% 
+        kable(caption = "Overlap between different typical assemblages.")
+# "  "
+
+rm(data)
+```
 
 
 # Notes for Traits 
