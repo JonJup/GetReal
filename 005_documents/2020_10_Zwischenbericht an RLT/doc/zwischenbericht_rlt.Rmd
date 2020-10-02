@@ -23,7 +23,11 @@ always_allow_html: yes
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
 knitr::opts_chunk$set(cache = TRUE)
-pacman::p_load(ggplot2, dplyr)
+pacman::p_load(
+        dplyr,
+        ggplot2, 
+        knitr
+        )
 ```
 
 \clearpage
@@ -68,8 +72,37 @@ plot_data %>%
         xlab("theshold") + 
         labs(col = "taxon level") + 
         theme_minimal()
-  
+ rm(plot_data)
 ```
+
+For the diatoms, we employed 75\% as threshold, because Gomphonema, which is the fourth most common genus in our data set, had 81.43\% observations at the species level. The taxonomic resolution was higher than in the macroinvertebrate data and the lowest resolution is the genus level. 
+
+# Can we represent the stream types with our data? 
+
+We determined visually whether a our data set contained enough sampling sites in a given river type to derive meaningful TAs. The degree of representation for river type was graded in a three-tier system: High, medium, and low. A high degree of representation indicates, that we have many sampling locations, which are distributed across the instances of a river type which fall within the countries considered in GetReal. A low degree indicates the opposite, i.e. few and spatially clustered sites. A medium rating implies that we either have many sampling sites, but these only extend over parts of the countries or few sites that extend over most of the countries. The ratings for all river types for both macro-invertebrates and diatoms are shown in table \@ref(tab:tbl-rating).  
+
+```{r tbl-rating, echo=FALSE}
+data <- data.frame("Rating"=rep(c("high", "medium", "low"), each=2),
+                   "Taxon"=rep(c("macro-invertebrates","diatoms"), times = 3),
+                   "River Types"=c(c("4, 5, 9, 10, 11, 12, 13, 16"), 
+                                   c(""), 
+                                   c("1, 2, 3, 8, 14, 15, 18"), 
+                                   c("1, 2, 3, 4, 5, 6, 8, 9, 12, 14, 16, 17, 18, 19"), 
+                                   c("6, 7, 17, 19, 20" ),
+                                   c("7, 10, 11, 13, 15, 20")
+                                   )
+)
+data %>% 
+        kable(caption = "The ratings for all river types for macro-invertebrates and diatoms")
+rm(data)
+```
+
+For each river type x taxon combination, you can find maps with the associated sampling sites [for macro-invertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/001_community_data/002_combined/002_invertebrates/004_plots/001_sampling_site_maps)
+
+
+
+Further analyses were conducted for all stream types with medium representation, as none were graded as good. More information on the river types is available in the accompanying publication. In general, we have fewer sampling sites for the diatoms than for the macroinvertebrates which entails that the representation of stream types is generally worse. Additionally, sites from France often outnumber all others due to the large amount of data we have from France. 
+
 
 # Notes for Traits 
 CWM with B value then RR-VGLM (glm RDA)
