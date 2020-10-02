@@ -24,14 +24,14 @@
 002_working_package_02/001_community_data/**/old
 
 002_working_package_02/001_community_data/**/Collaboration agreement_UKL_Irstea.docx
-002_working_package_02/001_community_data/998_list_for_Maria/
-002_working_package_02/001_community_data/999_quality_check/
+002_working_package_02/**/998_list_for_Maria/
+002_working_package_02/**/999_quality_check/
 
-002_working_package_02/001_community_data/100_combined/**/003_processed_data
-002_working_package_02/001_community_data/100_combined/**/001_raw_data
-002_working_package_02/001_community_data/100_combined/001_diatoms/004_plots
-002_working_package_02/001_community_data/100_combined/001_diatoms/old
-002_working_package_02/001_community_data/100_combined/001_diatoms/orignal_names_low_impact_sites
+002_working_package_02/001_community_data/002_combined/**/003_processed_data
+002_working_package_02/001_community_data/002_combined/**/001_raw_data
+002_working_package_02/001_community_data/002_combined/001_diatoms/004_plots
+002_working_package_02/001_community_data/002_combined/001_diatoms/old
+002_working_package_02/001_community_data/002_combined/001_diatoms/orignal_names_low_impact_sites
 
 
 003_Presentations
