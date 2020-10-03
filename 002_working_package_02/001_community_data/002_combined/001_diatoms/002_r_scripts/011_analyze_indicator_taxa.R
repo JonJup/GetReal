@@ -59,7 +59,7 @@ gty <- gen[B > 0.8 | B > 0.6 & p_value <= 0.05 | A > .95]
 
 bty <- rbindlist(list(sty, gty))
 
-saveRDS(file = paste0("011_", Sys.Date(),"_daitom_typical_assemblages.RDS"),object =  bty)
+# saveRDS(file = paste0("011_", Sys.Date(),"_daitom_typical_assemblages.RDS"),object =  bty)
 
 # Redundancy  -------------------------------------------------------------
 redundant(1)
@@ -273,7 +273,7 @@ taxa_per_level_plot <-
     geom_point(aes(col = variable), size = 3) +
     scale_color_manual(values = my_color_palette) +
     ylab("number of taxa") +
-    xlab("river type")
+    xlab("river type") 
 
 ggsave(filename = paste0("../004_plots/Zwischenbericht Diatom TAs/005_",
                          Sys.Date(),

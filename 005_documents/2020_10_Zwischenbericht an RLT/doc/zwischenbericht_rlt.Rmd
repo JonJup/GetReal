@@ -35,6 +35,8 @@ pacman::p_load(
         knitr,
         viridis
         )
+
+
 ```
 
 \clearpage
@@ -250,6 +252,32 @@ data %>%
 # "  "
 
 rm(data)
+```
+
+# Characteristics of typical assemblages
+
+In all macro-invertebrate TAs, genus is the prevalent taxonomic level (figure \@ref(fig:plot-mzb-n-taxa) A). The numbers of species and fol are similar with both exceeding the other in four assemblages. The mean number of species was 3.2, mean number of genera 14.3, and the mean number of fol 2.4. For diatoms, species is the prevalent taxonomic level in all TAs ( figue \@ref(fig:plot-mzb-n-taxa) B). Some assemblages consist entirely of species (i.e. RT04, 06, 09, 16, 17, and 19). The mean number of species per TA is 30 and the mean number of genera 0.5. RT03 has the most taxa rich TA with 49 taxa and RT19 the most taxa poor with 18.  
+
+```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10, fig.cap="Numbers of taxa on each taxonomical level for all typical assemblages"}
+source("../r/plot_mzb_n_taxa.R")
+source("~/01_Uni/02_getreal/005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R")
+plot_grid(align='h', mzb_per_level_plot, dia_per_level_plot, labels = c('A', 'B'), ncol = 2)
+```
+
+
+
+We can express the uniqueness of a TA with the following score: Each taxon receives a taxon uniqueness score that is one divided by the number of TAs it occurs in. For each river type, we sum the taxon scores of all taxa up and divide it by the number of taxa in the river type’s TA. If all taxa in the TA are unique to that TA the score is one. If all species occur in one other TA the score is 0.5. The minimal score depends on the number of TAs, as it is 1 divided by that number and it signals that all species in that TA occur in all other TAs. These scores are shown in figure \@ref(fig:pot-uni). The dashed horizontal lines indicate the minimum score for each representation level.  
+
+```{r plot-uni, echo=FALSE, fig.align="center", fig.cap="Uniqueness scores for typical assemblages of macro-invertebrates(A) and diatoms (B). The red dashed line indicates the lowest possible score."}
+source(file = "../r/plot_unique.R")
+plot_grid(align='h', plot_uni_mzb, plot_uni_dia, labels = c('A', 'B'), ncol = 2)
+```
+
+We also used non metric multidimensional scaling (NMDS) to visualize the similarity of TAs, based on Jaccard distance matrices. 
+
+```{r pcoa, echo=FALSE, fig.height=8}
+source("../r/pcoa.R")
+plot_grid(align='v', bim, bid, labels = c('A', 'B'), ncol = 1)
 ```
 
 

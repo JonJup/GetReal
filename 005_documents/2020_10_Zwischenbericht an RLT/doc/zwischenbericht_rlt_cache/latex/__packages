@@ -6,3 +6,14 @@ viridisLite
 viridis
 cowplot
 data.table
+magrittr
+stringr
+purrr
+here
+ggrepel
+ggthemr
+ape
+permute
+lattice
+vegan
+fuzzySim
