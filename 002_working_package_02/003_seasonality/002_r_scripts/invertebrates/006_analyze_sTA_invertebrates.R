@@ -21,7 +21,7 @@ pacman::p_load(data.table,
                stringr,
                vegan,
                viridis)
-setwd(here("003_results/invertebrates"))
+setwd(here("002_working_package_02/003_seasonality/003_results/invertebrates/"))
 
 # load data ---------------------------------------------------------------
 files <- dir()
@@ -44,16 +44,14 @@ ta_rt1516g <- rt1516g[B > 0.50 | (B > 0.33 & p_value <= 0.05)]
 ta_rt1011f <- rt1011f[B > 0.95 | (B > 0.80 & p_value <= 0.05)]
 ta_rt1516f <- rt1516f[B > 0.95 | (B > 0.80 & p_value <= 0.05)]
 
-rt1011s %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1)
-rt1011s %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
-rt1516s %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1)
-rt1516s %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
-rt1011g %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1) + geom_vline(xintercept = 0.5, col = "red")
-rt1011g %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
-rt1516g %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1) + geom_vline(xintercept = 0.5, col = "red")
-rt1516g %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
-
-
+# rt1011s %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1)
+# rt1011s %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
+# rt1516s %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1)
+# rt1516s %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
+# rt1011g %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1) + geom_vline(xintercept = 0.5, col = "red")
+# rt1011g %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
+# rt1516g %>% ggplot(aes(x = B)) + geom_histogram(binwidth = .01) + xlim(0,1) + geom_vline(xintercept = 0.5, col = "red")
+# rt1516g %>% ggplot(aes(x = A)) + geom_histogram(binwidth = .01) + xlim(0,1)
 
 ta_10_11 <- rbind(ta_rt1011s, ta_rt1011g, ta_rt1011f)
 ta_15_16 <- rbind(ta_rt1516s, ta_rt1516g, ta_rt1516f)
@@ -67,11 +65,15 @@ gc()
 
 #### How similar are the seasonal assemblages to each other #### 
 
+ta_10_11$season <- factor(ta_10_11$season, levels = c("spring", "summer", "autumn", "winter"))
+ta_15_16$season <- factor(ta_15_16$season, levels = c("spring", "summer", "autumn", "winter"))
+
 rv <- c("10_11","15_16")
 ll <- list()
 for (l in 1:2){
     ld <- get(paste0("ta_",rv[l]))
-    sv <- unique(ld$season)
+    ld$season <- droplevels(ld$season)
+    sv <- levels(ld$season)
     om <- data.frame(matrix(data = 0, ncol =  length(sv), nrow = length(sv)))
     names(om) <- rownames(om) <- sv
     for (i in sv) {
@@ -93,8 +95,11 @@ om2 <- ll[[2]]
 
 rm(sv, ll, ld, l, om, rv)
 
-om1 
-om2
+om1$N <- table(ta_10_11$season) 
+om2$N <- table(ta_15_16$season)
+
+saveRDS(om1,"../../../../005_documents/2020_10_Zwischenbericht an RLT/r/tbl_sta_mzb_11.RDS")
+saveRDS(om2,"../../../../005_documents/2020_10_Zwischenbericht an RLT/r/tbl_sta_mzb_15.RDS")
 
 # A closer Look  ----------------------------------------------------------
 

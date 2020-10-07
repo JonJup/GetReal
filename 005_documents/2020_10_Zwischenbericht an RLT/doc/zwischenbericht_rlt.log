@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.1)  3 OCT 2020 09:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.1)  7 OCT 2020 09:14
 entering extended mode
 **./zwischenbericht_rlt.tex
 (zwischenbericht_rlt.tex
@@ -350,48 +350,63 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks25
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
-(C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+(C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count271
+\FV@InFile=\read2
+\FV@TabBox=\box47
+\c@FancyVerbLine=\count272
+\FV@StepNumber=\count273
+\FV@OutFile=\write3
+) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/framed\framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip54
+\fb@frw=\dimen157
+\fb@frh=\dimen158
+\FrameRule=\dimen159
+\FrameSep=\dimen160
+) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip54
-\LTright=\skip55
-\LTpre=\skip56
-\LTpost=\skip57
-\LTchunksize=\count271
-\LTcapwidth=\dimen157
-\LT@head=\box47
-\LT@firsthead=\box48
-\LT@foot=\box49
-\LT@lastfoot=\box50
-\LT@cols=\count272
-\LT@rows=\count273
-\c@LT@tables=\count274
-\c@LT@chunks=\count275
+\LTleft=\skip55
+\LTright=\skip56
+\LTpre=\skip57
+\LTpost=\skip58
+\LTchunksize=\count274
+\LTcapwidth=\dimen161
+\LT@head=\box48
+\LT@firsthead=\box49
+\LT@foot=\box50
+\LT@lastfoot=\box51
+\LT@cols=\count275
+\LT@rows=\count276
+\c@LT@tables=\count277
+\c@LT@chunks=\count278
 \LT@p@ftn=\toks26
 ) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen158
-\lightrulewidth=\dimen159
-\cmidrulewidth=\dimen160
-\belowrulesep=\dimen161
-\belowbottomsep=\dimen162
-\aboverulesep=\dimen163
-\abovetopsep=\dimen164
-\cmidrulesep=\dimen165
-\cmidrulekern=\dimen166
-\defaultaddspace=\dimen167
-\@cmidla=\count276
-\@cmidlb=\count277
-\@aboverulesep=\dimen168
-\@belowrulesep=\dimen169
-\@thisruleclass=\count278
-\@lastruleclass=\count279
-\@thisrulewidth=\dimen170
+\heavyrulewidth=\dimen162
+\lightrulewidth=\dimen163
+\cmidrulewidth=\dimen164
+\belowrulesep=\dimen165
+\belowbottomsep=\dimen166
+\aboverulesep=\dimen167
+\abovetopsep=\dimen168
+\cmidrulesep=\dimen169
+\cmidrulekern=\dimen170
+\defaultaddspace=\dimen171
+\@cmidla=\count279
+\@cmidlb=\count280
+\@aboverulesep=\dimen172
+\@belowrulesep=\dimen173
+\@thisruleclass=\count281
+\@lastruleclass=\count282
+\@thisrulewidth=\dimen174
 )
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/footnotehyper\footnoteh
 yper.sty
 Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
-\FNH@notes=\box51
-\FNH@width=\dimen171
+\FNH@notes=\box52
+\FNH@width=\dimen175
 ) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
@@ -405,8 +420,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen172
-\Gin@req@width=\dimen173
+\Gin@req@height=\dimen176
+\Gin@req@width=\dimen177
 ) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/grffile\grffile.sty
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
 y)
@@ -416,46 +431,46 @@ line 40.
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 ) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count280
+\c@float@type=\count283
 \float@exts=\toks27
-\float@box=\box52
+\float@box=\box53
 \@float@everytoks=\toks28
-\@floatcapt=\box53
+\@floatcapt=\box54
 )
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2020-09-01 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count281
-\l__pdf_internal_box=\box54
+\l__kernel_color_stack_int=\count284
+\l__pdf_internal_box=\box55
 ) (zwischenbericht_rlt.aux)
 \openout1 = `zwischenbericht_rlt.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Info: Redefining \microtypecontext on input line 89.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
+LaTeX Font Info:    ... okay on input line 129.
+LaTeX Info: Redefining \microtypecontext on input line 129.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 89.
+LaTeX Info: Redefining \showhyphens on input line 129.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -466,16 +481,16 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count282
-\scratchdimen=\dimen174
-\scratchbox=\box55
-\nofMPsegments=\count283
-\nofMParguments=\count284
+\scratchcounter=\count285
+\scratchdimen=\dimen178
+\scratchbox=\box56
+\nofMPsegments=\count286
+\nofMParguments=\count287
 \everyMPshowfont=\toks29
-\MPscratchCnt=\count285
-\MPscratchDim=\dimen175
-\MPnumerator=\count286
-\makeMPintoPDFobject=\count287
+\MPscratchCnt=\count288
+\MPscratchDim=\dimen179
+\MPnumerator=\count289
+\makeMPintoPDFobject=\count290
 \everyMPtoPDFconversion=\toks30
 )
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
@@ -484,8 +499,8 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
-\AtBeginShipoutBox=\box56
-Package hyperref Info: Link coloring ON on input line 89.
+\AtBeginShipoutBox=\box57
+Package hyperref Info: Link coloring ON on input line 129.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -495,11 +510,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count288
+\c@section@level=\count291
 )
-LaTeX Info: Redefining \ref on input line 89.
-LaTeX Info: Redefining \pageref on input line 89.
-LaTeX Info: Redefining \nameref on input line 89.
+LaTeX Info: Redefining \ref on input line 129.
+LaTeX Info: Redefining \pageref on input line 129.
+LaTeX Info: Redefining \nameref on input line 129.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -534,41 +549,41 @@ LaTeX Info: Redefining \nameref on input line 89.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
-1.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+31.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
-1.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+31.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-91.
+131.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-91.
+131.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 91.
+(Font)              <14.4> on input line 131.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 91.
+(Font)              <10> on input line 131.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 91.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
-
+(Font)              <7> on input line 131.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 131
+.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 131
+.
 (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
@@ -577,42 +592,46 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {C:/Users/jonat/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (zwischenberich
 t_rlt.toc)
-\tf@toc=\write3
-\openout3 = `zwischenbericht_rlt.toc'.
+\tf@toc=\write4
+\openout4 = `zwischenbericht_rlt.toc'.
 
-[2
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+40.
+(C:\Users\jonat\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [2
 
 ] [3
 
 ]
-<zwischenbericht_rlt_files/figure-latex/mzb-thresh-plot-1.pdf, id=67, 469.755pt
+<zwischenbericht_rlt_files/figure-latex/mzb-thresh-plot-1.pdf, id=73, 469.755pt
  x 216.81pt>
 File: zwischenbericht_rlt_files/figure-latex/mzb-thresh-plot-1.pdf Graphic file
  (type pdf)
 <use zwischenbericht_rlt_files/figure-latex/mzb-thresh-plot-1.pdf>
 Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/mzb-thresh-plot
--1.pdf  used on input line 142.
+-1.pdf  used on input line 194.
 (pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
 [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.155 
+l.207 
        <./zwischenbericht_rlt_files/figure-latex/mzb-thresh-plot-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 160.
+(Font)              <12> on input line 212.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 160.
+(Font)              <8> on input line 212.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 160.
+(Font)              <6> on input line 212.
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--193
+Underfull \hbox (badness 10000) in paragraph at lines 243--245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--195
+Underfull \hbox (badness 10000) in paragraph at lines 245--247
 
  []
 
@@ -621,106 +640,168 @@ as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.201 \end{equation}
+l.253 \end{equation}
                     ] [6] [7]
-<zwischenbericht_rlt_files/figure-latex/plot-sa-mzb-1.pdf, id=124, 722.7pt x 72
+<zwischenbericht_rlt_files/figure-latex/plot-sa-mzb-1.pdf, id=130, 722.7pt x 72
 2.7pt>
 File: zwischenbericht_rlt_files/figure-latex/plot-sa-mzb-1.pdf Graphic file (ty
 pe pdf)
 <use zwischenbericht_rlt_files/figure-latex/plot-sa-mzb-1.pdf>
 Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/plot-sa-mzb-1.p
-df  used on input line 224.
+df  used on input line 276.
 (pdftex.def)             Requested size: 469.76045pt x 469.76045pt.
 [8pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.230 \newpage
+l.282 \newpage
                <./zwischenbericht_rlt_files/figure-latex/plot-sa-mzb-1.pdf>]
-<zwischenbericht_rlt_files/figure-latex/plot-sa-dia-1.pdf, id=140, 722.7pt x 72
+<zwischenbericht_rlt_files/figure-latex/plot-sa-dia-1.pdf, id=146, 722.7pt x 72
 2.7pt>
 File: zwischenbericht_rlt_files/figure-latex/plot-sa-dia-1.pdf Graphic file (ty
 pe pdf)
 <use zwischenbericht_rlt_files/figure-latex/plot-sa-dia-1.pdf>
 Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/plot-sa-dia-1.p
-df  used on input line 233.
+df  used on input line 285.
 (pdftex.def)             Requested size: 469.76045pt x 469.76045pt.
 [9pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.240 \newpage
+l.292 \newpage
                <./zwischenbericht_rlt_files/figure-latex/plot-sa-dia-1.pdf>] [1
 0pdfTeX warning (ext4): destination with the same identifier (name{table.2}) ha
 s been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.299 
+l.351 
       ]
-<zwischenbericht_rlt_files/figure-latex/plot-mzb-n-taxa-1.pdf, id=166, 722.7pt 
+<zwischenbericht_rlt_files/figure-latex/plot-mzb-n-taxa-1.pdf, id=172, 722.7pt 
 x 361.35pt>
 File: zwischenbericht_rlt_files/figure-latex/plot-mzb-n-taxa-1.pdf Graphic file
  (type pdf)
 <use zwischenbericht_rlt_files/figure-latex/plot-mzb-n-taxa-1.pdf>
 Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/plot-mzb-n-taxa
--1.pdf  used on input line 302.
+-1.pdf  used on input line 354.
 (pdftex.def)             Requested size: 469.76045pt x 234.88023pt.
 
-LaTeX Warning: Reference `fig:pot-uni' on page 11 undefined on input line 306.
+LaTeX Warning: Reference `fig:pot-uni' on page 11 undefined on input line 358.
 
-<zwischenbericht_rlt_files/figure-latex/plot-uni-1.pdf, id=167, 469.755pt x 325
+<zwischenbericht_rlt_files/figure-latex/plot-uni-1.pdf, id=173, 469.755pt x 325
 .215pt>
 File: zwischenbericht_rlt_files/figure-latex/plot-uni-1.pdf Graphic file (type 
 pdf)
 <use zwischenbericht_rlt_files/figure-latex/plot-uni-1.pdf>
 Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/plot-uni-1.pdf 
- used on input line 310.
+ used on input line 362.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [11pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.316 
+l.368 
        <./zwischenbericht_rlt_files/figure-latex/plot-mzb-n-taxa-1.pdf>]
-<zwischenbericht_rlt_files/figure-latex/pcoa-1.pdf, id=179, 469.755pt x 578.16p
+<zwischenbericht_rlt_files/figure-latex/pcoa-1.pdf, id=187, 469.755pt x 578.16p
 t>
 File: zwischenbericht_rlt_files/figure-latex/pcoa-1.pdf Graphic file (type pdf)
 
 <use zwischenbericht_rlt_files/figure-latex/pcoa-1.pdf>
 Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/pcoa-1.pdf  use
-d on input line 319.
+d on input line 373.
 (pdftex.def)             Requested size: 469.75386pt x 578.15858pt.
+
+LaTeX Warning: Reference `fig:' on page 12 undefined on input line 384.
+
 [12pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.322 ...otes for Traits}\label{notes-for-traits}}
-                                                   <./zwischenbericht_rlt_files
-/figure-latex/plot-uni-1.pdf>] [13 <./zwischenbericht_rlt_files/figure-latex/pc
-oa-1.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 364.
-[14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 364.
+l.386 T
+       o visualize differences between the seasons we used Nonmetric multidi...
+ <./zwischenbericht_rlt_files/figure-latex/plot-uni-1.pdf>] [13pdfTeX warning (
+ext4): destination with the same identifier (name{figure.6}) has been already u
+sed, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.386 T
+       o visualize differences between the seasons we used Nonmetric multidi...
+ <./zwischenbericht_rlt_files/figure-latex/pcoa-1.pdf>]
+
+LaTeX Warning: Reference `fig:' on page 14 undefined on input line 386.
+
+
+LaTeX Warning: Reference `fig:' on page 14 undefined on input line 386.
+
+[14pdfTeX warning (ext4): destination with the same identifier (name{table.3}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.431 
+      ]
+
+LaTeX Warning: Reference `tbl:tbl-sta-overlap-mzb-11' on page 15 undefined on i
+nput line 433.
+
+
+LaTeX Warning: Reference `tbl:tbl-sta-overlap-mzb-15' on page 15 undefined on i
+nput line 473.
+
+[15pdfTeX warning (ext4): destination with the same identifier (name{table.4}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.474 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.5
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.474 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.6
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.474 
+      ]
+
+LaTeX Warning: Reference `fig:sTAvsSS' on page 16 undefined on input line 475.
+
+<zwischenbericht_rlt_files/figure-latex/sTAvsSS-1.pdf, id=229, 469.755pt x 325.
+215pt>
+File: zwischenbericht_rlt_files/figure-latex/sTAvsSS-1.pdf Graphic file (type p
+df)
+<use zwischenbericht_rlt_files/figure-latex/sTAvsSS-1.pdf>
+Package pdftex.def Info: zwischenbericht_rlt_files/figure-latex/sTAvsSS-1.pdf  
+used on input line 476.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[16] [17 <./zwischenbericht_rlt_files/figure-latex/sTAvsSS-1.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 527.
+[18]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 527.
 (zwischenbericht_rlt.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 364.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 364.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 527.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 527.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 13461 strings out of 481199
- 201935 string characters out of 2905595
- 509884 words of memory out of 3000000
- 28651 multiletter control sequences out of 15000+200000
- 587099 words of font info for 120 fonts, out of 3000000 for 9000
+ 14013 strings out of 481199
+ 210613 string characters out of 2905595
+ 521118 words of memory out of 3000000
+ 29165 multiletter control sequences out of 15000+200000
+ 588138 words of font info for 126 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,8n,42p,1465b,337s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 50i,8n,42p,1506b,337s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/jonat/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C
 :/Users/jonat/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C
 :/Users/jonat/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C
@@ -735,10 +816,12 @@ s/jonat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users
 /jonat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/
 jonat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/jo
 nat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/jo
-nat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on zwischenbericht_rlt.pdf (14 pages, 278824 bytes).
+nat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/jo
+nat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/jo
+nat/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
+Output written on zwischenbericht_rlt.pdf (18 pages, 332969 bytes).
 PDF statistics:
- 290 PDF objects out of 1000 (max. 8388607)
- 63 named destinations out of 1000 (max. 500000)
- 12391 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 349 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 12412 words of extra memory for PDF output out of 14400 (max. 10000000)
 

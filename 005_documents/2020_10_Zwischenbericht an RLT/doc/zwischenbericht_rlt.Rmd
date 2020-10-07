@@ -45,9 +45,19 @@ pacman::p_load(
 \tableofcontents
 \renewcommand{\baselinestretch}{1.1}\normalsize
 
+```{r}
+# TODO discuss PCoA plots shortly
+# TODO add taxa lists 
+# TODO add to intro
+# TODO add image of map 
+# TODO add link to maps 
+# TODO add figures
+# TODO based on what criteria where the seasonal communities selected. 
+```
+
 \clearpage
 # Introduction 
-<!-- ADD TO INTRO  -->
+
 Here we describe the methods we used to derive typical assemblages of macro-invertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
 
 # Harmonizing taxa names
@@ -273,12 +283,87 @@ source(file = "../r/plot_unique.R")
 plot_grid(align='h', plot_uni_mzb, plot_uni_dia, labels = c('A', 'B'), ncol = 2)
 ```
 
-We also used non metric multidimensional scaling (NMDS) to visualize the similarity of TAs, based on Jaccard distance matrices. 
+We also used Principal Coordinate Analysis (PCoA, @gower1966some) to visualize the similarity of TAs, based on Jaccard distance matrices (Figure \@ref(fig:pcoa)). 
 
-```{r pcoa, echo=FALSE, fig.height=8}
+```{r pcoa, echo=FALSE, fig.height=8, fig.cap="Principal Coordinate Analysis ordinations of typical assemblages based on Jaccard distance matrices. A shows the typical asseblages of macroinvertebrate and B those of diatoms."}
 source("../r/pcoa.R")
 plot_grid(align='v', bim, bid, labels = c('A', 'B'), ncol = 1)
 ```
+
+Taxalists of the typical assemblages can be found here. 
+
+# Seasonal Typical Assemblages 
+In addition to the spatially defined TAs, we derived seasonal TAs (sTA) for a subset of river types. The four seasons were defined as follows: spring is March to May, Summer is June to August, Fall is September to November, and Winter is December to February. 
+
+To avoid strong spatial signals in the sTA only those river types (RT) were considered in which samples were evenly distributed between seasons. In most cases, an even spatio-temporal distribution could only be achieved by omitting parts of the data (e.g. certain seasons or data sets). The maps for all RT with all available seasons as well as the respective subsets that were used in the further analyses can be found in the here for macroinvertebrates and here for diatmos.  As an example, the map of macroinvertebrate samples for the combined RT 10+11 is shown in Figure \@ref(fig:).
+
+```{r sampling_map, echo=FALSE}
+
+```
+
+To visualize differences between the seasons we used Nonmetric multidimensional scaling (NMDS) on Jaccard dissimilarity matrices. The resulting NMDS plots are available in the for macroinvertebrates and diatoms. Figure \@ref(fig:) shows the NMDS plot for invertebrate samples in RT10+11. Further, we evaluated whether the Jaccard dissimilarity between sites would be better explained by spatial distance or by season. To this end, we employed generalized dissimilarity modeling (GDM, @Ferrier2007). In GDMs, the response variable is the ecological dissimilarity between two sites (expressed in some *a priori* chosen dissimilarity metric, here Jaccard). Smooth functions are fitted to the environmental data and the differences between the values of these functions at the two sites of interest are used as explanatory variables. By using a generalized modeling framework we can account for the bounded nature of dissimilarity metrics (between 0-1) and the smooth functions allow for variation in the rate of compositional turnover along gradients. The plots comparing the effect of spatial distance to that of season for all GDMs can be found in the for macroinvertebrates and diatoms. The plot for invertebrates in RT10 + 11 is shown in Figure \@ref(fig:)
+
+Based on the results of NMDS and GDMs, we selected RT 10 + 11 and RT 15 + 16 for invertebrates and RT10 and RT15 for diatoms. For these four river types sTA were derived in the same way as the non-seasonal TAs.  
+
+# Patterns and overlap in seasonal assemblages 
+In river type 11, the number of diatom taxa in the sTAs did not vary strongly between the seasons (Table \@ref(tab:tbl-sta-overlap-dia-11)). The summer and autumn sTAs were more similar to each other than either of them was to the winter sTA. The latter was most similar to the summer sTA, as they share some Gomphonema species (*Gomphonema olivaceum olivaceoides* and *Gomphonema parvulum* Complex) which are absent from the autumn sTA with exception of *Gomphonema pumilum* Complex. 
+
+```{r load tbl-sta-overlap-dia, echo=FALSE}
+om11 <-readRDS("../r/tbl_sta_dia_11.RDS")
+om15 <-readRDS("../r/tbl_sta_dia_15.RDS")
+```
+
+```{r tbl-sta-overlap-dia-11, echo=FALSE}
+om11 %>% 
+  kable(caption="Overlap between seasonal typical assemblages (sTA) of diatoms in river type 11  expressed in percent of taxa in row sTA also present in column sTA. N is the number of taxa in the respective sTA.")
+```
+
+```{r tbl-sta-overlap-dia-15, echo=FALSE}
+om15 %>% 
+  kable(caption="Overlap between seasonal typical assemblages (sTA) of diatoms in river type 15  expressed in percent of taxa in row sTA also present in column sTA. N is the number of taxa in the respective sTA.")
+```
+
+For diatom in RT 15, the winter sTA is considerably larger than the summer and autumn sTAs (Table \@ref{tab:tbl-sta-overlap-dia-15}.  
+Both, the summer and the autumn sTAs, overlap 81.2% with the winter sTA.  Therefore, they cross the threshold of 75% overlap we used to delineate redundant TAs. The overlap between the winter sTA and either summer or autumn sTA is of a similar size (41.4% and 44.8%). In general, the overlaps in river type 15 are larger than those in river type 11 which might indicate a weaker seasonal turnover in these ecosystems. 
+
+For the macroinvertebrates, the number of taxa in the sTAs is lower than for diatoms. In both river types, the number of taxa in the autumn sTA is also markedly higher than for all other macroinvertebrate sTAs. 
+In the combined river type 10 + 11, the spring sTA was nested in the winter sTA and had no overlap with the summer sTA (Table \@ref(tbl:tbl-sta-overlap-mzb-11)). The summer sTA was most similar to the autumn TA (71.4% overlap) and vice versa (29.4% overlap). Half of the taxa in the winter TA are also part of the autumn TA which is the highest overlap for the winter TA. 
+```{r load tbl-sta-overlap-mzb, echo=FALSE}
+om11 <-readRDS("../r/tbl_sta_mzb_11.RDS")
+om15 <-readRDS("../r/tbl_sta_mzb_15.RDS")
+```
+
+```{r tbl-sta-overlap-mzb-11, echo=FALSE}
+om11 %>% 
+  kable(caption="Overlap between seasonal typical assemblages (sTA) of macroinvertebrates in the combined river type 10+11  expressed in percent of taxa in row sTA also present in column sTA. N is the number of taxa in the respective sTA.")
+```
+
+```{r tbl-sta-overlap-mzb-15, echo=FALSE}
+om15 %>% 
+  kable(caption="Overlap between seasonal typical assemblages (sTA) of diatoms in river type 15  expressed in percent of taxa in row sTA also present in column sTA. N is the number of taxa in the respective sTA.")
+```
+
+In the other combined river type considered here, RT 15 + 16, the summer sTA is nested within the spring sTA and the winter sTA is almost nested within the autumn sTA (Table \@ref(tbl:tbl-sta-overlap-mzb-15). *Limnoidae* is the only taxon that occurs in the winter sTA but not the autumn sTA. Across this divide, the sTAs only share the two taxa which are common to all four: *Baetis* and *Chironomidae*.
+
+
+Several possible mechanisms that could explain the higher richness in diatom sTAs compared to macroinvertebrate sTAs as well as the higher richness in autumn sTAs observed for invertebrates are explored below. There might be a connection between the number of samples taken and the size of the TAs. The effect could plausibly be hypothesized to increase or decrease the size of the TA with an increasing number of sampling locations. A decrease in TA size could occur because the absolute number of occurrences required to be included in the TA is increased with the number of sampling sites.  In this model, the high number of taxa would be caused by taxa that are only included because of noise. The number should decrease if more samples would be taken. An increase in TA size with an increasing number of sampling sites could occur because the total impact of atypical sites which might be overrepresented in the sample by happenstance would most certainly decrease. Here, atypical refers to the community composition, i.e. taxa that are rare in other sites occur and otherwise frequently occurring taxa are absent.  Similar effects might also account for the difference between diatoms and macroinvertebrates. In a linear regression of the size of typical assemblages against the number of sampling locations (log-transformed) across taxa groups, no relationship was identified (F = 0.569, df = 12, p = 0.47, $R^2$ = 0.05,  Figure \@ref(fig:sTAvsSS)).
+```{r sTAvsSS, echo=F}
+data<-data.frame(n_samples = c(55,188,103,39, 7,42,27,36, 157,52,13, 82,19,52),
+           TA        = c(2,7,17,6,4,3,16,4, 28,21,22, 19,16,29),
+           taxon     = c("Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate",
+                         "Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate", 
+                         "Diatom", "Diatom", "Diatom", "Diatom", "Diatom", "Diatom"))
+
+options(warn = -1)
+
+ggplot(data, aes(x = log(n_samples), y = TA)) + 
+        stat_summary(fun.data=data) + 
+        geom_smooth(method='lm', formula= y~x) + 
+        geom_point(aes(col = taxon)) +
+        ylab("Size of Typical Assemblage") + 
+        xlab("Number of samples")
+```
+
 
 
 # Notes for Traits 

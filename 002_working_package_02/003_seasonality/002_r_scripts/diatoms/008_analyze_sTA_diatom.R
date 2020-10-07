@@ -5,14 +5,27 @@
 # -------------------------------------- #
 
 # date written/ modified: 09.09.20 + 16. + 17. 
-# date used: 09.09.20 + 16. + 17.  
+# date used: 09.09.20 + 16. + 17. + 07.10. 
 # Jonathan Jupke 
 # Get Real WP2 
 # Diatoms - Seasonality 
 
 # setup -------------------------------------------------------------------
-pacman::p_load(dplyr, magrittr, data.table, stringr, taxize, purrr, ggplot2, here, viridis, fuzzySim, vegan, ggplot2, faraway)
-setwd(here("003_results/diatoms"))
+pacman::p_load(
+    data.table,
+    dplyr,
+    faraway,
+    fuzzySim,
+    ggplot2,
+    here,
+    magrittr,
+    purrr,
+    stringr,
+    taxize,
+    vegan,
+    viridis
+)
+setwd(here("002_working_package_02/003_seasonality/003_results/diatoms/"))
 
 # load data ---------------------------------------------------------------
 files <- dir()
@@ -45,7 +58,8 @@ rm(list = rm_files)
 rm(rm_files)
 gc()
 
-
+ta_15$season = factor(ta_15$season, levels=c("spring", "summer", "autumn", "winter"))
+ta_11$season = factor(ta_11$season, levels=c("spring", "summer", "autumn", "winter"))
 
 #### How similar are the seasonal assemblages to each other #### 
 
@@ -53,7 +67,8 @@ rv <- c("11","15")
 ll <- list()
 for (l in 1:2){
     ld <- get(paste0("ta_",rv[l]))
-    sv <- unique(ld$season)
+    ld$season=droplevels(ld$season)
+    sv <- levels(ld$season)
     om <- data.frame(matrix(data = 0, ncol =  length(sv), nrow = length(sv)))
     names(om) <- rownames(om) <- sv
     for (i in sv) {
@@ -75,8 +90,12 @@ om15 <- ll[[2]]
 
 rm(sv, ll, ld, l)
 
-om11
-om15
+om11$N <- table(ta_11$season)[-1]
+om15$N <- table(ta_15$season)[-1]
+
+# save tables for report 
+saveRDS(om11, "../../../../005_documents/2020_10_Zwischenbericht an RLT/r/tbl_sta_dia_11.RDS")
+saveRDS(om15, "../../../../005_documents/2020_10_Zwischenbericht an RLT/r/tbl_sta_dia_15.RDS")
 
 # A closer Look  ----------------------------------------------------------
 
