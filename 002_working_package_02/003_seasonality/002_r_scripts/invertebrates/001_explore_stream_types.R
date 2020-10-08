@@ -21,7 +21,7 @@ pacman::p_load(data.table,
 setwd(here())
 
 # load data ----------------------------------------------------------------
-data <- readRDS("../001_Community Data/100_Combined/002_invertebrates/003_processed_data/004_2020-07-03_mzb_data1585_low_impact.RDS")
+data <- readRDS("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/004_2020-07-03_mzb_data1585_low_impact.RDS")
 mcp_sub <-c("#d95f02", "#666666", "#5f64ff", "#dcce00")
 
 # carpeting ---------------------------------------------------------------
@@ -107,10 +107,13 @@ tmap_save(plot_object, filename = paste0("004_plots/invertebrates/maps/", Sys.Da
 plot_data <- data %>% filter(rt == "RT10_11") %>%  unique(by = "gr_sample_id") %>% st_as_sf()
 osm <- read_osm(plot_data, ext=1.1)
 (plot_object <- tm_shape(osm) + tm_rgb() + tm_shape(plot_data) + tm_dots(col = "season", size = 1, shape = 21, palette = mcp_sub) +  tm_layout(legend.bg.color = "white", frame = F, legend.frame = T, legend.position = c("RIGHT", "top")))
-tmap_save(plot_object, filename = paste0("004_plots/invertebrates/maps/", Sys.Date(), "_RT10_11all.jpeg"))
+tmap_save(plot_object, filename = paste0("002_working_package_02/003_seasonality/004_plots/invertebrates/maps/", Sys.Date(), "_RT10_11all.jpeg"))
 
-
-
+plot_sub_data <- plot_data %>% 
+        filter(data.set!="Picos_Pepe")
+osm <- read_osm(plot_sub_data, ext=1.1)
+(plot_object <- tm_shape(osm) + tm_rgb() + tm_shape(plot_sub_data) + tm_dots(col = "season", size = 1, shape = 21, palette = mcp_sub) +  tm_layout(legend.bg.color = "white", frame = F, legend.frame = T, legend.position = c("RIGHT", "top")))
+tmap_save(plot_object, filename = paste0("002_working_package_02/003_seasonality/004_plots/invertebrates/maps/", Sys.Date(), "_RT10_11sub.jpeg"))
 # RT 12 --------------------------------------------------------------------
 
 

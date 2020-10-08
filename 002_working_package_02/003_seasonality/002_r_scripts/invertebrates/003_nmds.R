@@ -14,7 +14,7 @@ setwd(here())
 
 # load data ---------------------------------------------------------------
 
-files <- dir(path = "003_results/invertebrates/001_speciesXsites_tables/")
+files <- dir(path = "002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables/")
 files <- files[grepl(pattern = "2020-09-10", x = files)]
 for (i in seq_along(files)) {
         lv <- files[i]
@@ -22,7 +22,7 @@ for (i in seq_along(files)) {
                 str_extract("rt.*") %>% 
             str_remove(pattern = "\\.RDS")
         assign(x     = obj_name,
-               value = readRDS(paste0("003_results/invertebrates/001_speciesXsites_tables/",lv)))
+               value = readRDS(paste0("002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables/",lv)))
         
 }
 rm(i, lv, obj_name, files);gc()

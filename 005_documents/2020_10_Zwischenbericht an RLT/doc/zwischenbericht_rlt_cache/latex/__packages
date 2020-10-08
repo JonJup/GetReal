@@ -17,3 +17,14 @@ permute
 lattice
 vegan
 fuzzySim
+kableExtra
+OpenStreetMap
+sf
+tmaptools
+tmap
+sp
+raster
+foreach
+iterators
+doParallel
+gdm

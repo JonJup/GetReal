@@ -10,8 +10,8 @@ output:
     number_sections: yes
     toc: no
     includes: 
-        in_header: ../template/header.tex
         
+        in_header: ../template/header.tex
 bibliography: ../bib/ref.bib
 csl: ../bib/ecology_letters.csl
 mainfont: Times New Roman
@@ -21,22 +21,24 @@ link-citations: true
 documentclass: article
 geometry: margin=1in
 always_allow_html: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
 knitr::opts_chunk$set(cache = TRUE)
-knitr::opts_chunk$set(fig.pos = 'H')
+knitr::opts_chunk$set(fig.pos = 'H',fig_cap=TRUE)
 pacman::p_load(
         cowplot,
         data.table,
         dplyr,
-        ggplot2, 
+        ggplot2,
+        here,
+        kableExtra,
         knitr,
         viridis
         )
-
-
 ```
 
 \clearpage
@@ -112,7 +114,7 @@ data <- data.frame("Rating"=rep(c("high", "medium", "low"), each=2),
                                    )
 )
 data %>% 
-        kable(caption = "The ratings for all river types for macro-invertebrates and diatoms")
+        kable(caption = "The ratings for all river types for macro-invertebrates and diatoms") 
 rm(data)
 ```
 
@@ -276,7 +278,7 @@ plot_grid(align='h', mzb_per_level_plot, dia_per_level_plot, labels = c('A', 'B'
 
 
 
-We can express the uniqueness of a TA with the following score: Each taxon receives a taxon uniqueness score that is one divided by the number of TAs it occurs in. For each river type, we sum the taxon scores of all taxa up and divide it by the number of taxa in the river type’s TA. If all taxa in the TA are unique to that TA the score is one. If all species occur in one other TA the score is 0.5. The minimal score depends on the number of TAs, as it is 1 divided by that number and it signals that all species in that TA occur in all other TAs. These scores are shown in figure \@ref(fig:pot-uni). The dashed horizontal lines indicate the minimum score for each representation level.  
+We can express the uniqueness of a TA with the following score: Each taxon receives a taxon uniqueness score that is one divided by the number of TAs it occurs in. For each river type, we sum the taxon scores of all taxa up and divide it by the number of taxa in the river type’s TA. If all taxa in the TA are unique to that TA the score is one. If all species occur in one other TA the score is 0.5. The minimal score depends on the number of TAs, as it is 1 divided by that number and it signals that all species in that TA occur in all other TAs. These scores are shown in figure \@ref(fig:plot-uni). The dashed horizontal lines indicate the minimum score for each representation level.  
 
 ```{r plot-uni, echo=FALSE, fig.align="center", fig.cap="Uniqueness scores for typical assemblages of macro-invertebrates(A) and diatoms (B). The red dashed line indicates the lowest possible score."}
 source(file = "../r/plot_unique.R")
@@ -295,13 +297,41 @@ Taxalists of the typical assemblages can be found here.
 # Seasonal Typical Assemblages 
 In addition to the spatially defined TAs, we derived seasonal TAs (sTA) for a subset of river types. The four seasons were defined as follows: spring is March to May, Summer is June to August, Fall is September to November, and Winter is December to February. 
 
-To avoid strong spatial signals in the sTA only those river types (RT) were considered in which samples were evenly distributed between seasons. In most cases, an even spatio-temporal distribution could only be achieved by omitting parts of the data (e.g. certain seasons or data sets). The maps for all RT with all available seasons as well as the respective subsets that were used in the further analyses can be found in the here for macroinvertebrates and here for diatmos.  As an example, the map of macroinvertebrate samples for the combined RT 10+11 is shown in Figure \@ref(fig:).
+To avoid strong spatial signals in the sTA only those river types (RT) were considered in which samples were evenly distributed between seasons. In most cases, an even spatio-temporal distribution could only be achieved by omitting parts of the data (e.g. certain seasons or data sets). The maps for all RT with all available seasons as well as the respective subsets that were used in the further analyses can be found in the here for macroinvertebrates and here for diatoms.  As an example, the map of macroinvertebrate samples for the combined RT 10+11 is shown in Figure \@ref(fig:sampling-map2).
 
-```{r sampling_map, echo=FALSE}
-
+```{r sampling-map1, echo=FALSE}
+source(file = "../r/sampling_map.R")
+```
+```{r sampling-map2, echo=FALSE, fig.cap="Map of sampling sites for the combines River Type 10 + 11. The color of the points shows the season of sampling."}
+plot_object
+```
+```{r clean-sampling-map, echo=FALSE, results="hide"}
+rm(plot_object, data, mcp_sub, osm, plot_data);gc()
 ```
 
-To visualize differences between the seasons we used Nonmetric multidimensional scaling (NMDS) on Jaccard dissimilarity matrices. The resulting NMDS plots are available in the for macroinvertebrates and diatoms. Figure \@ref(fig:) shows the NMDS plot for invertebrate samples in RT10+11. Further, we evaluated whether the Jaccard dissimilarity between sites would be better explained by spatial distance or by season. To this end, we employed generalized dissimilarity modeling (GDM, @Ferrier2007). In GDMs, the response variable is the ecological dissimilarity between two sites (expressed in some *a priori* chosen dissimilarity metric, here Jaccard). Smooth functions are fitted to the environmental data and the differences between the values of these functions at the two sites of interest are used as explanatory variables. By using a generalized modeling framework we can account for the bounded nature of dissimilarity metrics (between 0-1) and the smooth functions allow for variation in the rate of compositional turnover along gradients. The plots comparing the effect of spatial distance to that of season for all GDMs can be found in the for macroinvertebrates and diatoms. The plot for invertebrates in RT10 + 11 is shown in Figure \@ref(fig:)
+To visualize differences between the seasons we used Non-metric multidimensional scaling (NMDS) on Jaccard dissimilarity matrices. The resulting NMDS plots are available in the for [macroinvertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/invertebrates) and [diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/diatoms/nmds). Figure \@ref(fig:plot-nmds) shows the NMDS plot for invertebrate samples in RT10+11. 
+
+```{r load-nmds, echo=FALSE}
+source("../r/plot_nmds.R")
+```
+```{r plot-nmds, echo=FALSE, fig.cap="Nonmetric multidimensional scaling plot of Jaccard dissimilarity matrices for macroinvertebrate communities in RT10 + 11. The color of the points shows the season. Convex hulls surround all sampling points from one season."}
+nmds_plot
+```
+```{r clean-plot-nmds, echo=FALSE, results="hide"}
+rm(list =ls());gc()
+```
+
+Further, we evaluated whether the Jaccard dissimilarity between sites would be better explained by spatial distance or by season. To this end, we employed generalized dissimilarity modeling (GDM, @Ferrier2007). In GDMs, the response variable is the ecological dissimilarity between two sites (expressed in some *a priori* chosen dissimilarity metric, here Jaccard). Smooth functions are fitted to the environmental data and the differences between the values of these functions at the two sites of interest are used as explanatory variables. By using a generalized modeling framework we can account for the bounded nature of dissimilarity metrics (between 0-1) and the smooth functions allow for variation in the rate of compositional turnover along gradients. The plots comparing the effect of spatial distance to that of season for all GDMs are available for [macroinvertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/invertebrates/gdm) and [diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/diatoms/gdm). The plot for invertebrates in RT10 + 11 is shown in Figure \@ref(fig:plot-gdm). 
+
+```{r load-gdm, echo=FALSE}
+source("~/01_Uni/02_getreal/005_documents/2020_10_Zwischenbericht an RLT/r/plot_gdm.R")
+```
+```{r plot-gdm, echo=FALSE, fig.cap="test"}
+gdm_plot
+```
+```{r clean-plot-gdm, echo=FALSE, results="hide"}
+rm(list =ls());gc()
+```
 
 Based on the results of NMDS and GDMs, we selected RT 10 + 11 and RT 15 + 16 for invertebrates and RT10 and RT15 for diatoms. For these four river types sTA were derived in the same way as the non-seasonal TAs.  
 
@@ -345,26 +375,60 @@ om15 %>%
 
 In the other combined river type considered here, RT 15 + 16, the summer sTA is nested within the spring sTA and the winter sTA is almost nested within the autumn sTA (Table \@ref(tbl:tbl-sta-overlap-mzb-15). *Limnoidae* is the only taxon that occurs in the winter sTA but not the autumn sTA. Across this divide, the sTAs only share the two taxa which are common to all four: *Baetis* and *Chironomidae*.
 
+Several possible mechanisms that could explain the higher richness in diatom sTAs compared to macroinvertebrate sTAs as well as the higher richness in autumn sTAs observed for invertebrates are explored below. There might be a connection between the number of samples taken and the size of the TAs. The effect could plausibly be hypothesized to increase or decrease the size of the TA with an increasing number of sampling locations. A decrease in TA size could occur because the absolute number of occurrences required to be included in the TA is increased with the number of sampling sites.  In this model, the high number of taxa would be caused by taxa that are only included because of noise. The number should decrease if more samples would be taken. An increase in TA size with an increasing number of sampling sites could occur because the total impact of atypical sites which might be overrepresented in the sample by happenstance would most certainly decrease. Here, atypical refers to the community composition, i.e. taxa that are rare in other sites occur and otherwise frequently occurring taxa are absent.  Similar effects might also account for the difference between diatoms and macroinvertebrates. In a linear regression of the size of typical assemblages against the number of sampling locations (log-transformed) across taxa groups, no relationship was identified (F = 0.569, df = 12, p = 0.47, $R^2$ = 0.05,  Figure \@ref(fig:fig-test)).  
 
-Several possible mechanisms that could explain the higher richness in diatom sTAs compared to macroinvertebrate sTAs as well as the higher richness in autumn sTAs observed for invertebrates are explored below. There might be a connection between the number of samples taken and the size of the TAs. The effect could plausibly be hypothesized to increase or decrease the size of the TA with an increasing number of sampling locations. A decrease in TA size could occur because the absolute number of occurrences required to be included in the TA is increased with the number of sampling sites.  In this model, the high number of taxa would be caused by taxa that are only included because of noise. The number should decrease if more samples would be taken. An increase in TA size with an increasing number of sampling sites could occur because the total impact of atypical sites which might be overrepresented in the sample by happenstance would most certainly decrease. Here, atypical refers to the community composition, i.e. taxa that are rare in other sites occur and otherwise frequently occurring taxa are absent.  Similar effects might also account for the difference between diatoms and macroinvertebrates. In a linear regression of the size of typical assemblages against the number of sampling locations (log-transformed) across taxa groups, no relationship was identified (F = 0.569, df = 12, p = 0.47, $R^2$ = 0.05,  Figure \@ref(fig:sTAvsSS)).
-```{r sTAvsSS, echo=F}
+```{r fig-test, echo=F, fig.height=3.5,fig.width=7, fig.cap="Regression of the taxon richness of typical assemblages against the number of sampling locations. Gray shaded area shows the 95% confidence interval for the regression line. The color of the dots indicates the taxon group."}
 data<-data.frame(n_samples = c(55,188,103,39, 7,42,27,36, 157,52,13, 82,19,52),
            TA        = c(2,7,17,6,4,3,16,4, 28,21,22, 19,16,29),
            taxon     = c("Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate",
                          "Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate", "Macroinvertebrate", 
                          "Diatom", "Diatom", "Diatom", "Diatom", "Diatom", "Diatom"))
-
 options(warn = -1)
 
 ggplot(data, aes(x = log(n_samples), y = TA)) + 
-        stat_summary(fun.data=data) + 
         geom_smooth(method='lm', formula= y~x) + 
         geom_point(aes(col = taxon)) +
-        ylab("Size of Typical Assemblage") + 
-        xlab("Number of samples")
+        ylab("taxon richness of typical assemblage") + 
+        xlab("log number of samples")
 ```
 
+The number of sampled communities does not differ strongly between taxa (Table 6). Most importantly, the number of macroinvertebrate samples for one river type is lower than that of diatom samples in RT11 and RT15 while the other one is higher. Thus, the overall difference in richness can not be explained by the number of sampled communities. The mean number of taxa in diatom communities was lower than in macroinvertebrate communities. The total number of taxa was also lower for diatoms than for invertebrates. This might partly also be due to the extensive harmonization efforts that summarized some diatom species in larger complexes. However, it also highlights that there is less variation between sites within river types, which is conductive to larger TA. Strong turnover between sites within one RT or season leads to low average fidelity (B value) and consequently to few taxa that are included in the typical assemblages.   
+The methodology we employed is an implicit test of the fit of the river typology to our data. If the communities would vary independently of the typology, TAs would include few or no taxa. 
 
+```{r tbl-summary-stats, echo=F}
+data <- data.table("Class" = rep(c("Invertebrates", "Diatoms"), each=2), 
+                   "RT" = paste0("RT", c("10+11", "15+16", "11", "15")),
+                   "N samples" = c(385, 112, 265, 230),
+                   "mean richness" = c(32.7, 22.9, 23.3, 17.1),
+                   #"Median richness"= c(32, 23, 22.5, 16),
+                   "SD richness" = c(11.7, 9.3, 7.1, 6.5),
+                   "N taxa"=c(257, 113, 140, 99),
+                   "Samples per Season"=c("55/188/103/39", "7/42/27/36", "0/157/52/13", "0/82/19/52")
+)
+data %>% 
+  kable(caption=
+"Summary statistics of samples used to delineate seasonal typical assemblages.Rt is the river type. N samples is the total number of samples taken in the respecitve river type. Mean richness is the mean number of taxa found at a sampling event. Medians are not shown but do not deviate strongly from means. SD richness is the standard deviation of taxa richness and N taxa the total number of taxa found in a river type.In the last column \"Samples per Season\" the seasons go from spring to winter.", 
+        format="latex") %>% 
+  kable_styling(font_size = 11)
+                                       
+```
+
+The taxa lists for typical assemblages can be obtained for macroinvertebrates and diatoms. We also visualized the nestedness of communities. 
+
+\blandscape
+test
+# ```{r img_dia_sta, echo=FALSE}
+# knitr::include_graphics('../figures/dia_sta.png') 
+# ```
+\elandscape
+\newpage
+\blandscape
+test
+# ```{r img_mzb_sta, echo=FALSE, out.width=5}
+# knitr::include_graphics('../figures/mzb_sta.png') 
+# ```
+\elandscape
+\newpage
 
 # Notes for Traits 
 CWM with B value then RR-VGLM (glm RDA)
