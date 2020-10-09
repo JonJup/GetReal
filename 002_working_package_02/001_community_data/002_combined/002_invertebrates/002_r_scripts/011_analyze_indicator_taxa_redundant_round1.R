@@ -61,7 +61,7 @@ spe_t <- spe_t[taxon != "Notonectidae"]
 tm <- rbindlist(list(spe_t, 
                      gen_t, 
                      foh_t))
-
+tm[,.N,by=group]
 # setwd("../003_processed_data/")
 # saveRDS(file = paste0("08_", Sys.Date(),"_macroinvertebrate_typical_assemblages.RDS"),object =  tm)
 

@@ -19,7 +19,7 @@ set_all[, c("final_taxon", "final_taxon_level") := .(character(), character())]
 remove_orders <-  dt_order[n_observations <= 10, order_name]
 set_all <- set_all[!order %in% remove_orders]
 
-dt_loop_out = data.table(threshold=rep(75:90, each=2),
+dt_loop_out = data.table(threshold=rep(70:95, each=2),
                          n_observations=numeric(0),
                          n_taxa=numeric(0),
                          taxon_level=rep(c("species","genus"), times=15))
@@ -63,11 +63,8 @@ for (l2 in c(95:70)) { #BEGIN FOR-LOOP 1 NOT-NESTED OVER:
         print(l2)
 }
 
-dt_loop_out %>% 
+pt_save <- dt_loop_out %>% 
         ggplot(aes(x=threshold, y=n_observations,col=taxon_level)) + 
         geom_line()+
         geom_point()
-dt_loop_out %>% 
-        ggplot(aes(x=threshold, y=n_taxa,col=taxon_level)) + 
-        geom_line()+
-        geom_point()
+ggsave(pt_save, filename="../004_plots/threshold_plot/threshold_plot_diatoms.jpeg")

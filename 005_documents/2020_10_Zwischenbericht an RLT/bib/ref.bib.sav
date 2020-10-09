@@ -171,4 +171,27 @@
   keywords = {Beta diversity,Biodiversity,Compositional turnover,Conservation assessment,Generalized dissimilarity modelling},
 }
 
+@Article{Hering2006,
+  author          = {Hering, Daniel and Johnson, Richard K. and Kramm, Sandra and Schmutz, Stefan and Szoszkiewicz, Krzysztof and Verdonschot, Piet F.M.},
+  journal         = {Freshwater Biology},
+  title           = {{Assessment of European streams with diatoms, macrophytes, macroinvertebrates and fish: A comparative metric-based analysis of organism response to stress}},
+  year            = {2006},
+  issn            = {00465070},
+  number          = {9},
+  pages           = {1757--1785},
+  volume          = {51},
+  abstract        = {1. Periphytic diatoms, macrophytes, benthic macroinvertebrates and fish were sampled with standard methods in 185 streams in nine European countries to compare their response to degradation. Streams were classified into two main stream type groups (i.e. lowland, mountain streams); in addition, the lowland streams were grouped into four more specific stream types. 2. Principal components analysis with altogether 43 environmental parameters was used to construct complex stressor gradients for physicalchemical, hydromorphological and land use data. About 30 metrics were calculated for each sample and organism group. Metric responses to different stress types were analysed by Spearman Rank Correlation. 3. All four organism groups showed significant response to eutrophication/organic pollution gradients. Generally, diatom metrics were most strongly correlated to eutrophication gradients (85{\%} and 89{\%} of the diatom metrics tested correlated significantly in mountain and lowland streams, respectively), followed by invertebrate metrics (91{\%} and 59{\%}). 4. Responses of the four organism groups to other gradients were less strong; all organism groups responded to varying degrees to land use changes, hydromorphological degradation on the microhabitat scale and general degradation gradients, while the response to hydromorphological gradients on the reach scale was mainly limited to benthic macroinvertebrates (50{\%} and 44{\%} of the metrics tested correlated significantly in mountain and lowland streams, respectively) and fish (29{\%} and 47{\%}). 5. Fish and macrophyte metrics generally showed a poor response to degradation gradients in mountain streams and a strong response in lowland streams. 6. General recommendations on European bioassessment of streams were derived from the results.},
+  annote          = {{\#}{\#} --READ --{\#}{\#} 05.02.19 Abstract {\#}{\#} --WHY? --{\#}{\#} Assess the ecological status of 185 streams in nine European countires. {\#}{\#} -- SUMMARY {\&} NOTES -- {\#}{\#} {\#}{\#} -- Abbreviations -- {\#}{\#} {\#}{\#} --Example Quotations-- {\#}{\#}},
+  archiveprefix   = {arXiv},
+  arxivid         = {arXiv:cond-mat/0402594v3},
+  doi             = {10.1111/j.1365-2427.2006.01610.x},
+  eprint          = {0402594v3},
+  file            = {:C$\backslash$:/Users/jonat/Documents/10{\_}Paper/Hering et al. - 2006 - Assessment of European streams with diatoms, macrophytes, macroinvertebrates and fish A comparative metric-based.pdf:pdf},
+  isbn            = {0046-5070},
+  keywords        = {Eutrophication,Hydromorphology,Land use,Metrics,Microhabitats,Perturbation},
+  mendeley-groups = {004{\_}Projekte/GetReal/WP1/Typologien,004{\_}Projekte/GetReal/WP2/MZB,004{\_}Projekte/GetReal/WP2/Diatomen},
+  pmid            = {19389825},
+  primaryclass    = {arXiv:cond-mat},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

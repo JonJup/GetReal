@@ -87,7 +87,7 @@
 }
 
 @Article{Chamberlain13,
-  author  = {{Scott Chamberlain} and {Eduard Szocs}},
+  author  = {Chamberlain, Scott and Szöcs, Eduard},
   journal = {F1000Research},
   title   = {taxize - taxonomic search and retrieval in R},
   year    = {2013},
