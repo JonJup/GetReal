@@ -1,4 +1,9 @@
+# ---------------------------------------------- #
 ### --- create maps of sampling sites from --- ### 
+# ---------------------------------------------- #
+
+#date created:???
+#date used   : 19.10.20
 
 pacman::p_load(here, sf, dplyr, ggplot2, magrittr, tmap)
 setwd(here())

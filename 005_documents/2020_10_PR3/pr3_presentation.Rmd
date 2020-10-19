@@ -1,0 +1,149 @@
+---
+title: "Aquatic Typical Assemblages"
+author: "Jonathan Jupke"
+date: "29.10.2020"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r}
+#TODO add sampling maps
+#TODO add table for cutoffs
+```
+
+---
+
+```{r setup, include=FALSE}
+# set to TRUE if you want to speed up computation 
+knitr::opts_chunk$set(cache = FALSE,fig.pos = 'H',fig_cap=TRUE)
+
+my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
+
+pacman::p_load(
+  ape,
+  cowplot,
+  data.table,
+  dplyr,
+  fuzzySim,
+  ggplot2,
+  here,
+  kableExtra,
+  knitr,
+  magrittr,
+  stringr,
+  vegan,
+  viridis
+)
+```
+
+# Optimal taxonomic level
+
+* last meeting: All taxa share one taxonomic resolution 
+
+--
+
+* what about taxa with low taxonomic resolutions? 
+  * e.g. *Oligochaeta*
+  
+--
+
+* find optimal taxonomic resolution for each taxon given our data sets. 
+---
+# Optimal taxonomic level
+```{r mzb-thresh-plot, echo=FALSE, fig.align="center", fig.width=10}
+plot_data=readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data"))
+plot_data$taxon_level %<>% factor(levels=c("species", "genus", "family", "order", "subclass"))
+plot_data %>% 
+        ggplot(aes(x = thresholds, y = number, col = taxon_level)) + 
+        #geom_point() + 
+        geom_line(size=2) + 
+        ylab("observations") + 
+        xlab("theshold [%]") + 
+        labs(col = "taxon level") + 
+        theme(text = element_text(size = 20)) + 
+  scale_color_manual(values = my_color_palette[c(1,4,6,7,9)])
+        #theme_minimal()
+ rm(plot_data)
+```
+---
+#Representativeness of data 
+
+---
+#What is a typical assemblage?
+
+* **A**, specificity, P(river type|taxon)
+* **B**, commonness, P(taxon|river type)
+* **IndVal**, weighted product of **A** and **B**
+
+add table here 
+Species:  **B** > 0.25 or **B** > 0.20 and *p* < 0.05 or **A** > 0.80  
+Genera:   **B** > 0.50 or **B** > 0.33 and *p* < 0.05 or **A** > 0.95   
+Families or lower:  **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99
+
+---
+# Redundnacy
+
+* overlap with other assemblages as metric 
+
+--
+
+* assemblages are redundant if overlap $\ge$ 75%
+
+--
+
+* combination of    
+  * RT02 and RT03 
+  * RT04 and RT05
+  * RT08 and RT09
+  * RT10 and RT11
+  * RT15 and RT16
+  
+---
+# Sensitivity analysis
+```{r plot-sa-mzb, echo=FALSE, fig.align="center",fig.height=7, fig.width=10}
+n_types = 9
+plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS"))
+p1 <- plot_data %>%
+        ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) + 
+        geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
+        ggtitle("Macro-invertebrates - Richness - All Levels") + 
+        facet_wrap(. ~ river_type) + 
+        scale_color_viridis() + 
+        ylab("species richness") + 
+        xlab("B Threshold") + 
+        labs(col = "A Threshold")
+# rm_id <- which(is.na(plot_data$us_gen))
+# plot_data <- plot_data[-rm_id,]
+# p2 <- plot_data %>% 
+#         ggplot(aes(x = B_threshold, y = us_taxa, col = A_threshold)) + 
+#         geom_hline(yintercept = 1/n_types, linetype = 2) + 
+#         geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + 
+#         ggtitle("Macro-invertebrates - Uniqueness - All levels") + 
+#         facet_wrap(.~river_type) + scale_color_viridis() + ylab("uniqueness score") + 
+#         xlab("B Threshold") + 
+#         labs(col = "A Threshold")
+# plot_grid(align='v', p1, p2, labels = c('A', 'B'), ncol = 1)
+p1
+rm(n_types, plot_data, p1)
+```
+
+---
+```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10}
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_mzb_n_taxa.R"))
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R"))
+mzb_per_level_plot
+```
+---
+```{r plot-uni, echo=FALSE, fig.align="center"}
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_unique.R"))
+plot_uni_mzb
+```
+---
+```{r pcoa, echo=FALSE, fig.height=6}
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/pcoa.R"))
+bim
+```
