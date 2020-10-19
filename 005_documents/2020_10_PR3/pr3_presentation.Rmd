@@ -1,9 +1,11 @@
 ---
 title: "Aquatic Typical Assemblages"
 author: "Jonathan Jupke"
+subtitle: "GetReal Progress Review"
 date: "29.10.2020"
 output:
   xaringan::moon_reader:
+    css: xaringan-themer.css
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -34,9 +36,23 @@ pacman::p_load(
   kableExtra,
   knitr,
   magrittr,
+  OpenStreetMap,
+  pkgcond,
+  sf,
   stringr,
+  tmaptools,
+  tmap,
   vegan,
-  viridis
+  viridis,
+  xaringanthemer
+)
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+style_duo(
+  primary_color = "#1F4257",
+  secondary_color = "#F97B64"
 )
 ```
 
@@ -57,20 +73,25 @@ pacman::p_load(
 ```{r mzb-thresh-plot, echo=FALSE, fig.align="center", fig.width=10}
 plot_data=readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data"))
 plot_data$taxon_level %<>% factor(levels=c("species", "genus", "family", "order", "subclass"))
-plot_data %>% 
-        ggplot(aes(x = thresholds, y = number, col = taxon_level)) + 
-        #geom_point() + 
-        geom_line(size=2) + 
-        ylab("observations") + 
-        xlab("theshold [%]") + 
-        labs(col = "taxon level") + 
-        theme(text = element_text(size = 20)) + 
-  scale_color_manual(values = my_color_palette[c(1,4,6,7,9)])
-        #theme_minimal()
+plot_data %>%
+  ggplot(aes(x = thresholds, y = number, col = taxon_level)) +
+  #geom_point() +
+  geom_line(size = 2) +
+  ylab("observations") +
+  xlab("theshold [%]") +
+  labs(col = "taxon level") +
+  theme(
+    text = element_text(size = 20)
+  ) +
+  theme_xaringan(background_color = "#1F4257") 
+  #scale_xaringan_color_discrete()
+  
  rm(plot_data)
 ```
 ---
 #Representativeness of data 
+
+
 
 ---
 #What is a typical assemblage?
@@ -107,43 +128,79 @@ Families or lower:  **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99
 ```{r plot-sa-mzb, echo=FALSE, fig.align="center",fig.height=7, fig.width=10}
 n_types = 9
 plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS"))
-p1 <- plot_data %>%
-        ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) + 
-        geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
-        ggtitle("Macro-invertebrates - Richness - All Levels") + 
-        facet_wrap(. ~ river_type) + 
-        scale_color_viridis() + 
-        ylab("species richness") + 
-        xlab("B Threshold") + 
-        labs(col = "A Threshold")
-# rm_id <- which(is.na(plot_data$us_gen))
-# plot_data <- plot_data[-rm_id,]
-# p2 <- plot_data %>% 
-#         ggplot(aes(x = B_threshold, y = us_taxa, col = A_threshold)) + 
-#         geom_hline(yintercept = 1/n_types, linetype = 2) + 
-#         geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) + 
-#         ggtitle("Macro-invertebrates - Uniqueness - All levels") + 
-#         facet_wrap(.~river_type) + scale_color_viridis() + ylab("uniqueness score") + 
-#         xlab("B Threshold") + 
-#         labs(col = "A Threshold")
-# plot_grid(align='v', p1, p2, labels = c('A', 'B'), ncol = 1)
-p1
-rm(n_types, plot_data, p1)
+plot_data %>%
+  ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) +
+  geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
+  facet_wrap(. ~ river_type) +
+  #scale_color_viridis() +
+  ylab("species richness") +
+  xlab("B Threshold") +
+  labs(col = "A Threshold") +
+  theme_xaringan(background_color = "#1F4257") +
+  scale_xaringan_color_continuous()
+
 ```
 
 ---
-```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10}
-source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_mzb_n_taxa.R"))
-source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R"))
-mzb_per_level_plot
+#Taxa richness of assemblages
+```{r plot-mzb-n-taxa, echo=F, fig.height=6,fig.width=10, fig.align="center"}
+source("r/plot_mzb_n_taxa.R")
+#source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R"))
+mzb_per_level_plot + 
+  theme(text = element_text(size = 20)) + 
+  theme_xaringan(background_color = "#1F4257") +
+  scale_xaringan_color_discrete()
 ```
 ---
-```{r plot-uni, echo=FALSE, fig.align="center"}
-source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_unique.R"))
-plot_uni_mzb
+#Uniqueness scores
+```{r plot-uni, echo=FALSE, fig.align="center", fig.width=10}
+source("r/plot_unique.R")
+plot_uni_mzb + 
+  theme(text=element_text(size=20)) + 
+  theme_xaringan(background_color = "#1F4257") +
+  scale_xaringan_color_continuous()
 ```
 ---
-```{r pcoa, echo=FALSE, fig.height=6}
-source(here("005_documents/2020_10_Zwischenbericht an RLT/r/pcoa.R"))
-bim
+#PCoA of Assemblages
+```{r pcoa, echo=FALSE, fig.height=7, fig.width=9,fig.align="center"}
+source("r/pcoa.R")
+bim  
+
 ```
+
+---
+class: inverse, center, middle 
+
+# seasonal typical assemblages 
+
+---
+background-image: url("figures/map_6.png")
+background-size: 450px
+background-position: 50% 50%
+
+---
+background-image: url("figures/map_15_1.png")
+background-size: 900px
+background-position: 50% 50%
+
+
+---
+background-image: url("figures/map_15_2.png")
+background-size: 250px
+background-position: 50% 50%
+
+
+---
+```{r load-nmds, echo=FALSE,fig.align="center",fig.width=8,fig.height=8}
+source("r/plot_nmds.R")
+nmds_plot
+```
+
+
+---
+```{r load-gdm, echo=FALSE,fig.align="center",fig.height=8, fig.width=8}
+source("r/plot_gdm.R")
+gdm_plot
+```
+
+---
