@@ -1,16 +1,15 @@
 ### ---------------------- ###
-### -- script for nmds --- ###
+### -- script for pcoa --- ###
+### ---- in RLT Report --- ###
 ### ---------------------- ###
 
 # date written : 03.10.20 
-# date changed : 
+# date changed : 09.10.20
 # date used    : 03.10.20
 
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/f_quiet_sim_mat.R"))
 
-source("~/01_Uni/02_getreal/005_documents/2020_10_Zwischenbericht an RLT/r/f_quiet_sim_mat.R")
-pacman::p_load(ape, vegan, fuzzySim)
-
-
+tm[,group:=str_replace(group, pattern="_",replacement="+")]
 
 mepad <- t(splist2presabs(data = bty, 
                          sites.col = 7,
@@ -38,9 +37,6 @@ rownames(mepam) <- taxa_namesm
 d_me_d <- 1 - quiet_sim_mat(mepad, method = "Jaccard")
 d_me_m <- 1 - quiet_sim_mat(mepam, method = "Jaccard")
 
-# plot(prcomp(d_me_d))
-# plot(prcomp(d_me_m))
-
 pcoa_objd <- pcoa(D= d_me_d)
 pcoa_objm <- pcoa(D= d_me_m)
 
@@ -56,3 +52,5 @@ bim <- pcoa_objm$vectors %>%
         geom_label(label = rownames(pcoa_objm$vectors)) +
         xlab(paste("Axis 1")) + 
         ylab(paste("Axis 2"))
+
+#rm(setdiff(ls(), c("bim", "bid")))

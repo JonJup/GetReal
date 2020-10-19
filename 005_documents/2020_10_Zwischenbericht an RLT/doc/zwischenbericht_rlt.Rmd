@@ -27,18 +27,23 @@ editor_options:
 
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
-knitr::opts_chunk$set(cache = TRUE,fig.pos = 'H',fig_cap=TRUE)
+knitr::opts_chunk$set(cache = FALSE,fig.pos = 'H',fig_cap=TRUE)
 
 pacman::p_load(
-        cowplot,
-        data.table,
-        dplyr,
-        ggplot2,
-        here,
-        kableExtra,
-        knitr,
-        viridis
-        )
+  ape,
+  cowplot,
+  data.table,
+  dplyr,
+  fuzzySim,
+  ggplot2,
+  here,
+  kableExtra,
+  knitr,
+  magrittr,
+  stringr,
+  vegan,
+  viridis
+)
 ```
 
 \clearpage
@@ -49,18 +54,17 @@ pacman::p_load(
 
 # TODO
 ```{r}
-# TODO discuss PCoA plots shortly
 # TODO change labels in PCoA
-# TODO add taxa lists 
 # TODO based on what criteria where the seasonal communities selected. 
 ```
 
 \clearpage
 # Introduction 
-In GetReal, we investigate whether different receiving systems typically harbor assemblages that are distinct enough in their sensitivity toward various anthropogenic chemical stressors to merit special consideration in the risk assessment processes. After we agreed on using the pan-european river typology proposed by @LycheSolheim2019 to delineate the receiving freshwater systems, the next step was to derive typical assemblages for them. Here we describe the methods we used to derive typical assemblages of macro-invertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
+In GetReal, we investigate whether different receiving systems typically harbor assemblages that are distinct enough in their sensitivity toward anthropogenic chemical stressors to merit special consideration in the risk assessment processes. After we agreed on using the pan-european river typology proposed by @LycheSolheim2019 to delineate the receiving freshwater systems, the next step was to derive typical assemblages for them. Here we describe the methods we used to derive typical assemblages of macro-invertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
 
 # Harmonizing taxa names
-International diatom occurrence data sets require extensive harmonization because of the taxonomic resolution differing between data sets, different working groups using different nomenclatures, identification errors, and ongoing changes to the accepted nomenclature [@Kahlert2020]. Harmonization can reduce overall taxonomic resolution but also improve the detection of large-scale spatio-temporal patterns [@Lee2019]. We compared all our data sets against a series of databases that contain accepted names, synonyms with links to the respective accepted names and suggestions for grouping contentious taxa in larger complexes. If a taxon name was found in one of the databases the name was accepted, changed into the accepted name in case it was a synonym, or grouped into the respective complex. Once a taxon was found in a database, it would not be included in queries of subsequent databases. However, if the accepted name differed from the original one, the accepted name would be queried through all previous databases again. The results were also controlled visually for consistency. The following databases were used in the same order: 
+International diatom occurrence data sets require extensive harmonization because of the taxonomic resolution differing between data sets, different working groups using different nomenclatures, identification errors, and ongoing changes to the accepted nomenclature [@Kahlert2020]. Though harmonizing occurrence data sets can reduce their taxonomic resolution, it also facilitates the detection of large-scale spatio-temporal patterns [@Lee2019]. We compared all our data sets against six databases that contain accepted names, synonyms with links to the respective accepted names and suggestions for grouping contentious taxa in larger complexes. If we found a taxon name in one of the databases we either accepted it, changed it into the accepted name in case of a synonym, or included it in a complex. Taxa we found in one data base, were not queried against later databases, but in case the name changed from the original one, the new one was queried against previous databases.
+Lastly, we controlled the results visually for consistency. We used the following databases in the same order: 
 
 1.	Table S2 from @Kahlert2020
 2.	The taxon list associated with the OMNIDA software [@lecointe1993omnidia]
@@ -69,19 +73,19 @@ International diatom occurrence data sets require extensive harmonization becaus
 5.	The website algaebase.org [@guiry2020]
 6.	The global biodiversity information platform (gbif) [@gbif2020]
 
-
-The harmonization of macro-invertebrate data required less effort, and was achieved with gbif [@gbif2020] through the taxize R package [@Chamberlain13]. 
+We harmonized the macro-invertebrate with gbif through the taxize R package [@Chamberlain13]. 
 
 # What is the optimal taxonmic level? 
-One result of the last progress review for GetReal (held on the 29.04.2020) was that taxa in the typical assemblages (TA) should be included on their respective optimal taxonomic level 
-instead of using one level (e.g. Genus) for all. *Oligochaetes*, for example, are usually only determined to subclass level, which should not prevent them to be part of a TA if
+One result of the last progress review for GetReal (held on the 29.04.2020) was the typical assemblages (TA) should include taxa on their optimal taxonomic level instead of using one level (e.g. Genus) for all taxa. *Oligochaetes*, for example, are often determined to subclass level, which should not prevent them to be part of a TA if
 they are common in a given river type. Thus, the question arises: given a data set, what is the optimal taxonomic level to represent a specific taxon?  
-The following refers exclusively to the marco-invertebrate data, as the taxnomic resoltuion is generally no an issue with diatom data sets. We shortly describe the procedure for diatom data at the end of the section. To establish the optimal level, we used a hierarchical approach. First, we removed all observations from Phyla and Classes that were not present 
+In GetReal, we investigate whether different receiving systems typically harbor assemblages that are distinct enough in their sensitivity toward various anthropogenic chemical stressors to merit special consideration in the risk assessment processes. After we agreed on using the pan-european river typology proposed by @LycheSolheim2019 to delineate the receiving freshwater systems, the next step was to derive typical assemblages for them. Here we describe the methods we used to derive typical assemblages of macro-invertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
 in all data sets. We assumed that these represented differences in sampling rather than in communities. That left us with the classes Clitellata (Annelida), Insecta, Malacostraca (Arthropoda), Bivalvia and Gastropoda (Mollusca).  
 In the following, a higher taxonomic level refers to levels with higher resolution, i.e. species is the highest taxonomic level and kingdom the lowest. For each taxon, we calculated the percentage of observations that are represented at each higher level. For example, 4.12% of observations from the order *Lepidoptera* are at the species level, 74.77% at the genus level, 7.75% at the family level, and 13,35% at the order level. Now given a threshold X, which is to be determined, we would call a taxon optimally represented at a certain taxonomic level if less than X% are represented by higher levels. For example, *Lepidoptera* would be represented on order level if X > 4,12% + 74,77% + 7,75% = 86,64%. As there are no theoretical grounds on which to base such a threshold value we searched for noticeable patterns in the data (Figure  \@ref(fig:mzb-thresh-plot)). The most salient change occurs between 85% and 86%. It occurs because for X > 86% *Chironomidae* are represented at the family level. Hence, we used 85% as threshold. Observations that were missed by this procedure, e.g. observations of *Chironomidae* at the family level, were included at their respective level.   
 
 ```{r mzb-thresh-plot, echo=FALSE, fig.align="center", fig.height=3, fig.cap="Number of macro-invertebrate observations at a given taxonomic level as function of the threshold value"}
-plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data")
+#plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data")
+plot_data=readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data"))
+
 plot_data %>% 
         ggplot(aes(x = thresholds, y = number, col = taxon_level)) + 
         geom_point() + 
@@ -148,7 +152,7 @@ Please note that results are only shown and discussed for the non-redundant TAs 
 
 ```{r plot-sa-mzb, echo=FALSE, fig.align="center",fig.height=10, fig.width=10,fig.cap="Changes in taxon richness along a changing B threshold. Line color indicates the A threshold"}
 n_types = 9
-plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS")
+plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS"))
 p1 <- plot_data %>%
         ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) + 
         geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
@@ -174,7 +178,7 @@ rm(n_types, rm_id, plot_data, p1, p2)
 
 ```{r plot-sa-dia, echo=FALSE, fig.align="center",fig.height=10, fig.width=10,fig.cap="Changes in uniqueness score along a changing B threshold. Line color indicates the A threshold"}
 n_types = 13
-plot_data <- readRDS("../../../002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/00x_plotdata_sensitivity_analysis.RDS")
+plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/00x_plotdata_sensitivity_analysis.RDS"))
 plot_data[,n_taxa := n_genera + n_species]
 p1 <- plot_data %>%
         ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) + 
@@ -281,7 +285,7 @@ plot_grid(align='h', plot_uni_mzb, plot_uni_dia, labels = c('A', 'B'), ncol = 2)
 We also used Principal Coordinate Analysis (PCoA, @gower1966some) to visualize the similarity of TAs, based on Jaccard distance matrices (Figure \@ref(fig:pcoa)). 
 
 ```{r pcoa, echo=FALSE, fig.height=6, fig.cap="Principal Coordinate Analysis ordinations of typical assemblages based on Jaccard distance matrices. A shows the typical asseblages of macro-invertebrates and B those of diatoms."}
-source("../r/pcoa.R")
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/pcoa.R"))
 plot_grid(align='v', bim, bid, labels = c('A', 'B'), ncol = 1)
 ```
 
@@ -293,7 +297,7 @@ RT08+09 and RT10+11 are the most similar which agrees with the considerable over
 In the PCoA of diatom TAs, the river types RT16 to 19 form one group. RT17 to 19 are Mediterranean streams and RT16 are glacial streams that also fall mainly within the region (the Pyrenees, the Western Alps, and the Central Alps. We do not have sampling sites in the later). RT17 (Mediterranean, lowland, medium-Large, perennial) is further removed from the core of the cluster. Potentially because they are the only lowland stream type in that group.  The second cluster consists of river types RT01 to 5 as well as RT08 and 9. The river types RT01, 4, 8 are one subcluster as are RT02 and 03. RT 05 connects the first to the second subcluster and RT09 is more similar to the first but noticeably removed from it. The structuring can be read as a size gradient. RT1,4,8 are very similar RT01 are very large rivers and RT04 and 8 are both medium to large, while RT05 and 09 are the respoective smaller versions of RT04 and 08. Interestingly the imprint of the non-size-related characteristics of the rivers are more pronounced in smaller streams (i.e. RT05 and RT09 are more distinct than RT04 and RT08). 
 The two TAs RT06 and RT12 are further removed from the formerly described clusters. Both represent rivers that are highly influenced by organic matter, which is known to impact diatom communities \@Hering2006.
 
-The taxalists of the typical assemblages can be found [here](). 
+Online, we provide the complete taxa lists for all [macro-invertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/typical_assemblages_diatoms_taxa_list.pdf) TAs.
 
 # Seasonal Typical Assemblages 
 In addition to the spatially defined TAs, we derived seasonal TAs (sTA) for a subset of river types. The four seasons were defined as follows: spring is March to May, Summer is June to August, Fall is September to November, and Winter is December to February. 
@@ -393,8 +397,8 @@ ggplot(data, aes(x = log(n_samples), y = TA)) +
         xlab("log number of samples")
 ```
 
-The number of sampled communities does not differ strongly between taxa (Table 6). Most importantly, the number of macroinvertebrate samples for one river type is lower than that of diatom samples in RT11 and RT15 while the other one is higher. Thus, the overall difference in richness can not be explained by the number of sampled communities. The mean number of taxa in diatom communities was lower than in macroinvertebrate communities. The total number of taxa was also lower for diatoms than for invertebrates. This might partly also be due to the extensive harmonization efforts that summarized some diatom species in larger complexes. However, it also highlights that there is less variation between sites within river types, which is conductive to larger TA. Strong turnover between sites within one RT or season leads to low average fidelity (B value) and consequently to few taxa that are included in the typical assemblages.   
-The methodology we employed is an implicit test of the fit of the river typology to our data. If the communities would vary independently of the typology, TAs would include few or no taxa. 
+The number of sampled communities does not differ strongly between taxa (Table 6). Most importantly, the number of macroinvertebrate samples for one river type is lower than that of diatom samples in RT11 and RT15 while the other one is higher. Thus, the overall difference in richness can not be explained by the number of sampled communities. The mean number of taxa in diatom communities was lower than in macroinvertebrate communities. The total number of taxa was also lower for diatoms than for invertebrates. This might partly also be due to the extensive harmonization efforts that summarized some diatom species in larger complexes. However, it also highlights that there is less variation between sites within river types, which is conductive to larger TA. Strong turnover between sites within one RT or season leads to low average fidelity (B value) and consequently to few taxa in the typical assemblages.   
+The method we employed is an implicit test of how well the river typology fits our data. If the communities would vary independently of the typology, TAs would include few or no taxa. 
 
 ```{r tbl-summary-stats, echo=F}
 data <- data.table("Class" = rep(c("Invertebrates", "Diatoms"), each=2), 
@@ -413,23 +417,6 @@ data %>%
   kable_styling(font_size = 11)
                                        
 ```
-
-The taxa lists for typical assemblages can be obtained for macroinvertebrates and diatoms. We also visualized the nestedness of communities. 
-
-\blandscape
-test
-# ```{r img_dia_sta, echo=FALSE}
-# knitr::include_graphics('../figures/dia_sta.png') 
-# ```
-\elandscape
-\newpage
-\blandscape
-test
-# ```{r img_mzb_sta, echo=FALSE, out.width=5}
-# knitr::include_graphics('../figures/mzb_sta.png') 
-# ```
-\elandscape
-\newpage
 
 # Notes for Traits 
 CWM with B value then RR-VGLM (glm RDA)
