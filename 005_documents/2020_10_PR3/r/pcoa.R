@@ -29,11 +29,11 @@ bim <- pcoa_objm$vectors %>%
         mutate("river_type"=rownames(as.data.frame(pcoa_objm$vectors))) %>% 
         ggplot(aes(x=Axis.1, y=Axis.2)) + 
         geom_text(aes(label=river_type, col = river_type), size = 6) + 
-        xlab(paste("Axis 1")) + 
-        ylab(paste("Axis 2")) + 
+        xlab(paste("PCoA Axis 1")) + 
+        ylab(paste("PCoA Axis 2")) + 
         xlim(-0.5,.6) + 
         theme(text=element_text(size=20), legend.position = "none") + 
-        theme_xaringan(background_color = "#1F4257") +
+        theme_xaringan(background_color = base_color_code2) +
         scale_xaringan_color_discrete()
 
 

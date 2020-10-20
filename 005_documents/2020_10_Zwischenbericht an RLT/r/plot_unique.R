@@ -3,7 +3,7 @@
 ### --------------------------------- ###
 
 # date written : 02.10.20 
-# date changed : 
+# date changed : 20.10.20
 # date used    : 02.10.20
 
 ## -- diatoms -- ## 
@@ -15,7 +15,9 @@ for (i in seq_along(unique(bty$group))) {
         bty[group == unique(bty$group)[i], group_score := sum(score)/.N]
 }
 
+bty$group %<>% str_remove_all(pattern = "RT0")
 bty$group %<>% str_remove_all(pattern = "RT")
+bty$group%<>%factor(levels=c(1,2,3,4,5,6,8,9,12,16,17,18,19))
 plot_uni_dia <-
         ggplot(data = bty, aes(x = group, y = group_score))  +
         geom_point(size = 2) +

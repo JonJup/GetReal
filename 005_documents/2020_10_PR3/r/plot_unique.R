@@ -27,7 +27,7 @@ tm$group %<>% factor(levels = c("1", "2_3", "4_5", "8_9", "10_11", "12","14", "1
 
 plot_uni_mzb <-
                 ggplot(data = tm, aes(x = group, y = group_score))  +
-                geom_point(size = 2) +
+                geom_point(size = 4) +
                 ylim(c(0, 1)) +
                 geom_hline(
                         col = "white",

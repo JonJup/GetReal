@@ -82,7 +82,7 @@ max_geo    <- max(splineDat$y_Geographic)
 max_season <- max(splineDat$y_season)
 y_max <- max(max_geo, max_season)
 
-p1 <- ggplot(data = splineDat, aes(x = x_Geographic, y = y_Geographic)) + geom_line() + ylab("partial ecological distance") + xlab("Geographic Distance") + ylim(0, y_max) + theme_minimal_hgrid() + ggtitle(paste0("Macroinvertebrates - River Type ", "10+11"))
+p1 <- ggplot(data = splineDat, aes(x = x_Geographic, y = y_Geographic)) + geom_line() + ylab("partial ecological distance") + xlab("Geographic Distance") + ylim(0, y_max) + theme_minimal_hgrid() + ggtitle(paste0("Macroinvertebrates - River Type ", "10_11"))
 p2 <- ggplot(data = splineDat, aes(x = x_season, y = y_season)) + geom_line() + ylab("partial ecological distance") + xlab("Season") + ylim(0, y_max) + theme_minimal_hgrid() 
 
 gdm_plot <- plot_grid(p1, p2, label_size = 12)

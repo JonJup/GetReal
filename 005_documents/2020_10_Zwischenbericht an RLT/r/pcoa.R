@@ -9,7 +9,7 @@
 
 source(here("005_documents/2020_10_Zwischenbericht an RLT/r/f_quiet_sim_mat.R"))
 
-tm[,group:=str_replace(group, pattern="_",replacement="+")]
+#tm[,group:=str_replace(group, pattern="_",replacement="+")]
 
 mepad <- t(splist2presabs(data = bty, 
                          sites.col = 7,

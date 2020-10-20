@@ -91,7 +91,7 @@ p1 <- ggplot(data = splineDat,
         xlab("Geographic Distance") + 
         ylim(0, y_max) + 
         theme(text=element_text(size=20)) + 
-        theme_xaringan(background_color = "#1F4257") +
+        theme_xaringan(background_color = base_color_code2) +
         scale_xaringan_color_discrete() 
 
 p2 <- ggplot(data = splineDat, 
@@ -102,7 +102,7 @@ p2 <- ggplot(data = splineDat,
         ylab("partial ecological distance") + 
         xlab("Season") + ylim(0, y_max) + 
         theme(text=element_text(size=20)) + 
-        theme_xaringan(background_color = "#1F4257") +
+        theme_xaringan(background_color = base_color_code2) +
         scale_xaringan_color_discrete() 
 
 gdm_plot <- plot_grid(p1, p2, label_size = 12)

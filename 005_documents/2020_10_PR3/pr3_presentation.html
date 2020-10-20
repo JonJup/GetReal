@@ -4,6 +4,8 @@
     <title>Aquatic Typical Assemblages</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jonathan Jupke" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -17,13 +19,6 @@ class: center, middle, inverse, title-slide
 
 ---
 
-
-```r
-#TODO add sampling maps
-#TODO add table for cutoffs
-```
-
----
 
 
 
@@ -45,19 +40,57 @@ class: center, middle, inverse, title-slide
 # Optimal taxonomic level
 &lt;img src="pr3_presentation_files/figure-html/mzb-thresh-plot-1.png" style="display: block; margin: auto;" /&gt;
 ---
+background-image: url("figures/sample_map_rt18.png")
+background-size: 450px
+background-position: 50% 70%
+#Representativeness of data 
+
+---
+background-image: url("figures/sample_map_rt11.png")
+background-size: 450px
+background-position: 50% 70%
 #Representativeness of data 
 
 ---
 #What is a typical assemblage?
 
-* **A**, specificity, P(river type|taxon)
-* **B**, commonness, P(taxon|river type)
-* **IndVal**, weighted product of **A** and **B**
+* A, specificity, P(river type|taxon)
+* B, commonness, P(taxon|river type)
+* IndVal, weighted product of A and B
 
-add table here 
-Species:  **B** &gt; 0.25 or **B** &gt; 0.20 and *p* &lt; 0.05 or **A** &gt; 0.80  
-Genera:   **B** &gt; 0.50 or **B** &gt; 0.33 and *p* &lt; 0.05 or **A** &gt; 0.95   
-Families or lower:  **B** &gt; 0.95 or **B** &gt; 0.80 and *p* &lt; 0.01 or **A** &gt; 0.99
+--
+
+&lt;table class=" lightable-minimal" style='font-family: "Trebuchet MS", verdana, sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;background-color: #f7b433 !important;"&gt; taxon &lt;/th&gt;
+   &lt;th style="text-align:left;background-color: #f7b433 !important;"&gt; B1 &lt;/th&gt;
+   &lt;th style="text-align:left;background-color: #f7b433 !important;"&gt; B2 &lt;/th&gt;
+   &lt;th style="text-align:left;background-color: #f7b433 !important;"&gt; A &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; species &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.25 &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; genus &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.50 &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.33 &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; family &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.95 &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.80 &lt;/td&gt;
+   &lt;td style="text-align:left;background-color: #355467 !important;"&gt; &amp;gt; 0.99 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
 
 ---
 # Redundnacy
@@ -78,17 +111,14 @@ Families or lower:  **B** &gt; 0.95 or **B** &gt; 0.80 and *p* &lt; 0.01 or **A*
   * RT15 and RT16
   
 ---
-# Sensitivity analysis
 &lt;img src="pr3_presentation_files/figure-html/plot-sa-mzb-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-#Taxa richness of assemblages
 &lt;img src="pr3_presentation_files/figure-html/plot-mzb-n-taxa-1.png" style="display: block; margin: auto;" /&gt;
 ---
-#Uniqueness scores
 &lt;img src="pr3_presentation_files/figure-html/plot-uni-1.png" style="display: block; margin: auto;" /&gt;
 ---
-#PCoA of Assemblages
+
 &lt;img src="pr3_presentation_files/figure-html/pcoa-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
@@ -119,8 +149,6 @@ background-position: 50% 50%
 
 ---
 &lt;img src="pr3_presentation_files/figure-html/load-gdm-1.png" style="display: block; margin: auto;" /&gt;
-
----
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

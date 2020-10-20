@@ -46,16 +46,17 @@ acp <- melt(
         measure.vars = c("species", "genus")
 )
 
+acp$river_type %<>% str_remove_all(pattern = "RT0")
 acp$river_type %<>% str_remove_all(pattern = "RT")
 acp[value == 0, value := NA]
 
 acp <- acp[!is.na(value),]
-
+acp$river_type%<>%factor(levels=c(1,2,3,4,5,6,8,9,12,16,17,18,19))
 dia_per_level_plot <-
         ggplot(data = acp, aes(x = river_type, y = value)) +
         geom_point(aes(col = variable), size = 3) +
         scale_color_manual(values = my_color_palette) +
-        ylab("number of taxa") +
+        ylab("taxa") +
         xlab("river type")+
         ggtitle("Diatoms")+
         theme(legend.position = "none")

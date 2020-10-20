@@ -71,6 +71,6 @@ nmds_plot = nmds10_11_data %>%
         geom_point(aes(col = season)) + 
         labs(fil = "Season")  +
         theme(text=element_text(size=20)) + 
-        theme_xaringan(background_color = "#1F4257") +
+        theme_xaringan(background_color = base_color_code2) +
         scale_xaringan_color_discrete() + 
         scale_xaringan_fill_discrete() 

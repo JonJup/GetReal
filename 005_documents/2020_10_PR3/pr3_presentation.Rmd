@@ -12,12 +12,6 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-```{r}
-#TODO add sampling maps
-#TODO add table for cutoffs
-```
-
----
 
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
@@ -50,9 +44,15 @@ pacman::p_load(
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+# base_color_code1="#23395b"
+# base_color_code2="#dcedf8"
+base_color_code1= "#f7b433" #f9c664  #f97b64
+base_color_code2="#355467"
+#style_mono_light(base_color = base_color_code)
 style_duo(
-  primary_color = "#1F4257",
-  secondary_color = "#F97B64"
+  primary_color = base_color_code2,
+  secondary_color = base_color_code1
 )
 ```
 
@@ -83,27 +83,46 @@ plot_data %>%
   theme(
     text = element_text(size = 20)
   ) +
-  theme_xaringan(background_color = "#1F4257") 
+  theme_xaringan(background_color = base_color_code2) 
   #scale_xaringan_color_discrete()
   
  rm(plot_data)
 ```
 ---
+background-image: url("figures/sample_map_rt18.png")
+background-size: 450px
+background-position: 50% 70%
 #Representativeness of data 
 
-
+---
+background-image: url("figures/sample_map_rt11.png")
+background-size: 450px
+background-position: 50% 70%
+#Representativeness of data 
 
 ---
 #What is a typical assemblage?
 
-* **A**, specificity, P(river type|taxon)
-* **B**, commonness, P(taxon|river type)
-* **IndVal**, weighted product of **A** and **B**
+* A, specificity, P(river type|taxon)
+* B, commonness, P(taxon|river type)
+* IndVal, weighted product of A and B
 
-add table here 
-Species:  **B** > 0.25 or **B** > 0.20 and *p* < 0.05 or **A** > 0.80  
-Genera:   **B** > 0.50 or **B** > 0.33 and *p* < 0.05 or **A** > 0.95   
-Families or lower:  **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99
+--
+
+```{r cutoff table, echo=FALSE}
+data=data.table(taxon=c("species","genus","family"),
+                B1=c("> 0.25","> 0.50", "> 0.95"), 
+                B2=c("> 0.20","> 0.33" ,"> 0.80"),
+                A=c("> 0.80", "> 0.95", "> 0.99")
+                )
+data %>% 
+  kable() %>% 
+  kable_minimal() %>% 
+  row_spec(1:3,background = "#355467") %>%
+  row_spec(0,background="#f7b433")
+
+```
+
 
 ---
 # Redundnacy
@@ -124,8 +143,7 @@ Families or lower:  **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99
   * RT15 and RT16
   
 ---
-# Sensitivity analysis
-```{r plot-sa-mzb, echo=FALSE, fig.align="center",fig.height=7, fig.width=10}
+```{r plot-sa-mzb, echo=FALSE, fig.height=8, fig.width=10, fig.align="center",}
 n_types = 9
 plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS"))
 plot_data %>%
@@ -136,33 +154,31 @@ plot_data %>%
   ylab("species richness") +
   xlab("B Threshold") +
   labs(col = "A Threshold") +
-  theme_xaringan(background_color = "#1F4257") +
+  theme_xaringan(background_color = base_color_code2) +
   scale_xaringan_color_continuous()
 
 ```
 
 ---
-#Taxa richness of assemblages
-```{r plot-mzb-n-taxa, echo=F, fig.height=6,fig.width=10, fig.align="center"}
+```{r plot-mzb-n-taxa, echo=F, fig.height=8,fig.width=10, fig.align="center"}
 source("r/plot_mzb_n_taxa.R")
 #source(here("005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R"))
 mzb_per_level_plot + 
   theme(text = element_text(size = 20)) + 
-  theme_xaringan(background_color = "#1F4257") +
+  theme_xaringan(background_color = base_color_code2) +
   scale_xaringan_color_discrete()
 ```
 ---
-#Uniqueness scores
-```{r plot-uni, echo=FALSE, fig.align="center", fig.width=10}
+```{r plot-uni, echo=FALSE, fig.align="center", fig.width=10, fig.height=8}
 source("r/plot_unique.R")
 plot_uni_mzb + 
   theme(text=element_text(size=20)) + 
-  theme_xaringan(background_color = "#1F4257") +
+  theme_xaringan(background_color = base_color_code2) +
   scale_xaringan_color_continuous()
 ```
 ---
-#PCoA of Assemblages
-```{r pcoa, echo=FALSE, fig.height=7, fig.width=9,fig.align="center"}
+
+```{r pcoa, echo=FALSE, fig.height=8, fig.width=10,fig.align="center"}
 source("r/pcoa.R")
 bim  
 
@@ -203,4 +219,3 @@ source("r/plot_gdm.R")
 gdm_plot
 ```
 
----

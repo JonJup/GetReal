@@ -6,7 +6,7 @@
 # date changed : 
 # date used    : 02.10.20
 
-pacman::p_load(dplyr, magrittr, data.table,  stringr, purrr, ggplot2, here, viridis, ggrepel)
+#pacman::p_load(dplyr, magrittr, data.table,  stringr, purrr, ggplot2, here, viridis, ggrepel)
 setwd("~/01_Uni/02_getreal/002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/")
 
 #my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
@@ -64,10 +64,8 @@ acp <- acp[!is.na(value),]
 
 mzb_per_level_plot <-
                 ggplot(data = acp, aes(x = river_type, y = value)) +
-                geom_point(aes(col = variable), size = 3) +
-                #scale_color_manual(values = my_color_palette[c(1,2,4)]) +
-                ylab("number of taxa") +
+                geom_point(aes(col = variable, shape=variable), size = 5) +
+                ylab("taxa") +
                 xlab("river type") + 
-                labs(col = "taxon level") + 
-                ggtitle("Macro-invertebrates")
-
+                labs(col = "taxon level", shape="taxon level") 
+                

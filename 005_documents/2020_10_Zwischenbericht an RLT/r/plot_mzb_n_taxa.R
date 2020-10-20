@@ -66,7 +66,7 @@ mzb_per_level_plot <-
                 ggplot(data = acp, aes(x = river_type, y = value)) +
                 geom_point(aes(col = variable), size = 3) +
                 scale_color_manual(values = my_color_palette[c(1,2,4)]) +
-                ylab("number of taxa") +
+                ylab("taxa") +
                 xlab("river type") + 
                 labs(col = "taxon level") + 
                 ggtitle("Macro-invertebrates")
