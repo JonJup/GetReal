@@ -35,3 +35,5 @@
 002_working_package_02/001_community_data/001_individual_data_sets/001_ld/002_r_scripts/000_Download files_Ger.R
 003_Presentations
 004_Sonstiges
+
+005_documents/**/*.pdf
