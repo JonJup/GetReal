@@ -1,7 +1,7 @@
 ---
 title: "Derivation of Typical Assemblages"
 author: "Jonathan Jupke"
-date: '`r gsub("^0", "", format(Sys.time(), "%B %d, %Y"))`'
+date: '`r gsub(pattern="k", replacement="c", x=gsub("^0", "", format(Sys.time(), "%B %d, %Y")), )`'
 linestretch: 1.2
 colorlinks: true
 output:
@@ -27,7 +27,7 @@ editor_options:
 
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
-knitr::opts_chunk$set(cache = TRUE,fig.pos = 'H',fig_cap=TRUE)
+knitr::opts_chunk$set(cache = FALSE,fig.pos = 'H',fig_cap=TRUE)
 
 pacman::p_load(
   ape,
@@ -46,15 +46,15 @@ pacman::p_load(
 )
 ```
 
-\clearpage
-
 \renewcommand{\baselinestretch}{0.5}\normalsize
 \tableofcontents
 \renewcommand{\baselinestretch}{1.1}\normalsize
 
 \clearpage
 # Introduction 
-In GetReal, we investigate whether the different receiving systems typically harbor ecological assemblages that are distinct enough in their sensitivity toward anthropogenic chemical stressors to merit special consideration in the risk assessment processes. After we agreed on using the Pan-European river typology proposed by @LycheSolheim2019 to delineate the receiving freshwater systems, the next step was to derive their typical assemblages (TA). Here we describe the methods we used to derive TAs of macroinvertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
+In GetReal, we investigate whether selected freshwater and terrestrial assemblages vary spatially and seasonally in their sensitivity towards chemicals and draw conclusions for risk assessment.
+After we agreed on using the Pan-European river typology proposed by @LycheSolheim2019 to delineate the receiving freshwater systems, the next step was to derive their typical assemblages (TA). 
+Here we describe the methods we used to derive TAs of macroinvertebrates and diatoms for selected river types across Europe. We also describe and briefly discuss the results.
 
 # Harmonizing taxa names
 International diatom occurrence datasets require extensive harmonization because of the taxonomic resolution differing between datasets, different working groups using different nomenclatures, identification errors, and ongoing changes to the accepted nomenclature [@Kahlert2020]. Though harmonizing occurrence datasets can reduce their taxonomic resolution, it also facilitates the detection of large-scale spatio-temporal patterns [@Lee2019]. We compared all our datasets against six databases that contain accepted names, synonyms with links to the respective accepted names, and suggestions for grouping contentious taxa in larger complexes. If we found a taxon name in one of the databases we either accepted it, changed it into the accepted name in case of a synonym, or included it in a complex. We did not query taxa we found in earlier databases against later ones, but in case the name changed from the original one, we queried the new one against earlier databases.
@@ -69,13 +69,13 @@ Lastly, we controlled the results visually for consistency. We used the followin
 
 We harmonized the macroinvertebrate data with gbif through the taxize R package [@Chamberlain13]. 
 
-# What is the optimal taxonmic level? 
-One result of the last progress review for GetReal (29.04.2020) was that we should determine an optimal taxonomic levels for each taxon separately instead of using one common level for all data. 
+# What is the optimal taxonomic level? 
+One result of the last progress review for GetReal (29.04.2020) was that we should determine an optimal taxonomic level for each taxon separately instead of using one common level for all data. 
 *Oligochaetes*, for example, are usually only determined to subclass level. 
-In a setting with one common level they would thus be discarded if said level would be higher than subclass, which would most likely be the case. 
-By using individual taxon levels that take into account these badly resolved taxa, we can thus make use of more of the data.
-However this poses the challenge of choosing an optimal level for each taxon given a dataset.  
-The following refers exclusively to the marco-invertebrate data, as the taxonomic resolution was not an issue with diatom datasets. 
+In a setting with one common level they would thus be omitted if this level would be higher than subclass, which would most likely be the case. 
+By using taxon-specific levels that take low-resolved taxa into account, we can thus use more of the data.
+However this poses the challenge of finding an optimal level for each taxon given a dataset.  
+The following refers exclusively to the macroinvertebrate data, as the taxonomic resolution was not an issue with diatom datasets. 
 We describe the procedure for diatom data at the end of the section. 
 The optimal level was established with a hierarchical approach. 
 First, we removed all observations from Phyla and Classes that were not present in all datasets. 
@@ -83,9 +83,9 @@ We assumed that these represented differences in sampling rather than in communi
 The classes Clitellata (Annelida), Insecta, Malacostraca (Arthropoda), Bivalvia and Gastropoda (Mollusca) remained.
 In the following, a higher taxonomic level refers to levels with higher resolution, i.e. species is the highest taxonomic level and kingdom the lowest. 
 For each taxon, we calculated the percentage of observations represented at each higher level. 
-For example, 4.12% of observations from the order *Lepidoptera* are at the species level, 74.77% at the genus level, 7.75% at the family level, and 13,35% at the order level. 
+For example, 4.12% of observations from the order *Lepidoptera* are at the species level, 74.77% at the genus level, 7.75% at the family level, and 13.35% at the order level. 
 Now given a threshold X, we hold a taxon to be optimally represented at a certain taxonomic level if less than X% are represented by higher levels. 
-For example, *Lepidoptera* would be represented on order level if X > 4,12% + 74,77% + 7,75% = 86,64%. 
+For example, *Lepidoptera* would be represented on order level if X > 4.12% + 74.77% + 7.75% = 86.64%. 
 As there are no theoretical grounds on which to base such a threshold value we searched for noticeable patterns in the data (Figure  \@ref(fig:mzb-thresh-plot)). 
 The most salient change occurs between 85% and 86%. 
 It occurs because for X > 86% *Chironomidae* are represented at the family level. 
@@ -98,15 +98,18 @@ plot_data = readRDS(
     "002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data"
   )
 )
-plot_data$taxon_level %<>% factor(levels=c("species", "genus", "family", "order", "subclass"))
-plot_data %>% 
-        ggplot(aes(x = thresholds, y = number, col = taxon_level)) + 
-        geom_line() + 
-        ylab("observations") + 
-        xlab("theshold [%]") + 
-        labs(col = "taxon level") + 
-        theme_minimal()
- rm(plot_data)
+plot_data$taxon_level %<>% factor(levels = c("species", "genus", "family", "order", "subclass"))
+plot_data %>%
+  ggplot(aes(x = thresholds, y = number, col = taxon_level)) +
+  geom_line() +
+  ylab("observations") +
+  xlab("theshold [%]") +
+  labs(col = "taxon level") +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+rm(plot_data)
 ```
 
 For the diatoms, we employed 75\% as a threshold, because for *Gomphonema*, which is the fourth most common genus in our dataset, 81.43\% of the observations were at the species level. 
@@ -116,7 +119,7 @@ The equivalent of Figure \@ref(fig:mzb-thresh-plot) for diatoms can be found [he
 # Can we represent the stream types with our data? 
 
 We determined visually whether our dataset contained enough sampling sites in a given river type to derive meaningful TAs. 
-The degree of representation for river type was graded in a three-tier system: high, medium, and low. 
+The degree of representation for river types was graded in a three-tier system: high, medium, and low. 
 A high degree of representation indicates, that we have many sampling locations, which are distributed across the instances of a river type that fall within the countries considered in GetReal. 
 A low degree indicates the opposite, i.e. few and spatially clustered sites. 
 A medium rating implies that we either have many sampling sites, but these only extend over parts of the countries or few sites that extend over most of the countries. 
@@ -164,15 +167,12 @@ The statistical significance of the Species Indicator Value can be assessed with
 Here, we are not interested in indicator species for each community, but TAs. 
 Hence, continuing with those species that have a pseudo-*p*-value below some significance level would not serve our purpose. 
 A species that occurs at each site, across all stream types, highlights the difference: while it would not be indicative of any stream type (low specificity) it should be part of each TA. 
-Hence, we need additional criteria to derive the TAs which can be based on **A**, **B**, and the pseudo-*p*-value of the indicator value. 
+Hence, we need additional criteria to derive the TAs which can be based on **A**, **B**, and the pseudo-*p*-value of the Species Indicator Value. 
 We used the following rules:  
-For macroinvertebrates:  
-Species were considered typical if  **B** > 0.25 or **B** > 0.20 and *p* < 0.05 or **A** > 0.80  
-Genera were considered typical if   **B** > 0.50 or **B** > 0.33 and *p* < 0.05 or **A** > 0.95   
-Families or lower taxonomic levels were considered typical if **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99  
-
-For diatoms:   
-Species where considered typical if **B** > 0.4 or **B** > 0.3 and *p* < 0.05 or **A** > 0.7.   
+For macroinvertebrates, species were considered typical if  **B** > 0.25 or **B** > 0.20 and *p* < 0.05 or **A** > 0.80.  
+Genera were considered typical if   **B** > 0.50 or **B** > 0.33 and *p* < 0.05 or **A** > 0.95.
+Families or lower taxonomic levels were considered typical if **B** > 0.95 or **B** > 0.80 and *p* < 0.01 or **A** > 0.99.  
+For diatoms, species where considered typical if **B** > 0.4 or **B** > 0.3 and *p* < 0.05 or **A** > 0.7.    
 Genera where considered typical if  **B** > 0.8 or **B** > 0.6 and *p* < 0.05 or **A** > 0.95.  
 
 Note that we did not systematically optimize these thresholds. 
@@ -325,9 +325,9 @@ rm(data)
 
 # Characteristics of typical assemblages
 
-In all macroinvertebrate TAs, genus is the prevalent taxonomic level (figure \@ref(fig:plot-mzb-n-taxa)A). The numbers of species and fol are similar with both exceeding the other in four assemblages. The mean number of species was 3.2, mean number of genera 14.3, and the mean number of fol 2.4. RT01 and RT14 where the smallest assemblages with 13 taxa both and RT18 was the most taxa rich assemblage with 28 taxa. For diatoms, species is the prevalent taxonomic level in all TAs (figure \@ref(fig:plot-mzb-n-taxa)B). Some assemblages consist entirely of species (i.e. RT4, 6, 9, 16, 17, and 19). The mean number of species per TA is 30 and the mean number of genera 0.5. RT3 has the most taxa rich TA with 49 taxa and RT19 has the least taxa in its TA with 18.  
+In all macroinvertebrate TAs, genus is the prevalent taxonomic level (figure \@ref(fig:plot-mzb-n-taxa)A). The numbers of species and fol are similar with both exceeding the other in four assemblages. The mean number of species was 3.2, mean number of genera 14.3, and the mean number of fol 2.4. RT01 and RT14 were the smallest assemblages with 13 taxa and RT18 was the most taxa rich assemblage with 28 taxa. For diatoms, species is the prevalent taxonomic level in all TAs (figure \@ref(fig:plot-mzb-n-taxa)B). Some assemblages consist entirely of species (i.e. RT4, 6, 9, 16, 17, and 19). The mean number of species per TA is 30 and the mean number of genera 0.5. RT3 has the most taxa rich TA with 49 taxa and RT19 has the least taxa in its TA with 18.  
 
-```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10, fig.cap="Numbers of taxa on each taxonomical level for all typical assemblages"}
+```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10, fig.cap="Numbers of taxa on each taxonomical level for all typical assemblages. Fol stands for families or lower."}
 source("../r/plot_mzb_n_taxa.R")
 source("~/01_Uni/02_getreal/005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R")
 plot_grid(align='h', mzb_per_level_plot, dia_per_level_plot, labels = c('A', 'B'), ncol = 2)
@@ -340,20 +340,14 @@ source(file = "../r/plot_unique.R")
 plot_grid(align='h', plot_uni_mzb, plot_uni_dia, labels = c('A', 'B'), ncol = 2)
 ```
 
-We also used Principal Coordinate Analysis (PCoA, @gower1966some) to visualize the similarity of TAs, based on Jaccard distance matrices (Figure \@ref(fig:pcoa)). 
-
-```{r pcoa, echo=FALSE, fig.height=6, fig.cap="Principal Coordinate Analysis ordinations of typical assemblages based on Jaccard distance matrices. A shows the typical asseblages of macroinvertebrates and B those of diatoms."}
-source(here("005_documents/2020_10_Zwischenbericht an RLT/r/pcoa.R"))
-plot_grid(align='v', bim, bid, labels = c('A', 'B'), ncol = 1)
-```
-
+We used Principal Coordinate Analysis (PCoA, @gower1966some) to visualize the similarity of TAs, based on Jaccard distance matrices (Figure \@ref(fig:pcoa)).
 <!-- Discuss PCoA Plots --> 
   <!-- MZB -->
 The first axis in the macroinvertebrate PCoA represents an altitude gradient going from lowland (RT1, RT2_3, RT4_5), over mid-altitude (RT8_9, RT10_11, RT12, RT18), to high altitude (RT14, RT15_16). 
 Mid-altitude streams are between 200-800 meters above sea level and the other two groups are lower or higher respectively.  
 RT8_9 and RT10_11 are the most similar which agrees with the considerable overlap (70%) we found before.
 Both river types represent mid-altitude rivers of all sizes, with RT8_9 containing siliceous rivers and RT10_11 calcareous rivers. 
-The difference in geology does not to lead to strongly diverging TAs.  
+The difference in geology does not to lead to strongly diverging TAs.
 None of the taxa, that the two TAs differ in, is considered indicative of geology. 
 However several are typical for mid- to high-altitude streams (e.g. *Amphinemura* and *Protonemura*).
 The difference between siliceous (RT14) and calcareous(15_16) becomes more pronounced with increasing altitude. 
@@ -374,15 +368,25 @@ Interestingly the imprint of the non-size-related characteristics of the rivers 
 The two TAs RT6 and RT12 are further removed from the formerly described clusters. 
 Both represent rivers that are highly influenced by organic matter, which is known to impact diatom communities [@Hering2006].
 
+```{r pcoa, echo=FALSE, fig.height=5, fig.cap="Principal Coordinate Analysis ordinations of typical assemblages based on Jaccard distance matrices. A shows the typical asseblages of macroinvertebrates and B those of diatoms."}
+source(here("005_documents/2020_10_Zwischenbericht an RLT/r/pcoa.R"))
+plot_grid(align='v', bim, bid, labels = c('A', 'B'), ncol = 1)
+```
+
 Online, we provide the complete taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/typical_assemblages_diatoms_taxa_list.pdf) TAs.
 
 # Seasonal typical assemblages 
-In addition to the spatially defined TAs, we derived seasonal TAs (sTA) for a subset of river types. The four seasons were defined as follows: spring is March to May, Summer is June to August, Fall is September to November, and Winter is December to February. To avoid strong spatial signals in the sTA, we only considered those river types (RT) in which samples were evenly distributed between seasons. In most cases, we had to omit parts of the data (e.g. certain seasons or datasets) to achieve an even spatio-temporal distribution. Online, we provide maps for all RT with all available seasons as well as the respective subsets that we used in the further analyses for [macroinvertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/invertebrates/maps) and for [diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/diatoms/maps).  As an example, the map of macroinvertebrate samples for the combined RT 10_11 is shown in Figure \@ref(fig:sampling-map2).
+In addition to the spatially defined TAs, we derived seasonal TAs (sTA) for a subset of river types. 
+The four seasons were defined as follows: spring is March to May, Summer is June to August, Fall is September to November, and Winter is December to February. 
+To avoid strong spatial signals in the sTAs, we only considered those river types (RT) in which samples were evenly distributed between seasons. 
+In most cases, we had to omit parts of the data (e.g. certain seasons or datasets) to achieve an even spatio-temporal distribution. 
+Online, we provide maps for all RT with all available seasons as well as the respective subsets that we used in the further analyses for [macroinvertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/invertebrates/maps) and [diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/diatoms/maps).  
+As an example, the map of macroinvertebrate samples for the combined RT 10_11 is shown in Figure \@ref(fig:sampling-map2).
 
 ```{r sampling-map1, echo=FALSE}
 source(file = "../r/sampling_map.R")
 ```
-```{r sampling-map2, echo=FALSE, fig.cap="Map of sampling sites for the combines River Type 10 + 11. The color of the points shows the season of sampling."}
+```{r sampling-map2, echo=FALSE, fig.cap="Map of sampling sites for the combined River Type 10_11. The color of the points shows the season of sampling."}
 plot_object
 ```
 ```{r clean-sampling-map, echo=FALSE, results="hide"}
@@ -390,14 +394,14 @@ rm(plot_object, data, mcp_sub, osm, plot_data);gc()
 ```
 
 To visualize differences between the seasons we used Non-metric multidimensional scaling (NMDS) on Jaccard dissimilarity matrices. 
-The resulting NMDS plots are available in the for [macroinvertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/invertebrates) and [diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/diatoms/nmds). 
+The resulting NMDS plots are available for [macroinvertebrates](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/invertebrates) and [diatoms](https://github.com/JonJup/GetReal/tree/master/002_working_package_02/003_seasonality/004_plots/diatoms/nmds). 
 Figure \@ref(fig:plot-nmds) shows the NMDS plot for invertebrate samples in RT10_11. 
 In most river types the differences between seasons are not large and the NMDS stress values are typically above 0.2. 
 
 ```{r load-nmds, echo=FALSE}
 source("../r/plot_nmds.R")
 ```
-```{r plot-nmds, echo=FALSE, fig.cap="Nonmetric multidimensional scaling plot of Jaccard dissimilarity matrices for macroinvertebrate communities in RT10 + 11. The color of the points shows the season. Convex hulls surround all sampling points from one season."}
+```{r plot-nmds, echo=FALSE, fig.cap="Nonmetric multidimensional scaling plot of Jaccard dissimilarity matrices for macroinvertebrate communities in RT10_11. The color of the points shows the season. Convex hulls surround all sampling points from one season."}
 nmds_plot
 ```
 ```{r clean-plot-nmds, echo=FALSE, results="hide"}
@@ -538,7 +542,7 @@ data %>%
 ```
 -->
 
-Online, we provide the complete taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/seasonal_typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/seasonal_typical_assemblages_diatoms_taxa_list.pdf) sTAs.
+Online, we provide the complete taxa lists for [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/seasonal_typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/seasonal_typical_assemblages_diatoms_taxa_list.pdf) sTAs.
 
 \newpage
 
