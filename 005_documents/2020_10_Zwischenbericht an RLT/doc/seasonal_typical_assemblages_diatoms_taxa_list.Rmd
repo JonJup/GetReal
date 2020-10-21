@@ -1,0 +1,24 @@
+---
+title: "Seasonal typical diatom assemblages"
+author: "Jonathan Jupke"
+date: "21.10.2020"
+output: pdf_document
+---
+
+## RT11 - Summer
+Achnanthidium druartii, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis euglyptoides, Cocconeis pediculus, Craticula molestiformis halophiloides  , Encyonema silesicacum minutum lange bertalotii, Eolimna comperei, Eolimna minima seminulum atomoides, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Hippodonta capitata, Mayamaea Complex, Mayamaea permitis, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula margalithii tripunctata, Navicula menisculus antonii, Navicula reichardtiana caterva, Nitzschia acicularis Complex, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia palea paleacea, Planothidium lanceolatum, Reimeria sinuata, Staurosira mutabilis
+
+## RT11 - Autumn
+Achnanthidium delmontii, Achnanthidium minutissimum, Achnanthidium subatomus, Amphora pediculus inariensis Complex, Caloneis lancettula, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Encyonema silesicacum minutum lange bertalotii, Encyonopsis descripta falaisensis microcephala, Eolimna minima seminulum atomoides, Fallacia subhamulata helensis, Gomphonema pumilum complex, Navicula cryptotenella cryptotenelloides, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Navicula vilaplanii, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia sociabilis, Reimeria sinuata
+
+## RT11 - Winter
+Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Diatoma ehrenbergii, Diatoma mesodon, Diatoma moniliformis tenuis, Encyonema silesicacum minutum lange bertalotii, Fragilaria arcus, Fragilaria austriaca, Fragilaria virescens complex, Gomphonema angustius, Gomphonema angustivalva, Gomphonema cymbelliclinum, Gomphonema micropus Complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Meridion circulare Complex, Navicula krasskei egregia minuscula, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex
+
+## RT15 - Summer
+Achnanthidium delmontii, Achnanthidium lauenburgianum, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cyclotella costei, Cymbella excisa, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Gomphonema angustivalva, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Navicula cryptotenella cryptotenelloides, Navicula margalithii tripunctata, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Reimeria sinuata, Staurosira mutabilis
+
+## RT15 - Autumn
+Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis pediculus, Diatoma moniliformis tenuis, Encyonema silesicacum minutum lange bertalotii, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Navicula cryptotenella cryptotenelloides, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia palea paleacea, Ulnaria ulna complex
+
+## RT15 - Winter
+Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Craticula molestiformis halophiloides  , Diatoma ehrenbergii, Diatoma mesodon, Diatoma moniliformis tenuis, Distrionella incognita, Encyonema silesicacum minutum lange bertalotii, Fragilaria austriaca, Fragilaria capucina complex, Gomphonema micropus Complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Gomphonema variostigmatum, Hannaea arcus, Meridion circulare Complex, Navicula catalanogermanica, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula krasskei egregia minuscula, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia sociabilis, Reimeria sinuata, Surirella lacrimula

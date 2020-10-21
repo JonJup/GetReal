@@ -5,7 +5,7 @@
 # -------------------------------------- #
 
 # date written/ modified: 11.09.20 + 17.09.
-# date used: 11.09.20 + 17. 
+# date used: 11.09.20 + 17. + 21.10. 
 # Jonathan Jupke 
 # Get Real WP2 
 # Macroinvertebrates - Seasonality 
@@ -21,6 +21,7 @@ pacman::p_load(data.table,
                stringr,
                vegan,
                viridis)
+
 setwd(here("002_working_package_02/003_seasonality/003_results/invertebrates/"))
 
 # load data ---------------------------------------------------------------
@@ -168,14 +169,16 @@ all_1516_id <- which(ta_15_16_winter$taxon %in% ta_15_16_autumn$taxon &
 
 
 ### --- ### 
-ta_10_11[season == "winter", unique(taxon)]%>%
+ta_10_11[season == "winter", unique(taxon)] %>%
     str_replace_all(pattern = "\\.", "\\ ") %>%
     paste(sep = ",", collapse = ", ") %>%
     writeClipboard()
+
 ta_15_16[season == "winter", unique(taxon)]%>%
     str_replace_all(pattern = "\\.", "\\ ") %>%
     paste(sep = ",", collapse = ", ") %>%
     writeClipboard()
+
 ta15[, unique(taxon)] %>%
     str_replace_all(pattern = "\\.", "\\ ") %>%
     paste(sep = ",", collapse = ", ") %>%

@@ -6,7 +6,6 @@ output: pdf_document
 ---
 
 # RT01 Very large rivers  
-
 Achnanthidium eutrophilum, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Anomoeoneis sphaerophora, Cocconeis euglypta, Cocconeis pediculus, Cyclotella wuethrichiana, Cymbella excisa, Diatoma vulgaris, Encyonema silesicacum minutum lange bertalotii, Eolimna comperei, Eolimna minima seminulum atomoides, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Halamphora montana, Luticola ventriconfusa, Mayamaea permitis, Navicula capitatoradiata, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula margalithii tripunctata, Navicula menisculus antonii, Navicula reichardtiana caterva, Navicula rotunda, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Nitzschia palea paleacea, Nitzschia sociabilis, Reimeria sinuata, Reimeria uniseriata, Sellaphora submuralis Complex, Gomphonema, Rhoicosphenia  
 
 # RT02 - Lowland, siliceous, medium-large

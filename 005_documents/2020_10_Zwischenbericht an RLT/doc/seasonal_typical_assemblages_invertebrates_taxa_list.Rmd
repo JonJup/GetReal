@@ -1,0 +1,30 @@
+---
+title: "Seasonal typical macro-invertebrate assemblages"
+author: "Jonathan Jupke"
+date: "21.10.2020"
+output: pdf_document
+---
+
+## RT10_11 - Spring
+Baetis, Limnephilidae
+
+## RT10_11 - Summer
+Elmis, Gammarus, Limnius, Rhyacophila, Chironomidae, Limoniidae, Simuliidae
+
+## RT10_11 - Autumn
+Baetis, Calopteryx, Ecdyonurus, Elmis, Ephemera, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Leuctra, Limnius, Pisidium, Potamopyrgus, Rhyacophila, Riolus, Chironomidae
+
+## RT10_11 - Winter
+Baetis, Leuctra, Rhithrogena, Chironomidae, Limnephilidae, Limoniidae
+
+## RT15_16 - Spring
+Baetis, Athericidae, Chironomidae, Simuliidae
+
+## RT15_16 - Summer
+Baetis, Chironomidae, Simuliidae
+
+## RT15_16 - Autumn
+Baetis, Caenis, Ecdyonurus, Elmis, Epeorus, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Nemoura, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Empididae
+
+## RT15_16 - Winter
+Baetis, Leuctra, Chironomidae, Limoniidae

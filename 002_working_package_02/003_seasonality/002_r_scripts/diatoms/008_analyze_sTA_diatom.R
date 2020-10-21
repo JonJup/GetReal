@@ -5,7 +5,8 @@
 # -------------------------------------- #
 
 # date written/ modified: 09.09.20 + 16. + 17. 
-# date used: 09.09.20 + 16. + 17. + 07.10. 
+# date used: 09.09.20 + 16. + 17. + 
+#            07.10. + 21.
 # Jonathan Jupke 
 # Get Real WP2 
 # Diatoms - Seasonality 
@@ -182,11 +183,12 @@ length(all1115)
 ta_15_winter$taxon[all_15_id][all1115]
 
 ### --- ### 
-ta_11[season == "autumn", unique(taxon)][both_id]%>%
+ta_11[season == "winter", unique(taxon)] %>%
     str_replace_all(pattern = "\\.", "\\ ") %>%
     paste(sep = ",", collapse = ", ") %>%
     writeClipboard()
-ta_15_summer[, unique(taxon)] %>%
+
+ta_15[season=="summer", unique(taxon)] %>%
     str_replace_all(pattern = "\\.", "\\ ") %>%
-    paste(sep = ",", collapse = ", \n") %>%
+    paste(sep = ",", collapse = ", ") %>%
     writeClipboard()
