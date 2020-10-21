@@ -538,8 +538,7 @@ data %>%
 ```
 -->
 
-Online, we provide the complete taxa lists for all [macroinvertebrate]() and [diatom]() sTAs.
-
+Online, we provide the complete taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/seasonal_typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/seasonal_typical_assemblages_diatoms_taxa_list.pdf) sTAs.
 
 \newpage
 

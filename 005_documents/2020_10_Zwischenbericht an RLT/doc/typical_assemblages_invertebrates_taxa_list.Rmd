@@ -1,33 +1,33 @@
 ---
 title: "Typical macro-invertebrate assemblages"
 author: "Jonathan Jupke"
-date: "9 10 2020"
+date: "09.10.2020"
 output: pdf_document
 ---
 
-# RT01 - Very Large rivers
+## RT01 - Very Large rivers
 Borysthenia naticina, Esperiana esperi, Hippolyte desmaresti, Microcolpia daudebartii, Obesogammarus obesus, Ancylus, Caenis, Chelicorophium, Corbicula, Dikerogammarus, Echinogammarus, Jaera, Potamopyrgus
 
-# RT02_03 - Lowland siliceous, very small - large
+## RT02_03 - Lowland siliceous, very small - large
 Peregriana peregra, Serratella ignita, Ancylus, Baetis, Caenis, Dicranota, Ecdyonurus, Elmis, Gammarus, Hydropsyche, Lepidostoma, Limnius, Oulimnius, Pisidium, Polycentropus, Potamopyrgus, Rhithrogena, Rhyacophila, Ameletidae
 
-# RT04_05 - Lowland calcareous, very small - large
+## RT04_05 - Lowland calcareous, very small - large
 Metreletus balcanicus, Odhneripisidium moitessierianum, Peregriana peregra, Serratella ignita, Ancylus, Asellus, Baetis, Caenis, Calamoceras, Cataclysta, Elmis, Elophila, Erpobdella, Gammarus, Glossiphonia, Harnischia, Hydropsyche, Ilyocoris, Micropsectra, Oulimnius, Pisidium, Potamopyrgus, Ranatra, Sphaerium, Unionidae, Viviparidae
 
-# RT08_09 - Mid-altitude siliceous, very small-large
+## RT08_09 - Mid-altitude siliceous, very small-large
 Isogenus nubecula, Serratella ignita, Amphinemura, Ancylus, Baetis, Dicranota, Ecdyonurus, Elmis, Ephemera, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Odontocerum, Polycentropus, Protonemura, Rhithrogena, Rhyacophila
 
-# RT10_11 - Mid-altitude, calcareous or mixed, very small - large
+## RT10_11 - Mid-altitude, calcareous or mixed, very small - large
 Serratella ignita, Ancylus, Baetis, Ecdyonurus, Elmis, Ephemera, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Leuctra, Limnius, Odontocerum, Pisidium, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Micronectidae, Simuliidae
 
-# RT12 – Mid-altitude, organic and siliceous 
+## RT12 – Mid-altitude, organic and siliceous 
 Ameletus inopinatus, Diura nanseni, Kageronia fuscogrisea, Nigrobaetis niger, Amphinemura, Baetis, Dicranota, Elmis, Ephemerella, Heptagenia, Isoperla, Lepidostoma, Leptophlebia, Leuctra, Polycentropus, Rhyacophila
 
-# RT14 – Highland, siliceous, incl. organic (humic)
+## RT14 – Highland, siliceous, incl. organic (humic)
 Baetis, Ephemerella, Heptagenia, Hydraenida, Hydropsyche, Leuctra, Rhyacophila, Chironomidae, Empididae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae
 
-# RT15_16 – Highland, calcareous/mixed and glacial rivers 
+## RT15_16 – Highland, calcareous/mixed and glacial rivers 
 Baetis, Ecdyonurus, Elmis, Epeorus, Hydraena, Hydropsyche, Isoperla, Leuctra, Nemoura, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae
 
-# RT18 - Mediterranean mid-altitude, medium-large, perennial
+## RT18 - Mediterranean mid-altitude, medium-large, perennial
 Baetis, Caenis, Calopteryx, Ecdyonurus, Elmis, Ephemerella, Esolus, Gammarus, Hydropsyche, Hydroptila, Hydroscapha, Leuctra, Limnius, Onychogomphus, Oulimnius, Polycentropus, Potamopyrgus, Procambarus, Psychomyia, Rhyacophila, Riolus, Sympecma, Chironomidae, Empididae, Lestidae, Oligochaeta, Simuliidae
