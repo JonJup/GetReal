@@ -188,7 +188,7 @@ ta_11[season == "winter", unique(taxon)] %>%
     paste(sep = ",", collapse = ", ") %>%
     writeClipboard()
 
-ta_15[season=="summer", unique(taxon)] %>%
+ta_15[season=="winter", unique(taxon)] %>%
     str_replace_all(pattern = "\\.", "\\ ") %>%
     paste(sep = ",", collapse = ", ") %>%
     writeClipboard()
