@@ -189,8 +189,7 @@ Henceforth, when referring to the threshold for *B*, we refer to $B_1$.
 For species, we varied the threshold for *B* in ten steps between 0.10 and 0.75 and that for **A** in ten steps between 0.5 and 1.0. 
 For lower taxonomic levels these thresholds were raised. 
 For genera, the threshold values of **A** and **B** were raised by a factor of 1.25 and 2 respectively. 
-Family and lower taxonomic levels were grouped in “families or lower” (fol). 
-For fol, the thresholds were raised by factors of 1.5 and 3 respectively. 
+For families and lower taxonomic levels, the thresholds were raised by factors of 1.5 and 3 respectively. 
 The taxon richness and uniqueness scores (see Figure \@ref(fig:plot-uni) and preceding text) of each TA were computed for all 100 combinations of these parameters and each taxonomic level. 
 Please note that results are only shown and discussed for the non-redundant TAs (see section \@ref(sec:redundancy)).   
 Taxa richness decreased with increasing **A** and **B** threshold in macroinvertebrates and diatoms (Figure \@ref(fig:plot-sa-mzb)A and Figure \@ref(fig:plot-sa-dia)A), while the uniqueness scores increased with **B** thresholds but decreased with **A** thresholds ((Figure \@ref(fig:plot-sa-mzb)B and Figure \@ref(fig:plot-sa-dia)B)). 
@@ -325,9 +324,9 @@ rm(data)
 
 # Characteristics of typical assemblages
 
-In all macroinvertebrate TAs, genus is the prevalent taxonomic level (figure \@ref(fig:plot-mzb-n-taxa)A). The numbers of species and fol are similar with both exceeding the other in four assemblages. The mean number of species was 3.2, mean number of genera 14.3, and the mean number of fol 2.4. RT01 and RT14 were the smallest assemblages with 13 taxa and RT18 was the most taxa rich assemblage with 28 taxa. For diatoms, species is the prevalent taxonomic level in all TAs (figure \@ref(fig:plot-mzb-n-taxa)B). Some assemblages consist entirely of species (i.e. RT4, 6, 9, 16, 17, and 19). The mean number of species per TA is 30 and the mean number of genera 0.5. RT3 has the most taxa rich TA with 49 taxa and RT19 has the least taxa in its TA with 18.  
+In all macroinvertebrate TAs, genus is the prevalent taxonomic level (figure \@ref(fig:plot-mzb-n-taxa)A). The numbers of species and families or lower levels are similar with both exceeding the other in four assemblages. The mean number of species was 3.2, mean number of genera 14.3, and the mean number of families or lower 2.4. RT01 and RT14 were the smallest assemblages with 13 taxa and RT18 was the most taxa rich assemblage with 28 taxa. For diatoms, species is the prevalent taxonomic level in all TAs (figure \@ref(fig:plot-mzb-n-taxa)B). Some assemblages consist entirely of species (i.e. RT4, 6, 9, 16, 17, and 19). The mean number of species per TA is 30 and the mean number of genera 0.5. RT3 has the most taxa rich TA with 49 taxa and RT19 has the least taxa in its TA with 18.  
 
-```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10, fig.cap="Numbers of taxa on each taxonomical level for all typical assemblages. Fol stands for families or lower."}
+```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10, fig.cap="Numbers of taxa on each taxonomical level for all typical assemblages."}
 source("../r/plot_mzb_n_taxa.R")
 source("~/01_Uni/02_getreal/005_documents/2020_10_Zwischenbericht an RLT/r/plot_dia_n_taxa.R")
 plot_grid(align='h', mzb_per_level_plot, dia_per_level_plot, labels = c('A', 'B'), ncol = 2)

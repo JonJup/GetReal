@@ -61,7 +61,7 @@ acp[value == 0, value := NA]
 acp$river_type %<>% factor(levels = c("1", "2_3", "4_5", "8_9", "10_11", "12","14", "15_16", "18"))
 
 acp <- acp[!is.na(value),]
-acp[variable=="foh", variable:="fol"]
+acp[variable=="foh", variable:="families or lower"]
 mzb_per_level_plot <-
                 ggplot(data = acp, aes(x = river_type, y = value)) +
                 geom_point(aes(col = variable), size = 3) +
