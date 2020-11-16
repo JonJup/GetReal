@@ -1,21 +1,27 @@
 # -------------------------------------------------------- #
-### --- establish optimal taxonomic resolution -02- --- ### 
+### --- establish optimal taxonomic resolution -02-  --- ### 
 # -------------------------------------------------------- #
 
-# 03.08.20
-# used: 03.08.20 + 18.08 
-# Diatoms GetReal 
+# written: 03.08.20
+# used: 03.08.20 + 18.08 + 04.11.
+# GetReal 
+# Diatoms
 
 # Setup -------------------------------------------------------------------
-pacman::p_load(here, dplyr, data.table, magrittr, sf, tmap)
-setwd(here())
+pacman::p_load(data.table,
+               dplyr,
+               here, 
+               magrittr, 
+               sf, 
+               tmap)
+
+dir_pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/")
 
 # data IO  ----------------------------------------------------------------
-set_all   <- readRDS("003_processed_data/005_2020-08-17_clean_diatoms_observations.RDS")
-order_t   <- readRDS("003_processed_data/006_2020-08-18_taxon_list_order.RDS")
-family_t  <- readRDS("003_processed_data/006_2020-08-18_taxon_list_family.RDS")
-genus_t   <- readRDS("003_processed_data/006_2020-08-18_taxon_list_genus.RDS")
-
+set_all  = readRDS(file.path(dir_pd, "005_2020-08-17_clean_diatoms_observations.RDS"))
+order_t  = readRDS(file.path(dir_pd, "006_2020-11-04_taxon_list_order.RDS"))
+family_t = readRDS(file.path(dir_pd, "006_2020-11-04_taxon_list_family.RDS"))
+genus_t  = readRDS(file.path(dir_pd, "006_2020-11-04_taxon_list_genus.RDS"))
 
 set_all <- set_all[- which(set_all$species == "Fontigonium rectangulare")]
 set_all[, c("genus_check2", "genus_new2", "double_checked", "species_new", "species_clean", "comment", "species_old") := NULL]
@@ -66,5 +72,5 @@ set_all[is.na(final_taxon)]
 # save to file  -------------------------------------------------------
 
 saveRDS(set_all,
-        paste0("003_processed_data/007_", Sys.Date(), "all_dia_optimal_taxon_75.RDS"))
+        file.path(paste0("007_", Sys.Date(), "all_dia_optimal_taxon_75.RDS")))
 

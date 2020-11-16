@@ -4,6 +4,7 @@
     <title>Aquatic Typical Assemblages</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jonathan Jupke" />
+    <link href="libs/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
     <script src="libs/kePrint-0.0.1/kePrint.js"></script>
     <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
@@ -24,20 +25,41 @@ class: center, middle, inverse, title-slide
 
 
 
-# Optimal taxonomic level
+# Status after last Review
 
-* last meeting: All taxa share one taxonomic resolution 
+<i class="fas  fa-users "></i> `\(\:\)` last meeting:   
+
+  * presented preliminary typical assemblages
+  * all taxa share one taxonomic resolution 
 
 --
 
-* what about taxa with low taxonomic resolutions? 
+<i class="fas  fa-comment "></i> `\(\:\)` what about taxa with low taxonomic resolutions?  
+
   * e.g. *Oligochaeta*
   
 --
 
-* find optimal taxonomic resolution for each taxon given our data sets. 
+<i class="fas  fa-question "></i> `\(\:\)` optimal taxonomic resolution 
+
 ---
-# Optimal taxonomic level
+
+# Optimal taxonomic resolution? 
+
+Resolution *R* is optimal if the fraction of observations represented at higher resolutions is smaller than *X* 
+
+--
+
+<i class="fas  fa-book "></i> `\(\:\)` no theoretical grounds
+
+--
+
+<i class="fas  fa-arrow-down "></i>   
+
+<i class="fas  fa-database "></i> `\(\:\)` data driven approach 
+  
+---
+# Optimal taxonomic resolution
 &lt;img src="pr3_presentation_files/figure-html/mzb-thresh-plot-1.png" style="display: block; margin: auto;" /&gt;
 ---
 background-image: url("figures/sample_map_rt18.png")
@@ -54,9 +76,28 @@ background-position: 50% 70%
 ---
 #What is a typical assemblage?
 
-* A, specificity, P(river type|taxon)
-* B, commonness, P(taxon|river type)
-* IndVal, weighted product of A and B
+.pull-left[
+**A** <i class="fas  fa-book " style="color:#355467;"></i> specificity  
+P(river type|taxon)
+]
+
+--
+
+.pull-right[
+**B** <i class="fas  fa-book " style="color:#355467;"></i> commonness   
+P(taxon|river type)
+]
+
+--
+  
+<i class="fas  fa-book " style="color:#355467;"></i>    
+<i class="fas  fa-book " style="color:#355467;"></i>    
+<i class="fas  fa-book " style="color:#355467;"></i>       
+    
+.center[
+ **IndVal**  
+ weighted product of A and B
+]
 
 --
 
@@ -91,15 +132,20 @@ background-position: 50% 70%
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-
+---
+&lt;img src="pr3_presentation_files/figure-html/plot-sa-mzb-1.png" style="display: block; margin: auto;" /&gt;
 ---
 # Redundnacy
 
-* overlap with other assemblages as metric 
+<i class="fas  fa-question "></i> `\(\:\)` are some assemblages redundant?
 
 --
 
-* assemblages are redundant if overlap `\(\ge\)` 75%
+<i class="fas  fa-info "></i> `\(\:\)` % of common taxa as metric 
+
+--
+
+<i class="fas  fa-window-close "></i> `\(\:\)` assemblages are redundant if `\(\ge\)` 75% are in common
 
 --
 
@@ -110,9 +156,6 @@ background-position: 50% 70%
   * RT10 and RT11
   * RT15 and RT16
   
----
-&lt;img src="pr3_presentation_files/figure-html/plot-sa-mzb-1.png" style="display: block; margin: auto;" /&gt;
-
 ---
 &lt;img src="pr3_presentation_files/figure-html/plot-mzb-n-taxa-1.png" style="display: block; margin: auto;" /&gt;
 ---

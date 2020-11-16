@@ -2,24 +2,24 @@
 ### --- Inspect threshold with high resolution --- ###
 # -------------------------------------------------- #
 
-# date: 23.06.20
-
+# date: 23.06.20 + 09.11.20
 
 # setup -------------------------------------------------------------------
+if(!require(pacman)) {install.packages("pacman");library(pacman)}
 pacman::p_load(here, dplyr, data.table, magrittr, sf, tmap, ggplot2)
-setwd(here("003_processed_data"))
+
+dir_pd = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/")
 
 # load data  --------------------------------------------------------------
-set_all  <- readRDS("001_2020-06-18_all_mzb_combined.RDS")
-phylum   <- readRDS("001_2020-06-18_taxon_list_phylum.RDS")
-class_t  <- readRDS("001_2020-06-18_taxon_list_class.RDS")
-subclass <- readRDS("001_2020-06-18_taxon_list_subclass.RDS")
-order_t  <- readRDS("001_2020-06-18_taxon_list_order.RDS")
-family   <- readRDS("001_2020-06-18_taxon_list_family.RDS")
-genus    <- readRDS("001_2020-06-18_taxon_list_genus.RDS")
+set_all  <- readRDS(file.path(dir_pd, "01_2020-11-03_all_mzb_combined.RDS"))
+phylum   <- readRDS(file.path(dir_pd, "01_2020-11-03_taxon_list_phylum.RDS"))
+class_t  <- readRDS(file.path(dir_pd, "01_2020-11-03_taxon_list_class.RDS"))
+subclass <- readRDS(file.path(dir_pd, "01_2020-11-03_taxon_list_subclass.RDS"))
+order_t  <- readRDS(file.path(dir_pd, "01_2020-11-03_taxon_list_order.RDS"))
+family   <- readRDS(file.path(dir_pd, "01_2020-11-03_taxon_list_family.RDS"))
+genus    <- readRDS(file.path(dir_pd, "01_2020-11-03_taxon_list_genus.RDS"))
         
 # clean data  -------------------------------------------------------------
-
 set_all_sf  <- st_as_sf(set_all)
 set_all_sf$x.coord <- st_coordinates(set_all_sf)[,1] 
 set_all_sf$y.coord <- st_coordinates(set_all_sf)[,2] 
@@ -27,9 +27,10 @@ set_all <- set_all_sf
 setDT(set_all) 
 
 # Create Lists  -----------------------------------------------------------
-
-for (l2 in c(95:70)) {
-
+ls_loop_out <- list()
+counter = 0
+for (l2 in c(99:50)) {
+        counter = counter + 1
         # for manual loop 
         #l2 = 85 
         # set cut off data_sets
@@ -216,52 +217,58 @@ for (l2 in c(95:70)) {
         }
         
         set_all_mod2 <- set_all_mod[!is.na(final_taxon_level)]
-        assign(x = paste0("d", l2,"_t"), 
-               value = data.table(taxon_level = names(table(set_all_mod2$final_taxon_level)), 
-                              number = as.vector(table(set_all_mod2$final_taxon_level)), 
-                              percent = as.vector(table(set_all_mod2$final_taxon_level)) / nrow(set_all_mod2), 
-                              thresholds = l2)
-        )
+        # assign(x = paste0("d", l2,"_t"), 
+        #        value = data.table(taxon_level = names(table(set_all_mod2$final_taxon_level)), 
+        #                       number = as.vector(table(set_all_mod2$final_taxon_level)), 
+        #                       percent = as.vector(table(set_all_mod2$final_taxon_level)) / nrow(set_all_mod2), 
+        #                       thresholds = l2)
+        # )
+        ls_loop_out[[counter]] = data.table(taxon_level = names(table(set_all_mod2$final_taxon_level)), 
+                                 number = as.vector(table(set_all_mod2$final_taxon_level)), 
+                                 percent = as.vector(table(set_all_mod2$final_taxon_level)) / nrow(set_all_mod2), 
+                                 thresholds = l2)
+                
         rm(set_all_mod2, species_taxa, genus_taxa, family_taxa, order_id, genus_lvl_id, species_lvl_id, family_lvl_id, lower_lvl_id, order_id)
         print(l2)
 }
  
-loop_results <- ls()[grep(pattern = "d[0-9]*_t", x = ls())]
+#loop_results <- ls()[grep(pattern = "d[0-9]*_t", x = ls())]
 
+d_all_t <- rbindlist(ls_loop_out)
 
-d_all_t <- rbindlist(list(
-        d70_t,
-        d71_t,
-        d72_t,
-        d73_t,
-        d74_t,
-        d75_t,
-        d76_t,
-        d77_t,
-        d78_t,
-        d79_t,
-        d80_t,
-        d81_t,
-        d82_t,
-        d83_t,
-        d84_t,
-        d85_t,
-        d86_t,
-        d87_t,
-        d88_t,
-        d89_t,
-        d90_t,
-        d91_t,
-        d92_t,
-        d93_t,
-        d94_t,
-        d95_t
-))
+# d_all_t <- rbindlist(list(
+#         d70_t,
+#         d71_t,
+#         d72_t,
+#         d73_t,
+#         d74_t,
+#         d75_t,
+#         d76_t,
+#         d77_t,
+#         d78_t,
+#         d79_t,
+#         d80_t,
+#         d81_t,
+#         d82_t,
+#         d83_t,
+#         d84_t,
+#         d85_t,
+#         d86_t,
+#         d87_t,
+#         d88_t,
+#         d89_t,
+#         d90_t,
+#         d91_t,
+#         d92_t,
+#         d93_t,
+#         d94_t,
+#         d95_t
+# ))
 
 
 d_all_t[, total_observations := number/percent]
 
-saveRDS(d_all_t, paste0("001_", Sys.Date(),"_threshold_plot_data"))
+saveRDS(d_all_t, file = file.path(dir_pd, "01_data_threshold_plot"))
 
 d_all_t %>% 
         #filter(taxon_level %in% c("genus", "family")) %>%  

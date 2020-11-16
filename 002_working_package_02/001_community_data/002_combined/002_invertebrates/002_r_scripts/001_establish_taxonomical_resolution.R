@@ -3,12 +3,13 @@
 # --------------------------------- #
 
 # 27.05.20
+# used: 03.11.20 
 # Invertebrates GetReal 
 
 # Setup -------------------------------------------------------------------
 
 pacman::p_load(here, dplyr, data.table, magrittr, taxize, beepr, stringr, purrr)
-setwd(here("../.."))
+setwd(here("002_working_package_02/001_community_data/001_individual_data_sets/"))
 
 # data IO  ----------------------------------------------------------------
 # I excluded the following data sets because they contained only very few taxa 
@@ -16,31 +17,39 @@ setwd(here("../.."))
 # -> Oscar Belmar - only data set not to include Annelida 
 # -> Mirela Cimpea 
 
-set01 <- readRDS("001_Landau/03_FinalData/09_2020-05-27_MZB_Landau_higher_taxa.RDS")                                       %>% setDT  # Landau  
-set03 <- readRDS("002_Miguel_Iglesias/03_FinalData/09_2020-05-27_MZB_Miguel_Iglesias_PA_high_phyla.RDS")                   %>% setDT  # Miguel Iglesias 1  
-set04 <- readRDS("002_Miguel_Iglesias/03_FinalData/09_2020-05-27_MZB_Miguel_Iglesias_PA_high_phyla.RDS")                   %>% setDT  # Miguel Iglesias 2  
-set05 <- readRDS("004_Naiades/03_FinalData/09_2020-05-27_MZB_Naiades_high_phyl.RDS")                                       %>% setDT  # Naiades 
-set06 <- readRDS("005_Pepe_Barquin/03_FinalData/09_2020-05-28_MZB_canta_Pepe_high_phyla.RDS")                              %>% setDT  # Pepe Barquin Cantabria  
-set07 <- readRDS("005_Pepe_Barquin/03_FinalData/09_2020-05-28_MZB_Picos_Pepe_high_phyla.RDS")                              %>% setDT  # Pepe Barquin Picos 
-set08 <- readRDS("007_Denes Schmera/03_FinalData/09_2020-05-28_MZB_Denes_Schmera_high_phyl.RDS")                           %>% setDT  # Denes Schmera 
-set09 <- readRDS("009_Hermann van Dam/03_FinalData/09_2020-05-28_MZB_Ecosurv_high_phyla.RDS")                              %>% setDT  # Hermann van Dam 
-set10 <- readRDS("011_RivPacs/03_FinalData/09_2020-05-28_MZB_Rivpacs_high_phyla.RDS")                                      %>% setDT  # Rivpacs 
-set11 <- readRDS("012_Christian Feld/03_FinalData/09_2020-05-28_MZB_STARS_high_phyla.RDS")                                 %>% setDT  # STARS 
-set12 <- readRDS("012_Christian Feld/03_FinalData/09_2020-05-28_MZB_mzb_WISER_High_phyla.RDS")                             %>% setDT  # WISER 
-set14 <- readRDS("014_Sandin_Kahlert/03_FinalData/09_2020-05-28_MZB_Leonard_Sandin_high_phyl.RDS")                         %>% setDT  # Sandin\ Kahlert 
-set15 <- readRDS("015_KaisaLenaHuttunen/03_FinalData/09_2020-05-28_MZB_Kaisa-Leena_Huttunen_high_phylum.RDS")              %>% setDT  # Kaisa Lena Huttunen 
-set16 <- readRDS("016_PhillipeUsseglioPolterra/03_FinalData/09_2020-05-28_MZB_Philippe_Usseglio_Polatera_high_phyla.RDS")  %>% setDT  # Phillipe Usseglio Polaterra  
-set17 <- readRDS("019_Edwin Peters/03_FinalData/09_200515_MZB_ediwn_peters_high_phyla.RDS")                                %>% setDT  # Edwin Peters 
-set18 <- readRDS("020_Peter_Haase/03_FinalData/09_200518_MZB_peter_haase_high_phyla.RDS")                                  %>% setDT  # Peter Haase  
+set01 <- readRDS("001_ld/003_processed_data/mzb/09_2020-05-27_MZB_Landau_higher_taxa.RDS")         
+set03 <- readRDS("002_mi/003_processed_data/mzb/09_2020-05-27_MZB_Miguel_Iglesias_PA_high_phyla.RDS")                   
+set04 <- readRDS("002_mi/003_processed_data/mzb/09_2020-05-27_MZB_Miguel_Iglesias_PA_high_phyla.RDS")                   
+set05 <- readRDS("004_na/003_processed_data/mzb/09_2020-05-27_MZB_Naiades_high_phyl.RDS")                               
+set06 <- readRDS("005_pb/003_processed_data/09_2020-05-28_MZB_canta_Pepe_high_phyla.RDS")                           
+set07 <- readRDS("005_pb/003_processed_data/09_2020-05-28_MZB_Picos_Pepe_high_phyla.RDS")                           
+set08 <- readRDS("007_ds/003_processed_data/09_2020-05-28_MZB_Denes_Schmera_high_phyl.RDS")                         
+set09 <- readRDS("009_hd/003_processed_data/mzb/09_2020-05-28_MZB_Ecosurv_high_phyla.RDS")                              
+set10 <- readRDS("011_rp/003_processed_data/09_2020-05-28_MZB_Rivpacs_high_phyla.RDS")                              
+set11 <- readRDS("012_cf/003_processed_data/mzb/09_2020-05-28_MZB_STARS_high_phyla.RDS")                                
+set12 <- readRDS("012_cf/003_processed_data/mzb/09_2020-05-28_MZB_mzb_WISER_High_phyla.RDS")                            
+set14 <- readRDS("014_sk/003_processed_data/mzb/09_2020-05-28_MZB_Leonard_Sandin_high_phyl.RDS")                      
+set15 <- readRDS("015_kh/003_processed_data/09_2020-05-28_MZB_Kaisa-Leena_Huttunen_high_phylum.RDS")              
+set16 <- readRDS("016_pp/003_processed_data/09_2020-05-28_MZB_Philippe_Usseglio_Polatera_high_phyla.RDS")  
+set17 <- readRDS("019_ep/003_processed_data/mzb/09_200515_MZB_ediwn_peters_high_phyla.RDS")                    
+set18 <- readRDS("020_ph/003_processed_data/09_200518_MZB_peter_haase_high_phyla.RDS")                     
 
 ## -- prepare data for combination 
+
+# set DT 
+ch_files <- ls()
+
+
+for(i in seq_along(ch_files)) {
+        setDT(get(ch_files[i]))
+}
 
 # Edwin Peters and Peter Haase data set still contains n. columns which need to be removed 
 set17[, c("n.species", "n.genus", "n.family", "n.order") := NULL]
 set18[, c("n.species", "n.genus", "n.family", "n.order") := NULL]
 
 # Data sets where date = NA have a different class in that column than those with actual dates. 
-# To avoid having to check each one seperately I made sure each date is of class date. 
+# To avoid having to check each one separately I made sure each date is of class date. 
 set03[, date := as.Date(date)]
 set04[, date := as.Date(date)]
 set06[, date := as.Date(date)]
@@ -75,6 +84,12 @@ set_all <- rbindlist(list(
         set17,
         set18
                           ))
+
+
+# change hydranida 
+set_all[genus == "Hydraenida", genus := NA]
+
+rm(list = ch_files)
 
 # Create Lists  -----------------------------------------------------------
 ## -- Manual pre checks -- ## 
@@ -409,11 +424,11 @@ setorderv(level_data_genus, cols = c("phylum_name", "class_name", "subclass_name
 ###### ------ END SPECIES ------ ######
 
 # Save to file  -----------------------------------------------------------
-setwd(here())
-saveRDS(object = set_all,             file = paste0("003_processed_data/001_", Sys.Date(), "_all_mzb_combined.RDS"))
-saveRDS(object = level_data_genus,    file = paste0("003_processed_data/001_", Sys.Date(), "_taxon_list_genus.RDS"))
-saveRDS(object = level_data_family,   file = paste0("003_processed_data/001_", Sys.Date(), "_taxon_list_family.RDS"))
-saveRDS(object = level_data_order,    file = paste0("003_processed_data/001_", Sys.Date(), "_taxon_list_order.RDS"))
-saveRDS(object = level_data_subclass, file = paste0("003_processed_data/001_", Sys.Date(), "_taxon_list_subclass.RDS"))
-saveRDS(object = level_data_class,    file = paste0("003_processed_data/001_", Sys.Date(), "_taxon_list_class.RDS"))
-saveRDS(object = level_data_phylum,   file = paste0("003_processed_data/001_", Sys.Date(), "_taxon_list_phylum.RDS"))
+setwd(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/"))
+saveRDS(object = set_all,             file = paste0("001_", Sys.Date(), "_all_mzb_combined.RDS"))
+saveRDS(object = level_data_genus,    file = paste0("001_", Sys.Date(), "_taxon_list_genus.RDS"))
+saveRDS(object = level_data_family,   file = paste0("001_", Sys.Date(), "_taxon_list_family.RDS"))
+saveRDS(object = level_data_order,    file = paste0("001_", Sys.Date(), "_taxon_list_order.RDS"))
+saveRDS(object = level_data_subclass, file = paste0("001_", Sys.Date(), "_taxon_list_subclass.RDS"))
+saveRDS(object = level_data_class,    file = paste0("001_", Sys.Date(), "_taxon_list_class.RDS"))
+saveRDS(object = level_data_phylum,   file = paste0("001_", Sys.Date(), "_taxon_list_phylum.RDS"))

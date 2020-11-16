@@ -1,0 +1,26 @@
+---
+title: "Seasonal typical macro-invertebrate assemblages"
+author: "Jonathan Jupke"
+date: "16.11.2020"
+output: pdf_document
+---
+
+## RT2_3 
+### Summer
+Ancylus, Dikerogammarus, Gammarus, Potamopyrgus, Chironomidae
+
+### Autumn
+Ampullaceana balthica, Ancylus, Baetis, Caenis, Chelicorophium, Corbicula, Dikerogammarus, Echinogammarus, Elmis, Ephemera, Gammarus, Hydropsyche, Jaera, Limnius, Pisidium, Potamopyrgus, Psychomyia, Chironomidae
+
+## RT8-11_15_16 
+### Spring
+Baetis, Dicranota, Elmis, Gammarus, Hydropsyche, Isoperla, Leuctra, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Sericostomatidae, Simuliidae
+
+### Summer
+Baetis, Elmis, Esolus, Gammarus, Hydraena, Hydropsyche, Leuctra, Limnius, Rhyacophila, Athericidae, Chironomidae, Empididae, Limnephilidae, Limoniidae, Sericostomatidae, Simuliidae
+
+### Autumn
+Amphinemura, Ancylus, Baetis, Ecdyonurus, Elmis, Epeorus, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Isoperla, Leuctra, Limnius, Nemoura, Protonemura, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Limnephilidae, Limoniidae, Simuliidae
+
+
+

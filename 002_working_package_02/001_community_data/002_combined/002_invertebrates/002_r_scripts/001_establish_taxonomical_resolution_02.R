@@ -3,7 +3,7 @@
 # --------------------------------- #
 
 # 15.06.20
-# used: 03.07.20 
+# used: 03.07.20, 03.11.20
 # Invertebrates GetReal 
 
 # Rules Phylum and Class in all 15 data sets 
@@ -12,16 +12,16 @@
 # Setup -------------------------------------------------------------------
 
 pacman::p_load(here, dplyr, data.table, magrittr, sf, tmap)
-setwd(here())
+setwd(here(... = "002_working_package_02/001_community_data/002_combined/002_invertebrates/"))
 
 # data IO  ----------------------------------------------------------------
-set_all  <- readRDS("003_processed_data/001_2020-06-18_all_mzb_combined.RDS")
-phylum   <- readRDS("003_processed_data/001_2020-06-18_taxon_list_phylum.RDS")
-class_t  <- readRDS("003_processed_data/001_2020-06-18_taxon_list_class.RDS")
-subclass <- readRDS("003_processed_data/001_2020-06-18_taxon_list_subclass.RDS")
-order_t  <- readRDS("003_processed_data/001_2020-06-18_taxon_list_order.RDS")
-family   <- readRDS("003_processed_data/001_2020-06-18_taxon_list_family.RDS")
-genus    <- readRDS("003_processed_data/001_2020-06-18_taxon_list_genus.RDS")
+set_all  <- readRDS("003_processed_data/001_2020-11-03_all_mzb_combined.RDS")
+phylum   <- readRDS("003_processed_data/001_2020-11-03_taxon_list_phylum.RDS")
+class_t  <- readRDS("003_processed_data/001_2020-11-03_taxon_list_class.RDS")
+subclass <- readRDS("003_processed_data/001_2020-11-03_taxon_list_subclass.RDS")
+order_t  <- readRDS("003_processed_data/001_2020-11-03_taxon_list_order.RDS")
+family   <- readRDS("003_processed_data/001_2020-11-03_taxon_list_family.RDS")
+genus    <- readRDS("003_processed_data/001_2020-11-03_taxon_list_genus.RDS")
 
 # add x and y coordinates as variables to extract unqiue sites 
 set_all_sf  <- st_as_sf(set_all)
@@ -181,13 +181,19 @@ set_all_mod <- set_all_mod[!is.na(final_taxon)]
 # save to file  -------------------------------------------------------
 
 save_out  <- st_as_sf(set_all_mod)
-sites_out <- unique(set_all_mod, by = c("x_coord", "y_coord")) %>% st_as_sf() 
+save_out$x_coord <- st_coordinates(save_out)[,1]
+save_out$y_coord <- st_coordinates(save_out)[,2]
+sites_out <- unique(save_out, by = c("x_coord", "y_coord")) 
 
-st_write(obj = save_out,
-         dsn = paste0("003_processed_data/002_", Sys.Date(), "all_inv_", l1 , "_", l2, ".gpkg"))
-st_write(obj = sites_out,
-         dsn = paste0("003_processed_data/002_", Sys.Date(), "all_inv_sites_", l1 , "_", l2, ".gpkg"))
+setDT(sites_out)
 
-# print(paste(l1, l2))
-#        }
-#} END FOR-LOOP 1
+
+# st_write(obj = save_out,
+#          dsn = paste0("003_processed_data/002_", Sys.Date(), "all_inv_", l1 , "_", l2, ".gpkg"))
+# st_write(obj = sites_out,
+#          dsn = paste0("003_processed_data/002_", Sys.Date(), "all_inv_sites_", l1 , "_", l2, ".gpkg"))
+saveRDS(object = save_out,
+         file = paste0("003_processed_data/002_", Sys.Date(), "all_inv_", requiered_data_sets , "_", requiered_percent, ".RDS"))
+saveRDS(object = sites_out,
+         file = paste0("003_processed_data/002_", Sys.Date(), "all_inv_sites_", requiered_data_sets , "_", requiered_percent, ".RDS"))
+

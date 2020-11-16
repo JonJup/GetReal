@@ -3,10 +3,11 @@
 ### - MARCROINVERTEBRATES - ###
 ### ----------------------- ###
 
-# Fit a generalized dissimilarity model to macroinvetrebrate data. This will show if the season can explain the dissimilarity between sites. 
+# Fit a generalized dissimilarity model to Macroinvertebrate data. This will
+# show how much of the difference between samples is explained by distance rather than by season. 
 
 # date: 08.09.20
-# GR WP 2 DIATOMS 
+# GetReal WP 2 DIATOMS 
 
 
 # setup -------------------------------------------------------------------
@@ -22,11 +23,17 @@ pacman::p_load(cowplot,
                stringr
                
 )
-setwd(here())
+
+dir_sxs = here("002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables/")
+dir_mzb = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/")
+dir_save_plot  = here("002_working_package_02/003_seasonality/004_plots/invertebrates/gdm/") 
+dir_save_model = here("002_working_package_02/003_seasonality/003_results/invertebrates/005_gdms/")
+
 
 # load and prepare data  --------------------------------------------------
-files <- dir(path = "003_results/invertebrates/001_speciesXsites_tables/")
-files <- files[grep(pattern = "2020-09-10", x = files)]
+files <- dir(path = file.path(dir_sxs))
+# select date 
+# files <- files[grep(pattern = "2020-09-10", x = files)]
 
 for (i in seq_along(files)) {
     lv <- files[i]
@@ -34,14 +41,14 @@ for (i in seq_along(files)) {
         str_extract("rt.*") %>% 
         str_remove(pattern = "\\.RDS")
     assign(x     = obj_name,
-           value = readRDS(paste0("003_results/invertebrates/001_speciesXsites_tables/",lv)))
+           value = readRDS(file.path(dir_sxs,lv)))
     
 }
 rm(i, lv, obj_name, files);gc()
-file_l <- ls()
+
 
 ## --  join tables -- ## 
-loop_over_var <- c("1.1", "1.2","2_3", "4_5", "8_9", "10_11", "15_16", "17", "18", "19")
+loop_over_var <- c("1.1", "1.2","2_3", "4_5", "8_11_15_16", "17", "18", "19")
 for (i in loop_over_var) {
         
         file_pre <- paste0("rt", i, "_")
@@ -58,13 +65,13 @@ for (i in loop_over_var) {
         rm(ldj, files, file_pre, i);gc()
         
 }
-rm(list = file_l)
-rm(file_l, loop_over_var);gc()
+
+rm(loop_over_var);gc()
 
 # Create distance matrix --------------------------------------------------
 
 ## -- distance matrix -- ##
-files <- ls()
+files <- ls()[grepl(x = ls(), pattern = "all$")]
 
 for (i in seq_along(files)) {
     ld <- get(files[i])
@@ -95,18 +102,17 @@ for (i in seq_along(files)) {
 
 
 ## -- site locations -- ## 
-data <- readRDS("../001_Community Data/100_Combined/002_invertebrates/003_processed_data/004_2020-07-03_mzb_data1585_low_impact.RDS")
+data <- readRDS(file.path(dir_mzb, "004_2020-11-03_mzb_data1585_low_impact.RDS"))
 data <- data[,c("gr_sample_id", "geom")]
 data <- unique(data, by = "gr_sample_id")
 data %<>% st_as_sf()
 data$x <- st_coordinates(data)[,1] %>%  as.numeric()
 data$y <- st_coordinates(data)[,2] %>%  as.numeric()
 data %<>% st_drop_geometry()
-# - 
+
 # Fitting models ----------------------------------------------------------
 
-
-loop_over_var <- c("1.1", "1.2","2_3", "4_5", "8_9", "10_11", "15_16", "17", "18", "19")
+loop_over_var <- c("1.1", "1.2","2_3", "4_5", "8_11_15_16", "17", "18", "19")
 for (i in loop_over_var) {
         loop_data_name  <- paste0("rt",i, "_all") 
         loop_data       <- get(loop_data_name)
@@ -144,9 +150,10 @@ for (i in loop_over_var) {
         
         p3 <- plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12)
         
-        ggsave(plot = p3, filename = paste0("004_plots/invertebrates/gdm/", Sys.Date(), "_gdm_plot_rt_", i,".jpeg"))
+        ggsave(plot = p3, filename = file.path(dir_save_plot,
+                                               paste0(Sys.Date(), "_gdm_plot_rt_", i, ".jpeg")))
         
-        saveRDS(fit_model, paste0("003_results/invertebrates/005_gdms/", Sys.Date(), "_gdm_rt", i, ".RDS"))
+        saveRDS(fit_model, file.path(dir_save_model, paste0(Sys.Date(), "_gdm_rt", i, ".RDS")))
         
         rm(loop_data, loop_data_name, i, n_col, env_data, input_data, gdmTab, fit_model, splineDat, splineDat_x, splineDat_y,max_geo, max_season,y_max, p1,p2,p3);gc()
         }

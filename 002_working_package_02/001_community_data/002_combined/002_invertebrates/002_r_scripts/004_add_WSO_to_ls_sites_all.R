@@ -9,11 +9,13 @@
 
 # Setup -------------------------------------------------------------------
 pacman::p_load(sf, dplyr, here)
-setwd(here())
 
+dir_mzb = "002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data"
+dir_cat = "001_working_package_01/001_stream_network/003_processed_data/Catchment/"
 # load data  --------------------------------------------------------------
-cat <- st_read("../../../../001_WP_01/001_Stream_Network/01_CCM2/03_data_processed/Catchment/2019-06-05_allGRcountires_WGS84.gpkg")
-mzb <- readRDS("003_processed_data/003_2020-07-03_mzb_sites_close_to_ls.RDS")
+cat <- st_read(file.path(here(dir_cat), "2019-06-05_allGRcountires_WGS84.gpkg"))
+mzb =  readRDS(file.path(here(dir_mzb), "003_2020-11-03_mzb_sites_close_to_ls.RDS"))           
+
 
 # spatial join  -----------------------------------------------------------
 mzb  <- st_as_sf(mzb)
@@ -24,4 +26,8 @@ join <- st_join(x = mzb,
                 join = st_intersects)
 
 # save to file ------------------------------------------------------------
-saveRDS(join, paste0("003_processed_data/003b_",Sys.Date(),"_mzb_sites_1585_close_to_ls_withWSO.RDS"))
+saveRDS(object = join, 
+        file   = file.path(here(dir_mzb), 
+                           paste0("003b_",Sys.Date(),"_mzb_sites_1585_close_to_ls_withWSO.RDS")
+                           )
+        )

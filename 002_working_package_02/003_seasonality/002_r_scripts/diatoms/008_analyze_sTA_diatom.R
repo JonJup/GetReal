@@ -6,7 +6,8 @@
 
 # date written/ modified: 09.09.20 + 16. + 17. 
 # date used: 09.09.20 + 16. + 17. + 
-#            07.10. + 21.
+#            07.10. + 21. + 
+#            16.11
 # Jonathan Jupke 
 # Get Real WP2 
 # Diatoms - Seasonality 
@@ -26,28 +27,34 @@ pacman::p_load(
     vegan,
     viridis
 )
-setwd(here("002_working_package_02/003_seasonality/003_results/diatoms/"))
+
+## DIRECTORIES 
+DIR = list()
+DIR$data = here("002_working_package_02/003_seasonality/003_results/diatoms/")
 
 # load data ---------------------------------------------------------------
-files <- dir()
-files <- files[grep(pattern = "002_2020", x = files)]
+files <- dir(DIR$data)
+files <- files[grep(pattern = "002_indicator", x = files)]
 for (i in seq_along(files)) {
     obj_name <- files[i]
-    obj_name %<>% str_remove("[:number:]+_+[:number:]+-+[:number:]+-+[:number:]+_[:alpha:]+_") %>% 
-        str_remove(".RDS$")
+    # changed 16.11
+    # obj_name %<>% str_remove("[:number:]+_+[:number:]+-+[:number:]+-+[:number:]+_[:alpha:]+_") %>% 
+    #     str_remove(".RDS$")
+    obj_name %<>% str_remove(".RDS$") %>% 
+        str_remove("^002_indicator_")
     assign(x = obj_name,
-           value = readRDS(files[i]))
+           value = readRDS(file.path(DIR$data,  files[i])))
     if (length(get(obj_name)) == 0) rm(list = obj_name)
 }
 rm(obj_name, i, files);gc()
 
 # create typical communities ----------------------------------------------
-files <- ls()
+ch_files <- ls()
 
-ta_s_11 <- s_11[B > 0.4 | (B>0.3 & p_value <= 0.05) | A > 0.70]
-ta_s_15 <- s_15[B > 0.4 | (B>0.3 & p_value <= 0.05) | A > 0.70]
-ta_g_11 <- g_11[B > 0.8 | (B>0.6 & p_value <= 0.05) | A > 0.95]
-ta_g_15 <- g_15[B > 0.8 | (B>0.6 & p_value <= 0.05) | A > 0.95]
+ta_s_11 <- s_11[B > 0.20]
+ta_s_15 <- s_15[B > 0.20]
+ta_g_11 <- g_11[B > 0.33]
+ta_g_15 <- g_15[B > 0.33]
 
 ta_11 <- rbind(ta_s_11, ta_g_11)
 ta_15 <- rbind(ta_s_15, ta_g_15)
@@ -91,12 +98,12 @@ om15 <- ll[[2]]
 
 rm(sv, ll, ld, l)
 
-om11$N <- table(ta_11$season)[-1]
-om15$N <- table(ta_15$season)[-1]
+om11$N <- table(droplevels(ta_11$season))
+om15$N <- table(droplevels(ta_15$season))
 
 # save tables for report 
-saveRDS(om11, "../../../../005_documents/2020_10_Zwischenbericht an RLT/r/tbl_sta_dia_11.RDS")
-saveRDS(om15, "../../../../005_documents/2020_10_Zwischenbericht an RLT/r/tbl_sta_dia_15.RDS")
+saveRDS(om11, file.path(DIR$data, "tbl_sta_dia_11.RDS"))
+saveRDS(om15, file.path(DIR$data, "tbl_sta_dia_15.RDS"))
 
 # A closer Look  ----------------------------------------------------------
 

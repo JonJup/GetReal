@@ -15,7 +15,7 @@ output:
 
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
-knitr::opts_chunk$set(cache = FALSE,fig.pos = 'H',fig_cap=TRUE)
+knitr::opts_chunk$set(cache = TRUE,fig.pos = 'H',fig_cap=TRUE)
 
 my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
 
@@ -56,21 +56,42 @@ style_duo(
 )
 ```
 
-# Optimal taxonomic level
+# Status after last Review
 
-* last meeting: All taxa share one taxonomic resolution 
+`r icon::fa("users", size = 1)` $\:$ last meeting:   
+
+  * presented preliminary typical assemblages
+  * all taxa share one taxonomic resolution 
 
 --
 
-* what about taxa with low taxonomic resolutions? 
+`r icon::fa("comment")` $\:$ what about taxa with low taxonomic resolutions?  
+
   * e.g. *Oligochaeta*
   
 --
 
-* find optimal taxonomic resolution for each taxon given our data sets. 
+`r icon::fa("question")` $\:$ optimal taxonomic resolution 
+
 ---
-# Optimal taxonomic level
-```{r mzb-thresh-plot, echo=FALSE, fig.align="center", fig.width=10}
+
+# Optimal taxonomic resolution? 
+
+Resolution *R* is optimal if the fraction of observations represented at higher resolutions is smaller than *X* 
+
+--
+
+`r icon::fa("book")` $\:$ no theoretical grounds
+
+--
+
+`r icon::fa("arrow-down")`   
+
+`r icon::fa("database")` $\:$ data driven approach 
+  
+---
+# Optimal taxonomic resolution
+```{r mzb-thresh-plot, echo=FALSE, fig.align="center", fig.width=10, warning=FALSE}
 plot_data=readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/001_2020-10-01_threshold_plot_data"))
 plot_data$taxon_level %<>% factor(levels=c("species", "genus", "family", "order", "subclass"))
 plot_data %>%
@@ -78,7 +99,7 @@ plot_data %>%
   #geom_point() +
   geom_line(size = 2) +
   ylab("observations") +
-  xlab("theshold [%]") +
+  xlab("theshold X [%]") +
   labs(col = "taxon level") +
   theme(
     text = element_text(size = 20)
@@ -103,9 +124,28 @@ background-position: 50% 70%
 ---
 #What is a typical assemblage?
 
-* A, specificity, P(river type|taxon)
-* B, commonness, P(taxon|river type)
-* IndVal, weighted product of A and B
+.pull-left[
+**A** `r icon::fa("book", color="#355467")` specificity  
+P(river type|taxon)
+]
+
+--
+
+.pull-right[
+**B** `r icon::fa("book", color="#355467")` commonness   
+P(taxon|river type)
+]
+
+--
+  
+`r icon::fa("book", color="#355467")`    
+`r icon::fa("book", color="#355467")`    
+`r icon::fa("book", color="#355467")`       
+    
+.center[
+ **IndVal**  
+ weighted product of A and B
+]
 
 --
 
@@ -123,15 +163,34 @@ data %>%
 
 ```
 
+---
+```{r plot-sa-mzb, echo=FALSE, fig.height=8, fig.width=10, fig.align="center",warning=FALSE}
+n_types = 9
+plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS"))
+plot_data %>%
+  ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) +
+  geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
+  facet_wrap(. ~ river_type) +
+  #scale_color_viridis() +
+  ylab("taxon richness") +
+  xlab("B Threshold") +
+  labs(col = "A Threshold") +
+  theme_xaringan(background_color = base_color_code2) +
+  scale_xaringan_color_continuous()
 
+```
 ---
 # Redundnacy
 
-* overlap with other assemblages as metric 
+`r icon::fa("question")` $\:$ are some assemblages redundant?
 
 --
 
-* assemblages are redundant if overlap $\ge$ 75%
+`r icon::fa("info")` $\:$ % of common taxa as metric 
+
+--
+
+`r icon::fa("window-close")` $\:$ assemblages are redundant if $\ge$ 75% are in common
 
 --
 
@@ -142,23 +201,6 @@ data %>%
   * RT10 and RT11
   * RT15 and RT16
   
----
-```{r plot-sa-mzb, echo=FALSE, fig.height=8, fig.width=10, fig.align="center",}
-n_types = 9
-plot_data <- readRDS(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/00x_for_plot_mzb_sa.RDS"))
-plot_data %>%
-  ggplot(aes(x = B_threshold, y = n_taxa, col = A_threshold)) +
-  geom_line(size = 1.5, alpha = 0.8, aes(group = A_col)) +
-  facet_wrap(. ~ river_type) +
-  #scale_color_viridis() +
-  ylab("species richness") +
-  xlab("B Threshold") +
-  labs(col = "A Threshold") +
-  theme_xaringan(background_color = base_color_code2) +
-  scale_xaringan_color_continuous()
-
-```
-
 ---
 ```{r plot-mzb-n-taxa, echo=F, fig.height=8,fig.width=10, fig.align="center"}
 source("r/plot_mzb_n_taxa.R")
@@ -178,7 +220,7 @@ plot_uni_mzb +
 ```
 ---
 
-```{r pcoa, echo=FALSE, fig.height=8, fig.width=10,fig.align="center"}
+```{r pcoa, echo=FALSE, fig.height=8, fig.width=10,fig.align="center", warning=FALSE}
 source("r/pcoa.R")
 bim  
 

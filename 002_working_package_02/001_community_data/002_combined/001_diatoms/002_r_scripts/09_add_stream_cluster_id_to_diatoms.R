@@ -3,39 +3,37 @@
 # -------------------------------------- #
 
 #date: 04.08.20
-#date used: 04.08.20, 05.08., 18.08
+#date used: 04.08.20, 05.08., 18.08, 04.11
 #Jonathan Jupke
 # Diatoms GetReal WP 2 
 
 # Setup -------------------------------------------------------------------
-pacman::p_load(sf, dplyr, data.table, magrittr, here, purrr)
-setwd(here("003_processed_data/"))
+pacman::p_load(data.table,
+               dplyr,
+               here,
+               magrittr,
+               purrr,
+               sf)
 
+dir_pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/")
+dir_typ = here("../my_papers/2020_02_TypologyPaper/TypologyPaper/001_stream_network/02_Lyche_Solheim_et_al/")
 # load data -------------------------------------------------------------------
-all_dia_spe <- readRDS("008_2020-08-18_spe_no_rare_20.RDS")
-all_dia_gen <- readRDS("008_2020-08-18_gen_no_rare_20.RDS")
-# all_dia_spr <- readRDS("001_speciesXsites_tables/2020-08-05_spe_no_rare_20")
-# all_dia_ger <- readRDS("001_speciesXsites_tables/2020-08-05_gen_no_rare_20")
+all_dia_spe <- readRDS(file.path(dir_pd, "008_2020-11-04_1_percent_species.RDS"))
+all_dia_gen <- readRDS(file.path(dir_pd, "008_2020-11-04_1_percent_genus.RDS"))
 
-sites   <- readRDS("004_2020-06-30_dia_sites_low_ls_all.RDS")
-ls_bd20 <- st_read("../../../../../../My Papers/2020_02_TypologyPaper/TypologyPaper/001_stream_network/02_Lyche_Solheim_et_al/m_river_fec_broad_type.shp")
+sites   <- readRDS(file.path(dir_pd, "004_2020-06-30_dia_sites_low_ls_all.RDS"))
+ls_bd20 <- st_read(file.path(dir_typ, "m_river_fec_broad_type.shp"))
 
 # clean data -------------------------------------------------------------------
 setDT(all_dia_spe)
 setDT(all_dia_gen)
-# setDT(all_dia_spr)
-# setDT(all_dia_ger)
 
 # set gr_sample id to character
 all_dia_spe[, gr_sample_id := as.character(gr_sample_id)]
 all_dia_gen[, gr_sample_id := as.character(gr_sample_id)]
-# all_dia_spr[, gr_sample_id := as.character(gr_sample_id)]
-# all_dia_ger[, gr_sample_id := as.character(gr_sample_id)]
 
 length(unique(all_dia_spe$gr_sample_id))
 length(unique(all_dia_gen$gr_sample_id))
-# length(unique(all_dia_spr$gr_sample_id))
-# length(unique(all_dia_ger$gr_sample_id))
 length(unique(sites$gr_sample_id))
 
 # add ls_btype20 to sites -------------------------------------------------
@@ -81,8 +79,8 @@ if (sum(is.na(join_spe$ls_bd_20)) == 0 &
 ## --------------------- ##
 
 # save to file  -------------------------------------------------------------------
-saveRDS(object = join_spe,  file = paste0("009_", Sys.Date(), "diatom_species_no_rare_w_LSRT.RDS"))
-saveRDS(object = join_gen,  file = paste0("009_", Sys.Date(), "diatom_genus_no_rare_w_LSRT.RDS"))
-# saveRDS(object = join_spr,  file = paste0("010_", Sys.Date(), "diatom_species_wo_rare_w_LSRT.RDS.RDS"))
-# saveRDS(object = join_ger,  file = paste0("010_", Sys.Date(), "diatom_genus_wo_rare_w_LSRT.RDS.RDS"))
+saveRDS(object = join_spe,  file = file.path(dir_pd, paste0("009_", Sys.Date(), "diatom_species_no_rare_w_LSRT.RDS")))
+saveRDS(object = join_gen,  file = file.path(dir_pd, paste0("009_", Sys.Date(), "diatom_genus_no_rare_w_LSRT.RDS")))
+
+
 

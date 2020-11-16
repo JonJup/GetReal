@@ -3,14 +3,17 @@
 #### --------------------------------------- ####
 
 
+#date written: ? 
+
+
 # 01 Setup ----------------------------------------------------------------
 pacman::p_load(data.table, dplyr, magrittr, sf, purrr, here, beepr)
-setwd(here())
+setwd(here("002_working_package_02/001_community_data/002_combined/002_invertebrates/"))
 
 # 02 load data  -----------------------------------------------------------
-old_sites      <- readRDS("003_processed_data/003_2020-06-29_mzb_sites_close_to_ls.RDS") 
-sites          <- st_read("003_processed_data/002_2020-07-03all_inv_sites_15_85.gpkg") 
-observations   <- st_read("003_processed_data/002_2020-07-03all_inv_15_85.gpkg") 
+old_sites = readRDS("003_processed_data/003_2020-07-03_mzb_sites_close_to_ls.RDS")
+sites     = readRDS("003_processed_data/002_2020-11-03all_inv_sites_15_85.RDS") 
+observations = readRDS("003_processed_data/002_2020-11-03all_inv_15_85.RDS") 
 
 # carpeting ---------------------------------------------------------------
 setDT(sites)

@@ -5,7 +5,7 @@
 # -------------------------------- #
  
 # date written\modified : 11.09.20
-# date used: 11.09.20
+# date used: 11.09.20, 13.11.20
 # Jonathan Jupke
 # GetReal WP2
 # Seasonality Macroinvertebrates   
@@ -17,65 +17,66 @@ pacman::p_load(data.table,
                indicspecies, 
                magrittr, 
                stringr)
-setwd(here("003_results/invertebrates/001_speciesXsites_tables"))
 
+dir_sxs = here("002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables")
+dir_sav = here("002_working_package_02/003_seasonality/003_results/invertebrates/")
 # load data  --------------------------------------------------------------
-rt10_11g <- readRDS("2020-09-10_rt10_11_gen.RDS")
-rt10_11s <- readRDS("2020-09-10_rt10_11_spe.RDS")
-rt10_11f <- readRDS("2020-09-10_rt10_11_foh.RDS")
+rt2_3g <- readRDS(file.path(dir_sxs, "2020-11-09_rt1.2_gen.RDS"))
+rt2_3s <- readRDS(file.path(dir_sxs, "2020-11-09_rt1.2_spe.RDS"))
+rt2_3f <- readRDS(file.path(dir_sxs, "2020-11-09_rt1.2_foh.RDS"))
 
-rt15_16g <- readRDS("2020-09-10_rt15_16_gen.RDS") 
-rt15_16s <- readRDS("2020-09-10_rt15_16_spe.RDS")
-rt15_16f <- readRDS("2020-09-10_rt15_16_foh.RDS")
+rt_large_g <- readRDS(file.path(dir_sxs, "2020-11-09_rt8_11_15_16_gen.RDS")) 
+rt_large_s <- readRDS(file.path(dir_sxs, "2020-11-09_rt8_11_15_16_spe.RDS"))
+rt_large_f <- readRDS(file.path(dir_sxs, "2020-11-09_rt8_11_15_16_foh.RDS"))
 
-n_spe_10_11 <- ncol(rt10_11s) - 2
-n_gen_10_11 <- ncol(rt10_11g) - 2
-n_fol_10_11 <- ncol(rt10_11f) - 2
-n_spe_15_16 <- ncol(rt15_16s) - 2
-n_gen_15_16 <- ncol(rt15_16g) - 2
-n_fol_15_16 <- ncol(rt15_16f) - 2
+n_spe_2_3 <- ncol(rt2_3s) - 2
+n_gen_2_3 <- ncol(rt2_3g) - 2
+n_fol_2_3 <- ncol(rt2_3f) - 2
+n_spe_large <- ncol(rt_large_s) - 2
+n_gen_large <- ncol(rt_large_g) - 2
+n_fol_large <- ncol(rt_large_f) - 2
 
-rt10_11_all <- rt10_11s[rt10_11g, on = "gr_sample_id"]
-rt10_11_all <- rt10_11_all[rt10_11f, on = "gr_sample_id"]
-rt15_16_all <- rt15_16s[rt15_16g, on = "gr_sample_id"]
-rt15_16_all <- rt15_16_all[rt15_16f, on = "gr_sample_id"]
+rt2_3_all <- rt2_3s[rt2_3g, on = "gr_sample_id"]
+rt2_3_all <- rt2_3_all[rt2_3f, on = "gr_sample_id"]
+rt_large_all <- rt_large_s[rt_large_g, on = "gr_sample_id"]
+rt_large_all <- rt_large_all[rt_large_f, on = "gr_sample_id"]
 
-rt10_11_all[is.na(season) & !is.na(i.season), season := i.season]
-rt10_11_all[is.na(season) & !is.na(i.season.1), season := i.season.1]
-rt10_11_all[, c("i.season", "i.season.1") := NULL]
-rt15_16_all[is.na(season) & !is.na(i.season), season := i.season]
-rt15_16_all[is.na(season) & !is.na(i.season.1), season := i.season.1]
-rt15_16_all[, c("i.season", "i.season.1") := NULL]
+rt2_3_all[is.na(season) & !is.na(i.season), season := i.season]
+rt2_3_all[is.na(season) & !is.na(i.season.1), season := i.season.1]
+rt2_3_all[, c("i.season", "i.season.1") := NULL]
+rt_large_all[is.na(season) & !is.na(i.season), season := i.season]
+rt_large_all[is.na(season) & !is.na(i.season.1), season := i.season.1]
+rt_large_all[, c("i.season", "i.season.1") := NULL]
 
 # Remove NAs 
-for (j in seq_len(ncol(rt10_11_all))) set(rt10_11_all, which(is.na(rt10_11_all[[j]])), j, 0)
-for (j in seq_len(ncol(rt15_16_all))) set(rt15_16_all, which(is.na(rt15_16_all[[j]])), j, 0)
+for (j in seq_len(ncol(rt2_3_all))) set(rt2_3_all, which(is.na(rt2_3_all[[j]])), j, 0)
+for (j in seq_len(ncol(rt_large_all))) set(rt_large_all, which(is.na(rt_large_all[[j]])), j, 0)
 
 # test that taxa vector will work 
-ncol(rt10_11_all) == 2 + n_spe_10_11 + n_gen_10_11 + n_fol_10_11
-ncol(rt15_16_all) == 2 + n_spe_15_16 + n_gen_15_16 + n_fol_15_16
+ncol(rt2_3_all) == 2 + n_spe_2_3 + n_gen_2_3 + n_fol_2_3
+ncol(rt_large_all) == 2 + n_spe_large + n_gen_large + n_fol_large
 
-rm(rt10_11f, rt10_11g, rt10_11s, rt15_16f, rt15_16g, rt15_16s, j);gc()
+rm(rt2_3f, rt2_3g, rt2_3s, rt_large_f, rt_large_g, rt_large_s, j);gc()
 
-rt10_11_all[season == "spring", .N]
-rt10_11_all[season == "summer", .N]
-rt10_11_all[season == "autumn", .N]
-rt10_11_all[season == "winter", .N]
-rt15_16_all[season == "spring", .N]
-rt15_16_all[season == "summer", .N]
-rt15_16_all[season == "autumn", .N]
-rt15_16_all[season == "winter", .N]
+rt2_3_all[season == "spring", .N]
+rt2_3_all[season == "summer", .N]
+rt2_3_all[season == "autumn", .N]
+rt2_3_all[season == "winter", .N]
+rt_large_all[season == "spring", .N]
+rt_large_all[season == "summer", .N]
+rt_large_all[season == "autumn", .N]
+rt_large_all[season == "winter", .N]
 
-rowSums(rt10_11_all[,-c(1:2)]) %>% hist()
-rowSums(rt10_11_all[,-c(1:2)]) %>% summary()
-rowSums(rt10_11_all[,-c(1:2)]) %>% sd()
-rowSums(rt15_16_all[,-c(1:2)]) %>% hist()
-rowSums(rt15_16_all[,-c(1:2)]) %>% summary()
-rowSums(rt15_16_all[,-c(1:2)]) %>% sd()
+rowSums(rt2_3_all[,-c(1:2)]) %>% hist()
+rowSums(rt2_3_all[,-c(1:2)]) %>% summary()
+rowSums(rt2_3_all[,-c(1:2)]) %>% sd()
+rowSums(rt_large_all[,-c(1:2)]) %>% hist()
+rowSums(rt_large_all[,-c(1:2)]) %>% summary()
+rowSums(rt_large_all[,-c(1:2)]) %>% sd()
 
 # compute indval ----------------------------------------------------------
 
-files <- c("rt10_11_all", "rt15_16_all")
+files <- c("rt2_3_all", "rt_large_all")
 
 # increased number of permutations to get smaller p-values 
 
@@ -97,7 +98,7 @@ for (k in 1:length(files)) {
                                 At = 0,
                                 Bt = 0,
                                 func = "IndVal.g",
-                                control = how(nperm = 999)
+                                control = how(nperm = 1)
                         )
                 )
                 print(paste("l", l, "end @", Sys.time()))
@@ -108,12 +109,12 @@ for (k in 1:length(files)) {
 }; beepr::beep()
 
 rm(loop_data, seasons_var, files, 
-   rt10_11_all, rt15_16_all);gc()
+   rt2_3_all, rt_large_all);gc()
 
-f_10_11   <- ls()[grep(x = ls(), pattern = "rt10_11")]
-f_15_16   <- ls()[grep(x = ls(), pattern = "rt15_16")]
+f_2_3   <- ls()[grep(x = ls(), pattern = "rt2_3")]
+f_large   <- ls()[grep(x = ls(), pattern = "rt_large")]
 
-ll <- paste0("ll_", c("10_11", "15_16"))
+ll <- paste0("ll_", c("2_3", "large"))
 
 for (i in seq_along(ll)) assign(x = ll[i], value = list())
 
@@ -154,27 +155,25 @@ for (i in seq_along(files_vector)) {
          
 }
 
-rt1011s <- ll_10_11[1:n_spe_10_11,]
-rt1011g <- ll_10_11[(n_spe_10_11+1):(n_spe_10_11+n_gen_10_11),]
-rt1011f <- ll_10_11[(n_spe_10_11+n_gen_10_11+1):nrow(ll_10_11)]
-rt1516s <- ll_15_16[1:n_spe_15_16,]
-rt1516g <- ll_15_16[(n_spe_15_16+1):(n_spe_15_16+n_gen_15_16),]
-rt1516f <- ll_15_16[(n_spe_15_16+n_gen_15_16+1):nrow(ll_15_16)]
+rt23s <- ll_2_3[1:n_spe_2_3,]
+rt23g <- ll_2_3[(n_spe_2_3+1):(n_spe_2_3+n_gen_2_3),]
+rt23f <- ll_2_3[(n_spe_2_3+n_gen_2_3+1):nrow(ll_2_3)]
+rtlarges <- ll_large[1:n_spe_large,]
+rtlargeg <- ll_large[(n_spe_large+1):(n_spe_large+n_gen_large),]
+rtlargef <- ll_large[(n_spe_large+n_gen_large+1):nrow(ll_large)]
 
-files_to_save <- c("rt1011s",
-                   "rt1011g",
-                   "rt1011f",
-                   "rt1516s",
-                   "rt1516g",
-                   "rt1516f")
+files_to_save <- c("rt23s",
+                   "rt23g",
+                   "rt23f",
+                   "rtlarges",
+                   "rtlargeg",
+                   "rtlargef")
 
 # save to file ------------------------------------------------------------
 for (i in files_to_save) {
         
         ld <- get(i)
-        # tl <- ifelse(str_detect(i, "spe"), "s", ifelse(str_detect(i, "gen"), "g", "f"))
-        # rt <- str_extract(file, "[0-9].*")
-        save_name <- paste0("../002_", Sys.Date(), "_indicator_", i, ".RDS")
+        save_name <- file.path(dir_sav, paste0("002_indicator_", i, ".RDS"))
         saveRDS(object = ld, 
                 file   = save_name)
         rm(ld, save_name, i);gc()

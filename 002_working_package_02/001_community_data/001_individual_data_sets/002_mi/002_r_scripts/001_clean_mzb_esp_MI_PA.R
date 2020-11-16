@@ -19,13 +19,13 @@
 # 01. Setup -------------------------------------------------------------------
 pacman::p_load(here, dplyr, taxize, magrittr, sf, stringr, data.table, lubridate, purrr, tmap)
 # tmap_mode("view")
-setwd(here("002_Miguel_Iglesias/"))
+setwd(here("002_working_package_02/001_community_data/001_individual_data_sets/002_mi//"))
 
 
-samples = readxl::read_excel("01_OriginalData/PA data.xls") %>% 
+samples = readxl::read_excel("001_raw_data//PA data.xls") %>% 
   setDT()
 
-        
+unique(samples$Hydraenida)        
 
 # 02. Cleaning data  ------------------------------------------------------
 

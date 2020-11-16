@@ -1,0 +1,42 @@
+---
+title: "Typical diatom assemblages"
+author: "Jonathan Jupke"
+date: "16.11.2020"
+output: pdf_document
+---
+
+## RT 3 
+### Typical assemblage
+Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Aulacoseira ambigua, Cocconeis euglypta, Cocconeis placentula, Cyclotella atomus, Cyclotella meneghiniana, Diatoma moniliformis tenuis, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fragilaria capucina complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Halamphora montana, Hippodonta capitata, Karayevia clevei, Melosira varians Complex, Navicula cryptocephala, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula lanceolata complex, Navicula margalithii tripunctata, Navicula menisculus antonii, Navicula rhynchocephala, Nitzschia amphibia Complex, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia frustulum Complex, Nitzschia inconspicua Complex, Nitzschia lacuum alpina bryophila  , Nitzschia palea paleacea, Nitzschia pura linearis Complex, Nitzschia sociabilis, Planothidium lanceolatum, Reimeria sinuata, Sellaphora submuralis Complex, Staurosira venter, Stephanodiscus hantzschii, Surirella angusta Complex, Surirella brebissonii, Ulnaria ulna complex, Cyclostephanos, Discostella, Mayamaea, Rhoicosphenia
+
+### Specific taxa
+Cyclostephanos, Placoneis, Thalassiosira
+
+## RT 6 
+### Typical assemblage
+Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Brachysira vitrea Complex, Cocconeis placentula, Ctenophora pulchella, Diatoma moniliformis tenuis, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Eucocconeis laevis alpestris, Eunotia  exigua elegans Complex, Eunotia arcus mucophila bilunaris Complex, Eunotia Complex, Eunotia implicata Complex, Eunotia incisa Complex, Eunotia pectinalis Complex, Fragilaria capucina complex, Fragilaria tenera complex, Frustulia rhomboides Complex, Gomphonema acuminatum Complex, Gomphonema angustatum Complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Melosira varians Complex, Meridion circulare Complex, Navicula cryptocephala, Navicula lanceolata complex, Navicula margalithii tripunctata, Navicula rhynchocephala, Nitzschia dissipata recta Complex, Nitzschia palea paleacea, Nitzschia perminuta Complex, Nitzschia pura linearis Complex, Planothidium lanceolatum, Psammothidium helveticum chlidanos daonense, Psammothidium subatomoides, Rossithidium pusillum anastasiae, Sellaphora pupula Complex, Staurosirella pinnata complex, Tabellaria flocculosa Complex, Ulnaria ulna complex, Stauroneis
+
+### Specific taxa
+Brachysira vitrea Complex
+
+## RT 9 
+### Typical assemblage
+Achnanthidium deflexum Complex, Achnanthidium minutissimum, Achnanthidium subatomus, Achnanthidium subhudsonis, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis placentula, Cocconeis pseudolineata, Diatoma mesodon, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fragilaria capucina complex, Fragilaria tenera complex, Gomphoneis calcifuga, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Navicula cryptocephala, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula lanceolata complex, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Navicula rhynchocephala, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Nitzschia palea paleacea, Nitzschia pura linearis Complex, Planothidium lanceolatum, Psammothidium helveticum chlidanos daonense, Psammothidium subatomoides, Reimeria sinuata, Ulnaria ulna complex, Mayamaea, Rhoicosphenia
+
+### Specific taxa
+Gomphoneis calcifuga
+
+## RT 12 
+### Typical assemblage
+Achnanthidium minutissimum, Brachysira neoexilis, Diatoma mesodon, Encyonema gracile luna, Encyonema silesicacum minutum lange bertalotii, Encyonopsis descripta falaisensis microcephala, Eucocconeis laevis alpestris, Eunotia  exigua elegans Complex, Eunotia arcus mucophila bilunaris Complex, Eunotia implicata Complex, Eunotia incisa Complex, Eunotia pectinalis Complex, Fragilaria arcus, Fragilaria capucina complex, Fragilaria construens pseudoconstruens, Fragilaria tenera complex, Frustulia rhomboides Complex, Gomphonema acuminatum Complex, Gomphonema parvulum Complex, Lindavia rossii complex, Navicula notha leptostriata, Nitzschia perminuta Complex, Planothidium lanceolatum, Rossithidium pusillum anastasiae, Tabellaria flocculosa Complex, Ulnaria ulna complex, Cymbopleura, Discostella, Gomphonema, Kobayasiella, Tryblionella
+
+### Specific taxa
+None
+
+## RT large 
+### Typical assemblage
+Achnanthidium eutrophilum, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Diatoma moniliformis tenuis, Diatoma vulgaris, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Navicula capitatoradiata, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula margalithii tripunctata, Navicula menisculus antonii, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Nitzschia palea paleacea, Planothidium lanceolatum, Reimeria sinuata, Ulnaria ulna complex, Gomphonema, Mayamaea, Rhoicosphenia
+
+### Specific taxa
+Achnanthidium atomus, Achnanthidium druartii, Achnanthidium latecephalum, Amphipleura pellucida, Brachysira neglectissima, Cyclotella costei, Cyclotella cyclopuncta, Cymbella compacta, Diatoma ehrenbergii, Didymosphenia geminata, Encyonopsis cesatii, Epithemia adnata, Fallacia pygmaea forcipata, Kolbesia gessneri, Navicula complex, Nitzschia denticula, Nitzschia gessneri, Nitzschia sinuata Complex, Nitzschia tabellaria, Puncticulata radiosa, Delicata
+

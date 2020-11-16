@@ -4,25 +4,28 @@
 ### ------------------------------------- ###
 
 # date written/modified: 03.08.20 + 14.09
-# date used: 03.08.20, 04.08., 05.08, 20.08, 14.09
-# Diatoms GetReal WP2
+# date used: 03.08.20, 04.08., 05.08, 20.08, 14.09, 04.11
+# GetReal 
+# WP2
+# Diatoms 
 # Jonathan Jupke 
 
 # 01. Setup  --------------------------------------------------------------
 
 pacman::p_load(data.table,
-               fuzzySim,
                dplyr,
+               fuzzySim,
+               here,
                magrittr,
                stringr,
-               here,
                taxadb
                )
 
-setwd(here())
+
+dir_pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/")
 
 # read in data ------------------------------------------------
-data  = readRDS("003_processed_data/007_2020-08-18all_dia_optimal_taxon_75.RDS")
+data  = readRDS(file.path(dir_pd, "007_2020-11-04all_dia_optimal_taxon_75.RDS"))
 
 # Prepare data -------------------------------------------------------------------------
 data[, c("final_taxon", "gr_sample_id") := .(
@@ -51,70 +54,53 @@ dat_all <-  general_subset[,.(gr_sample_id, final_taxon, final_taxon_level)]
 rm(general_subset); gc()
 
 ## -- different levels 
-# dat_all_s <- dat_all[final_taxon_level == "species"]
-# dat_all_g <- dat_all[final_taxon_level == "genus"]
 
-dat_all <- dat_all[final_taxon_level %in% c("species", "genus")]
+
+dat_all_s <- dat_all[final_taxon_level == "species"]
+dat_all_g <- dat_all[final_taxon_level == "genus"]
+
+# dat_all <- dat_all[final_taxon_level %in% c("species", "genus")]
 
 ## -- Quality Check -- ## 
-#if ((nrow(dat_all_s) + nrow(dat_all_g)) == nrow(dat_all)) print("Quality check passed") else print("Quality check failed")
+if ((nrow(dat_all_s) + nrow(dat_all_g)) == nrow(dat_all)) print("Quality check passed") else print("Quality check failed")
 ## --               -- ##
 
-dat_all[, final_taxon_level := NULL] 
+dat_all_s[, final_taxon_level := NULL] 
+dat_all_g[, final_taxon_level := NULL] 
 
 # 04. Turn to site X species matrix --------------------------------------------------------
-dat_all %<>% splist2presabs(sites.col = 1, sp.col = 2)
+dat_all_s %<>% splist2presabs(sites.col = 1, sp.col = 2)
+dat_all_g %<>% splist2presabs(sites.col = 1, sp.col = 2)
+
 
 # 05. remove rare species/ sites --------------------------------------------------------
 # i.e. < 5 taxa per site or < 5 occurrences of a taxon in the whole dataset 
 # all  
 # -- rare taxa -- #
 
-# let's have a look at a histogram of occurrences  
-graphics::hist(colSums(x = dat_all[,-1]), xlim = c(1,100), breaks = 10^4)
-abline(v = 5, col = "red", lwd = 3)
+# 1% cutoff
+nu_rate_cutoff = round(length(unique(dat_all$gr_sample_id)) * 0.01)
 
-# now let's see how many sites we loose in each "dropping regime" 
-r_id_all_05    <- which(colSums(x = dat_all[,-1]) <  5) + 1
-r_id_all_10    <- which(colSums(x = dat_all[,-1]) < 10) + 1
-r_id_all_20    <- which(colSums(x = dat_all[,-1]) < 20) + 1
+# -- rare taxa -- #
+dat_s_id   = which(colSums(x = dat_all_s[,-1]) < nu_rate_cutoff) + 1
+dat_g_id   = which(colSums(x = dat_all_g[,-1]) < nu_rate_cutoff) + 1
+ch_rare_species = names(dat_s_id) %>% str_replace("\\.", " ")
+ch_rare_genera = names(dat_g_id) %>% str_replace("\\.", " ")
 
-r_names_all_05 <- names(r_id_all_05) %>% str_replace("\\.", " ")
-r_names_all_10 <- names(r_id_all_10) %>% str_replace("\\.", " ")
-r_names_all_20 <- names(r_id_all_20) %>% str_replace("\\.", " ")
+ls_rare = list(ch_rare_species, ch_rare_genera)
+saveRDS(ls_rare, file.path(dir_pd, "008_a_rare_names.RDS"))
 
-dat_all_nr_05  <- dat_all[, -r_id_all_05]
-dat_all_nr_10  <- dat_all[, -r_id_all_10]
-dat_all_nr_20  <- dat_all[, -r_id_all_20]
-#drop sites without species 
-#histograms look good not to much change here. That means that removing the
-#(almost 600!) taxa with less than 20 occurrences in the whole data set does not
-#affect the overall richness at sites strongly.
+dat_all_s = dat_all_s[, -dat_s_id]
+dat_all_g = dat_all_g[, -dat_g_id]
 
-par(mfrow = c(1,3))
-rowSums(x = dat_all_nr_05[,-1]) %>%  hist(main = "5")
-rowSums(x = dat_all_nr_10[,-1]) %>%  hist(main = "10")
-rowSums(x = dat_all_nr_20[,-1]) %>%  hist(main = "20")
+empty_site_id_s        <- which(rowSums(x = dat_all_s[,-1]) == 0)
+empty_site_id_g        <- which(rowSums(x = dat_all_g[,-1]) == 0)
 
-rowSums(x = dat_all_nr_20[,-1]) %>%  table()
+if (length(empty_site_id_s) != 0)  dat_all_s = dat_all_s[- empty_site_id_s,]
+if (length(empty_site_id_g) != 0)  dat_all_g = dat_all_g[- empty_site_id_g,]
 
-empty_site_id_05        <- which(rowSums(x = dat_all_nr_05[,-1]) == 0)
-empty_site_id_10        <- which(rowSums(x = dat_all_nr_10[,-1]) == 0)
-empty_site_id_20        <- which(rowSums(x = dat_all_nr_20[,-1]) == 0)
+rm(list = setdiff(ls(), c("dat_all_s", "dat_all_g", "dir_pd")));gc()
 
-if (length(empty_site_id_05) != 0)  dat_all_nr_05 <- dat_all_nr_05[- empty_site_id_05,]
-if (length(empty_site_id_10) != 0)  dat_all_nr_10 <- dat_all_nr_10[- empty_site_id_10,]
-if (length(empty_site_id_20) != 0)  dat_all_nr_20 <- dat_all_nr_20[- empty_site_id_20,]
-
-data_all <- dat_all_nr_05
-
-
-rm(list = setdiff(ls(), c("data_all")));gc()
-
-# - check - # 
-if (length(which(colSums(x = data_all[, -1]) < 5)) == 0 
-) print("Quality Check Passed") else print("Quality check failed")
-# -       - # 
 # -- low richness sites -- #
 
 # in the last run (18.08.20) I did not drop sites with low richness. This is
@@ -158,5 +144,7 @@ if (length(which(colSums(x = data_all[, -1]) < 5)) == 0
 
 # 08. Save data to file ---------------------------------------------------
 
-saveRDS(data_all, paste0("003_processed_data/001_speciesXsites_tables/008_", Sys.Date(), "_no_rare_20.RDS"))
-names(data_all)
+saveRDS(dat_all_s, file.path(dir_pd, paste0( "001_speciesXsites_tables/008_", Sys.Date(), "_1_percent_species.RDS")))
+saveRDS(dat_all_g, file.path(dir_pd, paste0( "001_speciesXsites_tables/008_", Sys.Date(), "_1_percent_genus.RDS")))
+
+

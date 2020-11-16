@@ -28,7 +28,7 @@ bim <- pcoa_objm$vectors %>%
         as.data.frame() %>%
         mutate("river_type"=rownames(as.data.frame(pcoa_objm$vectors))) %>% 
         ggplot(aes(x=Axis.1, y=Axis.2)) + 
-        geom_text(aes(label=river_type, col = river_type), size = 6) + 
+        geom_text(aes(label=river_type, col = river_type), size = 10) + 
         xlab(paste("PCoA Axis 1")) + 
         ylab(paste("PCoA Axis 2")) + 
         xlim(-0.5,.6) + 

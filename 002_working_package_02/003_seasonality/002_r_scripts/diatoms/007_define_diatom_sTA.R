@@ -4,23 +4,23 @@
 # --------------------------------------- #
  
 # date written\modified : 09.09.20
-# date used: 09.09.20
+# date used: 09.09.20; 16.11.20
 # Jonathan Jupke
 # GetReal WP2
 # Seasonality Diatoms  
 
 # Setup -------------------------------------------------------------------
 pacman::p_load(data.table, magrittr, dplyr, indicspecies, stringr, here)
-setwd(here("003_results/diatoms/001_speciesXsites_tables"))
+
+## DIRECTORIES
+dir = list(data = here("002_working_package_02/003_seasonality/003_results/diatoms/001_speciesXsites_tables/"),
+           save = here("002_working_package_02/003_seasonality/003_results/diatoms/"))
 
 # load data  --------------------------------------------------------------
-rt11g <- readRDS("2020-09-15_rt11_gen.RDS") 
-rt11s <- readRDS("2020-09-15_rt11_spe.RDS")
-rt15g <- readRDS("2020-09-15_rt15_gen.RDS")
-rt15s <- readRDS("2020-09-15_rt15_spe.RDS")
-
-# all(rt11g$gr_sample_id %in% rt11s$gr_sample_id)
-# all(rt15g$gr_sample_id %in% rt15s$gr_sample_id)
+rt11g = readRDS(file.path(dir$data, "2020-11-09_rt_11_gen.RDS")) 
+rt11s = readRDS(file.path(dir$data, "2020-11-09_rt_11_spe.RDS"))
+rt15g = readRDS(file.path(dir$data, "2020-11-09_rt_15_gen.RDS"))
+rt15s = readRDS(file.path(dir$data, "2020-11-09_rt_15_spe.RDS"))
 
 # join data ---------------------------------------------------------------
 names_rt11_g<- names(rt11g)[-c(1:2)] 
@@ -48,7 +48,6 @@ rowSums(rt11all[,-c(1:2)]) %>% sd()
 rowSums(rt15all[,-c(1:2)]) %>% summary()
 rowSums(rt15all[,-c(1:2)]) %>% hist()
 rowSums(rt15all[,-c(1:2)]) %>% sd()
-
 
 rt11all[season == "summer", .N]
 rt11all[season == "autumn", .N]
@@ -82,7 +81,7 @@ for (k in 1:length(files)) {
                                 At = 0,
                                 Bt = 0,
                                 func = "IndVal.g",
-                                control = how(nperm = 999)
+                                control = how(nperm = 1)
                         )
                 )
                 print(paste("l", l, "end @", Sys.time()))
@@ -156,7 +155,6 @@ files <- paste0(rep(c("spe", "gen"), times = 3),rep(c("11", "15"), each = 2))
 
 # save to file ------------------------------------------------------------
 
-setwd("../")
 
 for (i in files) {
         
@@ -164,10 +162,9 @@ for (i in files) {
         ld <- get(file)
         tl <- ifelse(str_detect(file, "s"), "s", "g")
         rt <- str_extract(file, "[0-9].*")
-        save_name <- paste0("002_", Sys.Date(), "_indicator_", tl, "_", rt, ".RDS")
+        save_name <- paste0("002_indicator_", tl, "_", rt, ".RDS")
         saveRDS(object = ld, 
-                file   = save_name)
+                file   = file.path(dir$save, save_name))
         
 }
-getwd()
 if (readline("delete all? ") == "yes") rm(list = ls())

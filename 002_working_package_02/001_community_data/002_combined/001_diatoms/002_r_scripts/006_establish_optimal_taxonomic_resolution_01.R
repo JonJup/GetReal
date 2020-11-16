@@ -9,11 +9,19 @@
 
 # Setup -------------------------------------------------------------------
 
-pacman::p_load(here, dplyr, data.table, magrittr, taxize, beepr, stringr, purrr)
-setwd(here())
+pacman::p_load(here, 
+               dplyr, 
+               data.table,
+               magrittr, 
+               taxize, 
+               beepr, 
+               stringr,
+               purrr)
+
+dir_pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/")
 
 # data IO  ----------------------------------------------------------------
-data <- readRDS("003_processed_data/005_2020-08-17_clean_diatoms_observations.RDS")
+data <- readRDS(file.path(dir_pd,"/005_2020-08-17_clean_diatoms_observations.RDS"))
 # Prepare data  -----------------------------------------------------------
 
 # This section contains cleaning steps that were results from exploratory
@@ -23,9 +31,32 @@ data[family == "Leptocylindraceae", order := "Chaetocerotales"]
 data <- data[species != "Fontigonium rectangulare" | is.na(species)] 
 data[genus == "Kobayasiella", c("family", "order") := .("Naviculales incertae sedis", "Naviculales")]
 
+data[species != species_clean]
+
+data = data[,c("species_old", "original_name", "name_source", "species_clean", "species_new", "double_checked", "genus_new2", "genus_check2") := NULL]
+data[str_detect(string=species, "Complex"), species := str_replace(string=species, pattern = "Complex", replacement = "complex")]
+
+data[str_detect(string=species, pattern="complex"), sort(unique(genus))]
+
+# delete genus complexes into genera 
+data[str_detect(string=species, pattern="complex"), sort(unique(species))]
+ch_genus_complexes = c("Adlafia complex", 
+                       "Craticula complex",
+                       "Cyclostephanos complex",
+                       "Discostella complex",
+                       "Eunotia complex",
+                       "Kobayasiella complex",
+                       "Luticola complex",
+                       "Mastogloia complex",
+                       "Mayamaea complex",
+                       "Navicula complex",
+                       "Placoneis complex",
+                       "Stauroneis complex small",
+                       "Thalassiosira complex")
+data[species %in% ch_genus_complexes, species := NA]
 
 ###### ------ BEGIN ORDER ------ ###### 
-n_order       <- length(data[!is.na(order), unique(order)])
+n_order       <- length(data[!is.na(order), sort(unique(order))])
 unique_orders <- sort(unique(data$order))
 
 level_data_order <- data.table(
@@ -137,8 +168,8 @@ setorderv(level_data_genus, cols = c("order_name", "family_name", "genus_name"))
 ###### ------ END GENUS ------ ######
 
 # Save to file  -----------------------------------------------------------
-setwd(here())
-saveRDS(object = level_data_genus,   file = paste0("003_processed_data/006_", Sys.Date(), "_taxon_list_genus.RDS"))
-saveRDS(object = level_data_family,  file = paste0("003_processed_data/006_", Sys.Date(), "_taxon_list_family.RDS"))
-saveRDS(object = level_data_order,   file = paste0("003_processed_data/006_", Sys.Date(), "_taxon_list_order.RDS"))
+
+saveRDS(object = level_data_genus,   file = file.path(dir_pd, paste0("006_", Sys.Date(), "_taxon_list_genus.RDS")))
+saveRDS(object = level_data_family,  file = file.path(dir_pd, paste0("006_", Sys.Date(), "_taxon_list_family.RDS")))
+saveRDS(object = level_data_order,   file = file.path(dir_pd, paste0("006_", Sys.Date(), "_taxon_list_order.RDS")))
 

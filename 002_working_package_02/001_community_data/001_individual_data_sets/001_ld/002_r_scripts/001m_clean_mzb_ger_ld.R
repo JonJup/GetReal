@@ -18,12 +18,12 @@ pacman::p_load(here, dplyr, taxize, magrittr, sf, stringr, data.table, lubridate
 
 tmap_mode("view")
 
-setwd(here("001_Landau"))
+setwd(here("002_working_package_02/001_community_data/001_individual_data_sets/001_ld/"))
 # or
 #setwd("~/01_Uni/03_GetReal/02_WP_02/Community Data/01_Landau/")
 
-samples <- fread("01_OriginalData/mzb_samples.csv")
-sites   <- fread("01_OriginalData/mzb_sites.csv") 
+samples <- fread("001_raw_data/mzb_samples.csv")
+sites   <- fread("001_raw_data/mzb_sites.csv") 
         
 
 # 02. Cleaning data  ------------------------------------------------------

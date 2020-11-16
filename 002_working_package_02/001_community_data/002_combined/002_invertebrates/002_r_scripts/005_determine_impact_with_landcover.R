@@ -3,17 +3,20 @@
 #### ------------------------------------ ####
 
 # date: 19.06.20
-# used: 03.07.20 
+# used: 03.07.20 + 03.11
 # Jonathan Jupke 
 
 # setup -------------------------------------------------------------------
 pacman::p_load(sf, dplyr, data.table, magrittr, here)
-setwd(here())
+
+dir_corine = here("001_working_package_01/003_corine_land_cover/003_data_processed")
+dir_pd     = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/")
+
 
 # Load data ---------------------------------------------------------------
-landcover      <- readRDS("../../../../001_WP_01/003_corine_land_cover/03_data_processed/reduced_clc.RDS")
-sites          <- readRDS("003_processed_data/003b_2020-07-03_mzb_sites_1585_close_to_ls_withWSO.RDS")
-observations   <- readRDS("003_processed_data/003_2020-07-03_mzb_data_close_to_ls.RDS")
+landcover      <- readRDS(file.path(dir_corine, "reduced_clc.RDS"))
+sites          <- readRDS(file.path(dir_pd,      "003b_2020-07-03_mzb_sites_1585_close_to_ls_withWSO.RDS"))
+observations   <- readRDS(file.path(dir_pd,      "003_2020-07-03_mzb_data_close_to_ls.RDS"))
 
 # Intersect or spatial join  ----------------------------------------------
 sites_x_lc <- left_join(sites, 
@@ -55,10 +58,10 @@ sites_low %<>% st_as_sf()
 sites_low %<>% dplyr::select(gr_sample_id, WSO1_ID, ls_bd_20)
 
 # Save to file  -----------------------------------------------------------
-setwd(here("003_processed_data"))
-saveRDS(file = paste0("004_",Sys.Date(), "_mzb_data1585_low_impact.RDS"),
+
+saveRDS(file = file.path(dir_pd, paste0("004_",Sys.Date(), "_mzb_data1585_low_impact.RDS")),
         object = observations2_low)
 
-saveRDS(file = paste0("004_",Sys.Date(), "_mzb_sites1585_low_impact.RDS"),
+saveRDS(file = file.path(dir_pd, paste0("004_",Sys.Date(), "_mzb_sites1585_low_impact.RDS")),
         object = sites_low)
 

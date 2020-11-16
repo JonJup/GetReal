@@ -3,32 +3,53 @@
 ### --- Macroinvertebrates ---------- ### 
 # ------------------------------------- #
 
-# date: 01.09.20 + 10.09
-# GetReal WP 2 MZB
-
+# date: 01.09.20 + 10.09 + 11.09 + 12.11
+# GetReal 
+# Working Package 2 
+# Macroinvertebrates
 
 # setup -------------------------------------------------------------------
 
-pacman::p_load(data.table, dplyr, fuzzySim, ggplot2, here, stringr, vegan)
-setwd(here())
+pacman::p_load(data.table, 
+               dplyr, 
+               fuzzySim, 
+               ggplot2, 
+               here, 
+               stringr, 
+               vegan)
+## DIRECTORIES
+dir_ss = here("002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables/")
+dir_re = here("002_working_package_02/003_seasonality/003_results/invertebrates/")
+dir_save = here("002_working_package_02/003_seasonality/004_plots/invertebrates/nmds/")
+
+
+## OPTIONS 
+COMPUTE_NMDS = FALSE 
+COMPUTE_DISTANCE = FALSE 
+LOAD_DISTANCE = TRUE 
+LOAD_NMDS = TRUE
+SAVE_PLOTS = TRUE
+
+# color palette # 
+my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
 
 # load data ---------------------------------------------------------------
 
-files <- dir(path = "002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables/")
-files <- files[grepl(pattern = "2020-09-10", x = files)]
+files = dir(path = file.path(dir_ss))
+
 for (i in seq_along(files)) {
-        lv <- files[i]
-        obj_name <- lv %>% 
-                str_extract("rt.*") %>% 
-            str_remove(pattern = "\\.RDS")
-        assign(x     = obj_name,
-               value = readRDS(paste0("002_working_package_02/003_seasonality/003_results/invertebrates/001_speciesXsites_tables/",lv)))
-        
+    lv       = files[i]
+    obj_name = lv %>%
+        str_extract("rt.*") %>%
+        str_remove(pattern = "\\.RDS")
+    assign(x     = obj_name,
+           value = readRDS(file.path(dir_ss, lv)))
+    
 }
 rm(i, lv, obj_name, files);gc()
-file_l <- ls()
+file_l <- ls()[grepl(pattern="^rt", x = ls())]
 # join tables 
-loop_over_var <- c("1.1", "1.2","2_3", "4_5", "8_9", "10_11", "15_16", "17", "18", "19")
+loop_over_var <- c("1.1", "1.2","2_3", "4_5", "8_11_15_16", "17", "18", "19")
 for (i in loop_over_var) {
         
         file_pre <- paste0("rt", i, "_")
@@ -52,11 +73,10 @@ for (i in loop_over_var) {
 rm(list = file_l)
 rm(file_l, loop_over_var)
 
-
 # fix combined tables -----------------------------------------------------
 
 ## -- distance matrix -- ##
-files <- ls()
+files <- ls()[grepl(pattern="^rt", x = ls())]
 
 for (i in seq_along(files)) {
     ld <- get(files[i])
@@ -86,7 +106,8 @@ for (i in seq_along(files)) {
 }
 
 # create distance matrices 
-for (i in files){
+if (COMPUTE_DISTANCE){
+    for (i in files){
         ld             <- get(i)
         ld             <- t(ld)
         colnames(ld)   <- ld[1,]
@@ -99,133 +120,140 @@ for (i in files){
         dld           <- 1 - simMat(ld, method = "Jaccard")
         assign(x = paste0("d_", i), value = dld)
         assign(x = paste0("season_", i), value = seasons_var)
+        saveRDS(object = dld,         file = file.path(dir_re, "004_nmds/distance_matrices", paste0("d_", i, ".RDS")))
+        saveRDS(object = seasons_var, file = file.path(dir_re, "004_nmds/distance_matrices", paste0("season_",i,".RDS")))
         print(i)
         rm(ld, dld,i, seasons_var);gc()
         
+    }
 }
 
-nmds1.1   <- metaMDS(comm = d_rt1.1_all,   try = 500, k = 2)  ; saveRDS(nmds1.1  , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt1.1.RDS"))
-nmds1.2   <- metaMDS(comm = d_rt1.2_all,   try = 500, k = 2)  ; saveRDS(nmds1.2  , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt1.2.RDS")) 
-nmds2_3   <- metaMDS(comm = d_rt2_3_all,   try = 500, k = 2)  ; saveRDS(nmds2_3  , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt2_3.RDS"))
-nmds4_5   <- metaMDS(comm = d_rt4_5_all,   try = 5000, k = 2) ; saveRDS(nmds4_5  , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt4_5.RDS"))
-nmds8_9   <- metaMDS(comm = d_rt8_9_all,   try = 5000, k = 2)  ; saveRDS(nmds8_9  , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt8_9.RDS"))
-nmds10_11 <- metaMDS(comm = d_rt10_11_all, try = 1500, k = 2); saveRDS(nmds10_11, paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt10_11.RDS"))
-nmds10_11 <- metaMDS(comm = d_rt10_11_all, try = 1500, k = 2, previous.best = nmds10_11); saveRDS(nmds10_11, paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt10_11.RDS"))
-nmds15_16 <- metaMDS(comm = d_rt15_16_all, try = 500, k = 2); saveRDS(nmds15_16, paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt15_16.RDS"))
-nmds17    <- metaMDS(comm = d_rt17_all,    try = 1000, k = 2)  ; saveRDS(nmds17   , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt17.RDS"))
-nmds18    <- metaMDS(comm = d_rt18_all,    try = 1000, k = 2)  ; saveRDS(nmds18   , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt18.RDS")) 
-nmds18    <- metaMDS(comm = d_rt18_all,    try = 1000, k = 2, previous.best = nmds18)  ; saveRDS(nmds18   , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt18.RDS")) 
-nmds19    <- metaMDS(comm = d_rt19_all,    try = 500, k = 2)   ; saveRDS(nmds19   , paste0("003_results/invertebrates/004_nmds/", Sys.Date(), "_nmds_object_invertebrates_rt19.RDS"))
+if (LOAD_DISTANCE){
+    ch_distance_files = dir(path = file.path(dir_re, "004_nmds/distance_matrices/"))
+    ch_season_files   = ch_distance_files[str_detect(string=ch_distance_files, pattern = "season")] 
+    ch_distance_files = ch_distance_files[!ch_distance_files %in% ch_season_files]
+    for (i in seq_along(ch_distance_files)){
+        loop_rt    = str_extract(ch_distance_files[i], pattern = "rt.*") %>% 
+            str_remove(".RDS")
+        
+        loop_file1 = readRDS(file.path(dir_re, "004_nmds/distance_matrices", ch_distance_files[i]))
+        loop_file2 = readRDS(file.path(dir_re, "004_nmds/distance_matrices", ch_season_files[i]))
+        
+        assign(x = paste0("d_", loop_rt),value = loop_file1)
+        assign(x = paste0("season_", loop_rt),value = loop_file2)
+    }
+}
 
 
-nmds1.1     <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt1.1.RDS")
-nmds1.2     <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt1.2.RDS")
-nmds2_3     <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt2_3.RDS")
-nmds4_5     <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt4_5.RDS")
-nmds8_9     <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt8_9.RDS")
-nmds10_11   <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt10_11.RDS") 
-nmds15_16   <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt15_16.RDS")
-nmds17      <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt17.RDS")
-nmds18      <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt18.RDS")
-nmds19      <- readRDS("003_results/invertebrates/004_nmds/2020-09-10_nmds_object_invertebrates_rt19.RDS")
+files = ls()[grep(pattern="d_rt", x = ls())]
+
+if (COMPUTE_NMDS){
+    for (i in files[7:8]){
+        loop_data = get(i)
+        ch_save_name = str_extract(string = i, pattern = "rt.*") %>% str_remove(pattern="_all")
+        ch_save_name = paste0("nmds_", ch_save_name)
+        converged = FALSE 
+        iter = 0
+        while (converged == FALSE & iter < 3000) {
+            iter = iter + 500
+            print(paste(iter, "for", i))
+            
+            if (iter == 500) {
+                loop_nmds  = metaMDS(comm = loop_data,  try = iter, k = 2)
+            } else {
+                loop_nmds = metaMDS(comm = loop_data,  try = iter, k = 2, previous.best = loop_nmds)   
+            }
+            
+            converged = loop_nmds$converged
+        }
+        
+        ch_save_name = ifelse(loop_nmds$converged,
+                              paste0(ch_save_name, "_iter",iter,"_converged"),
+                              paste0(ch_save_name, "_iter",iter,"_not_converged")
+        )
+        assign(x = ch_save_name,
+               value = loop_nmds)
+        saveRDS(object = loop_nmds,
+                file = file.path(
+                    dir_re,
+                    "004_nmds/",
+                    paste0(Sys.Date(), "_", ch_save_name, ".RDS")
+                ))
+        rm(i, loop_data, ch_save_name, loop_nmds)
+    }
+}
 
 
+## -- read file in 
+if (LOAD_NMDS){
+    ch_nmds_files     = dir(path = file.path(dir_re, "004_nmds/"), pattern = ".RDS")
+    
+    for (i in seq_along(ch_nmds_files)){
+        loop_rt    = str_extract(ch_nmds_files[i], pattern = "rt.*") %>% 
+            str_remove(".RDS")
+        
+        loop_file1 = readRDS(file.path(dir_re, "004_nmds", ch_nmds_files[i]))
+        
+        assign(x = paste0(loop_rt),value = loop_file1)
+    
+    }
+}
 
-# data for plots ----------------------------------------------------------
-nmds1.1_data   <- data.table(NMDS1 = scores(nmds1.1)[,1]  ,  NMDS2 = scores(nmds1.1)[,2]  , season = factor(season_rt1.1_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds1.2_data   <- data.table(NMDS1 = scores(nmds1.2)[,1]  ,  NMDS2 = scores(nmds1.2)[,2]  , season = factor(season_rt1.2_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds2_3_data   <- data.table(NMDS1 = scores(nmds2_3)[,1]  ,  NMDS2 = scores(nmds2_3)[,2]  , season = factor(season_rt2_3_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds4_5_data   <- data.table(NMDS1 = scores(nmds4_5)[,1]  ,  NMDS2 = scores(nmds4_5)[,2]  , season = factor(season_rt4_5_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds8_9_data   <- data.table(NMDS1 = scores(nmds8_9)[,1]  ,  NMDS2 = scores(nmds8_9)[,2]  , season = factor(season_rt8_9_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds10_11_data <- data.table(NMDS1 = scores(nmds10_11)[,1],  NMDS2 = scores(nmds10_11)[,2], season = factor(season_rt10_11_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds15_16_data <- data.table(NMDS1 = scores(nmds15_16)[,1],  NMDS2 = scores(nmds15_16)[,2], season = factor(season_rt15_16_all, levels = c("spring", "summer", "autumn", "winter")))
-nmds17_data    <- data.table(NMDS1 = scores(nmds17)[,1]   ,  NMDS2 = scores(nmds17)[,2]   , season = factor(season_rt17_all,    levels = c("spring", "summer", "autumn", "winter")))
-nmds18_data    <- data.table(NMDS1 = scores(nmds18)[,1]   ,  NMDS2 = scores(nmds18)[,2]   , season = factor(season_rt18_all,    levels = c("spring", "summer", "autumn", "winter")))
-nmds19_data    <- data.table(NMDS1 = scores(nmds19)[,1]   ,  NMDS2 = scores(nmds19)[,2]   , season = factor(season_rt19_all,    levels = c("spring", "summer", "autumn", "winter")))
+files = ls()[grepl(pattern = "iter", x = ls())]
+files2 = ls()[grepl(pattern = "season", x = ls())]
+files2 = files2[files2 != "ch_season_files"]
+# prepare data for plots ----------------------------------------------------------
+for (i in seq_along(files)) {
+    loop_data = files[i]
+    loop_data = get(loop_data)
+    season_data = files2[i]
+    season_data = get(season_data)
+    loop_rt   = str_extract(files[i], "rt.*") %>% str_remove("_iter.*")
+    loop_dt   = data.table(NMDS1 = scores(loop_data)[,1]  ,  NMDS2 = scores(loop_data)[,2]  , season = factor(season_data, levels = c("spring", "summer", "autumn", "winter")))
+    assign(x = paste0("dt_nmds_", loop_rt), value = loop_dt)
+}
 
+files = ls()[grepl(pattern = "dt_nmds", x = ls())]
 ### ---  hulls --- ###  
-hull_1.1   <- nmds1.1_data  %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_1.2   <- nmds1.2_data  %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_2_3   <- nmds2_3_data  %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_4_5   <- nmds4_5_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_8_9   <- nmds8_9_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_10_11 <- nmds10_11_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_15_16 <- nmds15_16_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_17    <- nmds17_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_18    <- nmds18_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
-hull_19    <- nmds19_data %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
+for (i in seq_along(files)) {
+    loop_data = files[i]
+    loop_data = get(loop_data)
+    loop_rt   = str_extract(files[i], "rt.*") %>% str_remove("_nmds.*")
+    loop_dt   = loop_data  %>% group_by(season) %>% slice(chull(NMDS1, NMDS2))
+    assign(x = paste0("hull_", loop_rt), value = loop_dt)
+}
+files_hull = ls()[grepl(pattern = "hull", x = ls())]
+files_nmds  = ls()[grepl(patter  = "iter", x = ls())]
 
-# color palette # 
-my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
+for (i in seq_along(files)) {
+    loop_data = files[i]
+    loop_data = get(loop_data)
+    loop_rt   = str_extract(files[i], "rt.*") %>% str_remove("_nmds.*")
+    loop_hull = get(files_hull[i])
+    nmds_data = get(files_nmds[i])
+    loop_plot = ggplot(data = loop_data,   aes(x = NMDS1, y = NMDS2)) +
+        geom_polygon(data = loop_hull,   alpha = 0.5, aes(fill = season)) +
+        geom_point(aes(fill = season), shape = 21) +
+        ggtitle(paste0( "NMDS"," ", loop_rt)) +
+        labs(fil = "Season", subtitle = paste0("Macroinvertebrates, Stress: ", round(nmds_data$stress,   2))) +
+        scale_fill_manual(values = my_color_palette[c(1, 2, 4, 6)])
+    assign(x = paste0("gg_",loop_rt,"_nmds"),
+           value = loop_plot)
+}
 
-## -- plots -- ## 
-# create plot objects 
-plot_withhull_nmds1.1   <- ggplot(data = nmds1.1_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_1.1,   alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.1",   "- Stress: ", round(nmds1.1$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds1.2   <- ggplot(data = nmds1.2_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_1.2,   alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.2",   "- Stress: ", round(nmds1.2$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds2_3   <- ggplot(data = nmds2_3_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_2_3,   alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT2_3",   "- Stress: ", round(nmds2_3$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds4_5   <- ggplot(data = nmds4_5_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_4_5,   alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT4_5",   "- Stress: ", round(nmds4_5$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds8_9   <- ggplot(data = nmds8_9_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_8_9,   alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT8_9",   "- Stress: ", round(nmds8_9$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds10_11 <- ggplot(data = nmds10_11_data, aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_10_11, alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT10_11", "- Stress: ", round(nmds10_11$stress, 2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds15_16 <- ggplot(data = nmds15_16_data, aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_15_16, alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT15_16", "- Stress: ", round(nmds15_16$stress, 2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds17    <- ggplot(data = nmds17_data,    aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_17,    alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT17",    "- Stress: ", round(nmds17$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds18    <- ggplot(data = nmds18_data,    aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_18,    alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT18",    "- Stress: ", round(nmds18$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-plot_withhull_nmds19    <- ggplot(data = nmds19_data,    aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_19,    alpha = 0.5, aes(fill = season)) + geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT19",    "- Stress: ", round(nmds19$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_wouthull_nmds1.1   <- ggplot(data = nmds1.1_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.1",   "- Stress: ", round(nmds1.1$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])# plot_wouthull_nmds1.1   <- ggplot(data = nmds1.1_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.1",   "- Stress: ", round(nmds1.1$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_wouthull_nmds1.2   <- ggplot(data = nmds1.2_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.2",   "- Stress: ", round(nmds1.2$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds1.2   <- ggplot(data = nmds1.2_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.2",   "- Stress: ", round(nmds1.2$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds2_3   <- ggplot(data = nmds2_3_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT2_3",   "- Stress: ", round(nmds2_3$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds4_5   <- ggplot(data = nmds4_5_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT4_5",   "- Stress: ", round(nmds4_5$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds8_9   <- ggplot(data = nmds8_9_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT8_9",   "- Stress: ", round(nmds8_9$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) # plot_wouthull_nmds8_9   <- ggplot(data = nmds8_9_data,   aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT8_9",   "- Stress: ", round(nmds8_9$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds10_11 <- ggplot(data = nmds10_11_data, aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT10_11", "- Stress: ", round(nmds10_11$stress, 2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds15_16 <- ggplot(data = nmds15_16_data, aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT15_16", "- Stress: ", round(nmds15_16$stress, 2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds17    <- ggplot(data = nmds17_data,    aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT17",    "- Stress: ", round(nmds17$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds18    <- ggplot(data = nmds18_data,    aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT18",    "- Stress: ", round(nmds18$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_wouthull_nmds19    <- ggplot(data = nmds19_data,    aes(x = NMDS1, y = NMDS2)) +                                                                     geom_point(aes(fill = season), shape = 21) + ggtitle(paste0("NMDS of macroinvertebrate communities in RT19",    "- Stress: ", round(nmds19$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)]) 
-# plot_onlyhull_nmds1.1   <- ggplot(data = nmds1.1_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_1.1,   alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.1",   "- Stress: ", round(nmds1.1$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds1.2   <- ggplot(data = nmds1.2_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_1.2,   alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT1.2",   "- Stress: ", round(nmds1.2$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds2_3   <- ggplot(data = nmds2_3_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_2_3,   alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT2_3",   "- Stress: ", round(nmds2_3$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds4_5   <- ggplot(data = nmds4_5_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_4_5,   alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT4_5",   "- Stress: ", round(nmds4_5$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds8_9   <- ggplot(data = nmds8_9_data,   aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_8_9,   alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT8_9",   "- Stress: ", round(nmds8_9$stress,   2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds10_11 <- ggplot(data = nmds10_11_data, aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_10_11, alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT10_11", "- Stress: ", round(nmds10_11$stress, 2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds15_16 <- ggplot(data = nmds15_16_data, aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_15_16, alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT15_16", "- Stress: ", round(nmds15_16$stress, 2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds17    <- ggplot(data = nmds17_data,    aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_17,    alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT17",    "- Stress: ", round(nmds17$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds18    <- ggplot(data = nmds18_data,    aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_18,    alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT18",    "- Stress: ", round(nmds18$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# plot_onlyhull_nmds19    <- ggplot(data = nmds19_data,    aes(x = NMDS1, y = NMDS2)) +  geom_polygon(data = hull_19,    alpha = 0.5, aes(fill = season)) +                                              ggtitle(paste0("NMDS of macroinvertebrate communities in RT19",    "- Stress: ", round(nmds19$stress,    2))) + labs(fil = "Season") + scale_fill_manual(values = my_color_palette[c(1,2,4,6)])
-# -- ## 
-# save plots to file (jpeg) 
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_rivertype_1_subset1.jpeg" , plot = plot_withhull_nmds1.1)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt1.1.jpeg" , plot = plot_wouthull_nmds1.1)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt1.1.jpeg" , plot = plot_onlyhull_nmds1.1)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_rivertype_1_subset2.jpeg" , plot = plot_withhull_nmds1.2)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt1.2.jpeg" , plot = plot_wouthull_nmds1.2)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt1.2.jpeg" , plot = plot_onlyhull_nmds1.2)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_2_3.jpeg" , plot = plot_withhull_nmds2_3)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt2_3.jpeg" , plot = plot_wouthull_nmds2_3)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt2_3.jpeg" , plot = plot_onlyhull_nmds2_3)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_4_5.jpeg", plot = plot_withhull_nmds4_5)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt4_5.jpeg", plot = plot_wouthull_nmds4_5)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt4_5.jpeg", plot = plot_onlyhull_nmds4_5)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_8_9.jpeg", plot = plot_withhull_nmds8_9)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt8_9.jpeg", plot = plot_wouthull_nmds8_9)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt8_9.jpeg", plot = plot_onlyhull_nmds8_9)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_10_11.jpeg", plot = plot_withhull_nmds10_11)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt10_11.jpeg", plot = plot_wouthull_nmds10_11)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt10_11.jpeg", plot = plot_onlyhull_nmds10_11)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_15_16.jpeg", plot = plot_withhull_nmds15_16)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt15_16.jpeg", plot = plot_wouthull_nmds15_16)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt15_16.jpeg", plot = plot_onlyhull_nmds15_16)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_17.jpeg", plot = plot_withhull_nmds17)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt17.jpeg", plot = plot_wouthull_nmds17)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt17.jpeg", plot = plot_onlyhull_nmds17)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_18.jpeg", plot = plot_withhull_nmds18)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt18.jpeg", plot = plot_wouthull_nmds18)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt18.jpeg", plot = plot_onlyhull_nmds18)
-ggsave(filename = "004_plots/invertebrates/nmds/nmds_river type_19.jpeg", plot = plot_withhull_nmds19)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_woh_rt19.jpeg", plot = plot_wouthull_nmds19)
-# ggsave(filename = "004_plots/invertebrates/nmds/nmds_onh_rt19.jpeg", plot = plot_onlyhull_nmds19)
-# save plots to file (pdf) 
 
+files_plots = ls()[grepl(pattern= "gg_", x = ls())]
+
+if (SAVE_PLOTS){
+    for (i in seq_along(files_plots)) {
+        
+        loop_plot = get(files_plots[i])
+        loop_rt   = str_extract(files_plots[i], "rt.*") %>% str_remove("_nmds.*")
+        ch_save_name = paste0(Sys.Date(), "_nmds_plot_", loop_rt, ".png")
+        ggsave(filename = file.path(dir_save, ch_save_name),
+               plot = loop_plot)
+    }
 
 ## -- ## 
 if (readline("remove all ") == "yes") rm(list = ls())
-
+}

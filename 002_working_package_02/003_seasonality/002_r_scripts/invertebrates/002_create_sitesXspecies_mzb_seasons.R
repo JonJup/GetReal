@@ -11,19 +11,20 @@
 # Seasonal changes? 
 
 # 01. Setup  --------------------------------------------------------------
+if(!require(pacman)){install.packages("pacman"); library(pacman)}
+p_load(data.table,
+       dplyr,
+       fuzzySim,
+       here,
+       magrittr,
+       stringr)
 
-pacman::p_load(data.table,
-               fuzzySim,
-               dplyr,
-               magrittr,
-               stringr,
-               here
-               )
-
-setwd(here())
+dir_mzb = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/")
+dir_mzb2= here("002_working_package_02/003_seasonality/003_results/invertebrates/")
+dir_re  = here("002_working_package_02/003_seasonality/003_results/invertebrates/003_auxiliary/")
 
 # read in and prepare data ------------------------------------------------
-mzb  <- readRDS("../001_Community Data/100_Combined/002_invertebrates/003_processed_data/004_2020-07-03_mzb_data1585_low_impact.RDS")
+mzb  <- readRDS(file.path(dir_mzb, "004_2020-11-03_mzb_data1585_low_impact.RDS"))
 
 # carpeting  -------------------------------------------------------------
 mzb[, final_taxon := str_trim(final_taxon, side = "both")]
@@ -36,37 +37,32 @@ mzb$gr_sample_id %<>% as.character()
 sub_1 <- mzb[(is.na(year) | year >= 2000) & !is.na(season)]
 sub_1[,rt := ls_bd_20]
 sub_1[, ls_bd_20 := NULL]
-sub_1[rt %in% paste0("RT", 2:3),   rt := "RT2_3"]
-sub_1[rt %in% paste0("RT", 4:5),   rt := "RT4_5"]
-sub_1[rt %in% paste0("RT", 8:9),   rt := "RT8_9"]
-sub_1[rt %in% paste0("RT", 10:11), rt := "RT10_11"]
-sub_1[rt %in% paste0("RT", 15:16), rt := "RT15_16"]
+sub_1[rt %in% c("RT8", "RT9", "RT10", "RT11", "RT15", "RT16"),   rt := "RT8_11_15_16"]
+sub_1[rt %in% c("RT4", "RT5"), rt := "RT4_5"]
+sub_1[rt %in% c("RT2", "RT3"), rt := "RT2_3"]
 sub_1[season == "Summer", season := "summer"]
 unique(sub_1$season)
 
-for (i in c("1", "2_3", "4_5", "8_9", "10_11", "15_16", "17", "18", "19")) {
+for (i in c("1", "2_3", "4_5", "8_11_15_16", "17", "18", "19")) {
         assign(x = paste0("rt", i), 
                value = sub_1[rt == paste0("RT",i)])
 }
 
-rt_15_16_sites <- readRDS("003_results/invertebrates/003_auxiliary/rt_15_16_sites.RDS")
-rt_17_sites    <- readRDS("003_results/invertebrates/003_auxiliary/rt17_sites.RDS")
+rt_17_sites    <- readRDS(file.path(dir_re, "rt17_sites.RDS"))
 
 # 03. Drop columns --------------------------------------------------------
 
 # subset sites 
-rt1.1   <- rt1[data.set %in% c("mzb_Ecosurv")]
-rt1.2   <- rt1[data.set %in% c("mzb_Naiades", "MZB_LD") & !gr_sample_id %in% c("site_18460_date_05121_mzb_Landau", "site_18459_date_05121_mzb_Landau") & season != "spring"]
-rt2_3   <- rt2_3[data.set %in% c("MZB_LD") & season != "autumn"]
-rt4_5   <- rt4_5[data.set %in% c("MZB_LD", "mzb_WISER") & season != "winter"]
-rt8_9   <- rt8_9[!data.set %in% c("leonard_sandin", "Picos_Pepe") & season != "winter"]
-rt15_16 <- rt15_16[gr_sample_id %in% rt_15_16_sites]
-rt17    <- rt17[gr_sample_id %in% rt_17_sites]
-rt18    <- rt18[!season %in% c("spring", "winter")]
-rt19    <- rt19[!season %in% c("spring", "winter")]
+rt1.1 = rt1[data.set %in% c("mzb_Ecosurv")]
+rt1.2 = rt1[data.set %in% c("mzb_Naiades", "MZB_LD") & !gr_sample_id %in% c("site_18460_date_05121_mzb_Landau", "site_18459_date_05121_mzb_Landau") & season != "spring"]
+rt2_3 = rt2_3[data.set %in% c("MZB_LD") & season != "autumn"]
+rt4_5 = rt4_5[data.set %in% c("MZB_LD", "mzb_WISER") & season != "winter"]
+rt8_11_15_16 =  rt8_11_15_16[!data.set %in% c("leonard_sandin", "Picos_Pepe") & season != "winter"]
+rt17 = rt17[gr_sample_id %in% rt_17_sites]
+rt18 = rt18[!season %in% c("spring", "winter")]
+rt19 = rt19[!season %in% c("spring", "winter")]
 
-
-files_vec <- c("rt1.1","rt1.2","rt2_3","rt4_5","rt8_9", "rt10_11", "rt15_16","rt17","rt18","rt19")
+files_vec <- c("rt1.1","rt1.2","rt2_3","rt4_5","rt8_11_15_16","rt17","rt18","rt19")
 
 # drop columns 
 for (i in files_vec) {
@@ -75,8 +71,7 @@ for (i in files_vec) {
         assign(x = i, value = ld)
 }
 
-
-rm(sub_1, mzb, i , ld, rt_15_16_sites, rt_17_sites,rt1);gc()
+rm(sub_1, mzb, i , ld, rt_17_sites,rt1);gc()
 
 ## -- different levels
 for (i in c("spe", "gen", "foh")) {
@@ -90,7 +85,7 @@ for (i in c("spe", "gen", "foh")) {
 }
 rm (list = files_vec)
 rm (i, k, taxon_var, files_vec);gc()
-files <- ls()
+files <- setdiff(ls(),c("dir_mzb", "dir_re", "dir_mzb2"))
 
 # 04. Turn to site X species matrix --------------------------------------------------------
 
@@ -121,18 +116,24 @@ for (i in files) {
 
 # -- rare taxa -- #
 
-for (i in files) {
-        
-        ld <- get(i)
-        rare_taxon_id <- which(colSums(x = ld[,-c(1,2)]) < 3) + 1
-        rare_names    <- names(rare_taxon_id)
-        if (length(rare_names) != 0) {
-                assign(x     = i,
-                       value = ld[, -rare_names, with = FALSE])
-                rm(rare_taxon_id, rare_names, ld);gc()
-        } else {
-                rm(rare_names, rare_taxon_id, ld);gc()
+ls_rare = readRDS(file.path(dir_mzb, "0x_rare_taxa_list.RDS"))
+
+for (i in 1:length(files)) {
+        dt_loop = get(files[i])
+        if (str_detect(string = files[i], pattern = "spe")) {
+                in_loop_id = which(names(dt_loop) %in% ls_rare[[1]])
+                dt_loop = dt_loop[, -in_loop_id, with = FALSE]
+        } else if (str_detect(string = files[i], pattern = "gen")) {
+                in_loop_id = which(names(dt_loop) %in% ls_rare[[2]])
+                dt_loop = dt_loop[, -in_loop_id, with = FALSE]
+        } else if (str_detect(string = files[i], pattern = "foh")) {
+                in_loop_id = which(names(dt_loop) %in% ls_rare[[3]])
+                dt_loop = dt_loop[, -in_loop_id, with = FALSE]
         }
+        assign(x = files[i],
+               value = dt_loop)
+        rm(i)
+        gc()
 }
         
 # Remove all entries with only two columns i.e. no taxa 
@@ -148,18 +149,19 @@ for (i in files) {
 }
 
 # save data to file -------------------------------------------------------
-setwd("003_results/invertebrates/")
-
 for (i in seq_along(files)) {
-        save.name = paste0(files[i],".RDS")
+        save.name = paste0(files[i], ".RDS")
         save.file = get(files[i])
-        saveRDS(
-                object = save.file,
-                file = paste0("001_speciesXsites_tables/",
-                              Sys.Date(),
-                              "_",
-                              save.name)
-        )
+        saveRDS(object = save.file,
+                file = file.path(
+                        dir_mzb2,
+                        paste0(
+                                "001_speciesXsites_tables/",
+                                Sys.Date(),
+                                "_",
+                                save.name
+                        )
+                ))
 } 
 ## -- ## 
 if (readline("remove all? ") == "yes") rm(list = ls()) 

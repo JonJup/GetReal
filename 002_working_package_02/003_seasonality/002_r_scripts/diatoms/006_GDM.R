@@ -21,7 +21,7 @@ pacman::p_load(cowplot,
                sf,
                stringr
 )
-setwd(here())
+setwd(here("002_working_package_02/003_seasonality/"))
 
 # load and prepare data  --------------------------------------------------
 files <- dir(path = "003_results/diatoms/001_speciesXsites_tables/")
@@ -30,19 +30,20 @@ files <- dir(path = "003_results/diatoms/001_speciesXsites_tables/")
 for (i in seq_along(files)) {
         lv <- files[i]
         obj_name <- lv %>% 
-                str_extract("rt[0-9]*_[a-z]*")
+                str_extract("rt_.*") %>% 
+            str_remove(".RDS")
         assign(x     = obj_name,
                value = readRDS(paste0("003_results/diatoms/001_speciesXsites_tables/",lv)))
         
 }
 rm(i, lv, obj_name, files);gc()
-file_l <- ls()
+file_l <- ls()[grepl(x = ls(), pattern = "rt")]
 
 ## --  join tables -- ## 
-loop_over_var <- c("08","10","11","14", "15", "16", "17", "18","19")
+loop_over_var <- c("10","11","14", "15", "large")
 for (i in loop_over_var) {
         
-        file_pre <- paste0("rt", i, "_")
+        file_pre <- paste0("rt_", i, "_")
         files    <- ls()[grepl(pattern = file_pre, x = ls())]
         ld1 <- get(files[1]) 
         ld2 <- get(files[2])
@@ -63,15 +64,12 @@ rm(file_l, loop_over_var);gc()
 
 files <- ls()
 
-if (nrow(rt08_all[is.na(season)]) != 0 |
-    nrow(rt10_all[is.na(season)]) != 0 |
-    nrow(rt11_all[is.na(season)]) != 0 |
-    nrow(rt14_all[is.na(season)]) != 0 |
-    nrow(rt15_all[is.na(season)]) != 0 |
-    nrow(rt16_all[is.na(season)]) != 0 |
-    nrow(rt17_all[is.na(season)]) != 0 |
-    nrow(rt18_all[is.na(season)]) != 0 |
-    nrow(rt19_all[is.na(season)]) != 0) {
+if (
+    nrow(rt_10_all[is.na(season)]) != 0 |
+    nrow(rt_11_all[is.na(season)]) != 0 |
+    nrow(rt_14_all[is.na(season)]) != 0 |
+    nrow(rt_15_all[is.na(season)]) != 0 |
+    nrow(rt_large_all[is.na(season)]) != 0) {
         print("Quality Check Failed")
 } else {
         print("Quality Check Passed")
@@ -88,7 +86,7 @@ for (i in files){
 
 
 ## -- site locations -- ## 
-dia  <- readRDS("003_results/diatoms/001_2020-09-01_diatoms_w_rt.RDS")
+dia  <- readRDS("003_results/diatoms/001_2020-11-09_diatoms_w_rt.RDS")
 dia <- dia[,c("gr_sample_id", "geometry")]
 dia <- unique(dia, by = "gr_sample_id")
 dia %<>% st_as_sf()
@@ -101,9 +99,9 @@ dia %<>% st_drop_geometry()
 # Fitting models ----------------------------------------------------------
 
 
-loop_over_var <- c("08","10","11","14", "15", "16", "17", "18","19")
+loop_over_var <- c("10","11","14", "15", "large")
 for (i in loop_over_var) {
-        loop_data_name  <- paste0("rt",i, "_all") 
+        loop_data_name  <- paste0("rt_",i, "_all") 
         loop_data       <- get(loop_data_name)
         n_col           <- ncol(loop_data) - 1
         env_data        <- loop_data[,1:2]
