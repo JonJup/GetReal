@@ -35,6 +35,8 @@
 002_working_package_02/001_community_data/001_individual_data_sets/001_ld/002_r_scripts/000_Download files_Ger.R
 
 002_working_package_02/003_seasonality/old/
+002_working_package_02/003_seasonality/003_results/diatoms/003_nmds/2020-11-13_nmds_rt_large_iter0_not_converged.RDS
+002_working_package_02/003_seasonality/003_results/diatoms/003_nmds/distance_matrices/d_rt_large_all.RDS
 
 003_Presentations
 004_Sonstiges
