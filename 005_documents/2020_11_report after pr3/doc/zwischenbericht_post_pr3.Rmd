@@ -25,9 +25,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-#TODO sa plots at each level  
-#TODO complete taxa lists 
-#TODO new seasonal maps 
 ```{r setup, include=FALSE}
 # set to TRUE if you want to speed up computation 
 knitr::opts_chunk$set(cache = FALSE,fig.pos = 'H',fig_cap=TRUE)
@@ -335,7 +332,7 @@ plot_grid(align='v',
   Previous studies have already indicated, that there is strong turnover in diatom communities along gradients of organic matter [@Kelly1995;@coring1999situation; @Hering2006].
 
 
-Online, we provide the complete taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_10_Zwischenbericht%20an%20RLT/doc/typical_assemblages_diatoms_taxa_list.pdf) TAs.
+Online, we provide the complete taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_11_report%20after%20pr3/doc/typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_11_report%20after%20pr3/doc/typical_assemblages_diatoms_taxa_list.pdf) TAs.
 
 # Seasonal typical assemblages 
 
