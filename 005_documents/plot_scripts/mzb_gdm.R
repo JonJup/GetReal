@@ -4,7 +4,7 @@
 
 
 # setup --------------------------------------------------------------------
-pacman::p_load(gdm, ggplot2, here)
+pacman::p_load(cowplot, dplyr, gdm, ggplot2, here)
 dir_da = here("002_working_package_02/003_seasonality/003_results/invertebrates/005_gdms/")
 
 # data --------------------------------------------------------------------
@@ -23,8 +23,20 @@ y_max <- max(max_geo, max_season)
 
 
 # plot --------------------------------------------------------------------
-p1 <- ggplot(data = splineDat, aes(x = x_Geographic, y = y_Geographic)) + geom_line() + ylab("partial ecological distance") + xlab("Geographic Distance") + ylim(0, y_max) + theme_minimal_hgrid() + ggtitle(paste0("Macroinvertebrates - River Type 4_5"))
-p2 <- ggplot(data = splineDat, aes(x = x_season, y = y_season)) + geom_line() + ylab("partial ecological distance") + xlab("Season") + ylim(0, y_max) + theme_minimal_hgrid() 
+p1 <-
+        ggplot(data = splineDat, aes(x = x_Geographic, y = y_Geographic)) +
+        geom_line() +
+        ylab("partial ecological distance") +
+        xlab("Geographic Distance") +
+        ylim(0, y_max) + theme_minimal_hgrid() +
+        ggtitle(paste0("Macroinvertebrates")) +
+        labs(subtitle = "RT 4_5")
+p2 <- ggplot(data = splineDat, aes(x = x_season, y = y_season)) +
+        geom_line() +
+        ylab("partial ecological distance") +
+        xlab("Season") +
+        ylim(0, y_max) +
+        theme_minimal_hgrid()
 
 p3 <- plot_grid(p1, p2, label_size = 12)
 

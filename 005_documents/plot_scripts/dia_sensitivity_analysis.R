@@ -23,7 +23,23 @@ dt_dia_b = readRDS(file.path(dir_dia, "012_2020-11-05_sensitivity_parameter_b_50
 gg_sa_rich_dia_a = 
         ggplot(dt_dia_a, aes(x = threshold, y = n_all)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("Diatom taxon richness") + 
+        ggtitle("all levels - richness") + 
+        scale_color_viridis(discrete=T) + 
+        ylab("richness") + 
+        xlab("a threshold") + 
+        theme(legend.position = "bottom")
+gg_sa_rich_dia_a_spe = 
+        ggplot(dt_dia_a, aes(x = threshold, y = n_spe)) +
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("species - richness") + 
+        scale_color_viridis(discrete=T) + 
+        ylab("richness") + 
+        xlab("a threshold") + 
+        theme(legend.position = "bottom")
+gg_sa_rich_dia_a_gen = 
+        ggplot(dt_dia_a, aes(x = threshold, y = n_gen)) +
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("genus - richness") + 
         scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("a threshold") + 
@@ -31,7 +47,23 @@ gg_sa_rich_dia_a =
 gg_sa_rich_dia_b = 
         ggplot(dt_dia_b, aes(x = threshold, y = n_all)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("Diatom taxon richness"  ) + 
+        ggtitle("all levels - richness"  ) + 
+        viridis::scale_color_viridis(discrete=T) + 
+        ylab("richness") + 
+        xlab("b threshold") + 
+        theme(legend.position = "bottom")
+gg_sa_rich_dia_b_spe = 
+        ggplot(dt_dia_b, aes(x = threshold, y = n_spe)) +
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("species -  richness"  ) + 
+        viridis::scale_color_viridis(discrete=T) + 
+        ylab("richness") + 
+        xlab("b threshold") + 
+        theme(legend.position = "bottom")
+gg_sa_rich_dia_b_gen = 
+        ggplot(dt_dia_b, aes(x = threshold, y = n_gen)) +
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("genus - richness"  ) + 
         viridis::scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("b threshold") + 
@@ -40,7 +72,25 @@ gg_sa_uniq_dia_a =
         ggplot(dt_dia_a, aes(x = threshold, y = u_all)) + 
        # geom_hline(yintercept = 1/length(unique(dt_dia_a$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("Uniqueness") + 
+        ggtitle("all levels - uniqueness") + 
+        scale_color_viridis(discrete = T) + 
+        ylab("uniqueness score") + 
+        xlab("a threshold") + 
+        labs(col = "river type")
+gg_sa_uniq_dia_a_spe = 
+        ggplot(dt_dia_a, aes(x = threshold, y = u_spe)) + 
+       # geom_hline(yintercept = 1/length(unique(dt_dia_a$river_type)), linetype = 2) + 
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("species - uniqueness") + 
+        scale_color_viridis(discrete = T) + 
+        ylab("uniqueness score") + 
+        xlab("a threshold") + 
+        labs(col = "river type")
+gg_sa_uniq_dia_a_gen = 
+        ggplot(dt_dia_a, aes(x = threshold, y = u_gen)) + 
+       # geom_hline(yintercept = 1/length(unique(dt_dia_a$river_type)), linetype = 2) + 
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("genus - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("a threshold") + 
@@ -49,7 +99,25 @@ gg_sa_uniq_dia_b =
         ggplot(dt_dia_b, aes(x = threshold, y = u_all)) + 
        # geom_hline(yintercept = 1/length(unique(dt_dia_b$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("Uniqueness") + 
+        ggtitle("all levels - uniqueness") + 
+        scale_color_viridis(discrete = T) + 
+        ylab("uniqueness score") + 
+        xlab("b threshold") + 
+        labs(col = "river type")
+gg_sa_uniq_dia_b_spe = 
+        ggplot(dt_dia_b, aes(x = threshold, y = u_all)) + 
+       # geom_hline(yintercept = 1/length(unique(dt_dia_b$river_type)), linetype = 2) + 
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("species - uniqueness") + 
+        scale_color_viridis(discrete = T) + 
+        ylab("uniqueness score") + 
+        xlab("b threshold") + 
+        labs(col = "river type")
+gg_sa_uniq_dia_b_gen = 
+        ggplot(dt_dia_b, aes(x = threshold, y = u_all)) + 
+       # geom_hline(yintercept = 1/length(unique(dt_dia_b$river_type)), linetype = 2) + 
+        geom_line(size = 1.2, aes(col=river_type)) +
+        ggtitle("genus - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("b threshold") + 

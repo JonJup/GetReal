@@ -26,7 +26,7 @@ dt_mzb_b = readRDS(file.path(dir_mzb, "07_2020-11-06_sensitivity_parameter_b_50s
 gg_sa_rich_mzb_a = 
         ggplot(dt_mzb_a, aes(x = threshold, y = n_all)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("Macroinvertebrate  richness") + 
+        ggtitle("all levels - richness") + 
         scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("a threshold") + 
@@ -35,7 +35,7 @@ gg_sa_rich_mzb_a =
 gg_sa_rich_mzb_a_spe = 
         ggplot(dt_mzb_a, aes(x = threshold, y = n_spe)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("species richness"  ) + 
+        ggtitle("species - richness"  ) + 
         scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("a threshold") + 
@@ -43,7 +43,7 @@ gg_sa_rich_mzb_a_spe =
 gg_sa_rich_mzb_a_gen = 
         ggplot(dt_mzb_a, aes(x = threshold, y = n_gen)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("genus richness"  ) + 
+        ggtitle("genus - richness"  ) + 
         scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("a threshold") + 
@@ -51,7 +51,7 @@ gg_sa_rich_mzb_a_gen =
 gg_sa_rich_mzb_a_fol = 
         ggplot(dt_mzb_a, aes(x = threshold, y = n_fol)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("family richness"  ) + 
+        ggtitle("family or lower - richness") + 
         scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("a threshold") + 
@@ -60,7 +60,7 @@ gg_sa_rich_mzb_a_fol =
 gg_sa_rich_mzb_b = 
         ggplot(dt_mzb_b, aes(x = threshold, y = n_all)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("Macroinvertebrates richness") + 
+        ggtitle("all levels - richness") + 
         viridis::scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("b threshold") + 
@@ -68,10 +68,7 @@ gg_sa_rich_mzb_b =
 gg_sa_rich_mzb_b_spe = 
         ggplot(dt_mzb_b, aes(x = threshold, y = n_spe)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        # geom_text(data=dt_mzb_b %>% group_by(river_type) %>% arrange(threshold) %>% slice(1),
-        #           aes(x = threshold - 0.05, label=river_type), hjust=0) + 
-        # guides(colour=FALSE) +
-        ggtitle("species: richness"  ) + 
+        ggtitle("species - richness"  ) + 
         viridis::scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("b threshold") + 
@@ -79,10 +76,10 @@ gg_sa_rich_mzb_b_spe =
 gg_sa_rich_mzb_b_gen = 
         ggplot(dt_mzb_b, aes(x = threshold, y = n_all)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        geom_text(data=dt_mzb_b %>% group_by(river_type) %>% arrange(threshold) %>% slice(1),
-                  aes(x = threshold - 0.05, label=river_type), hjust=0) + 
-        guides(colour=FALSE) +
-        ggtitle("genera: richness"  ) + 
+        # geom_text(data=dt_mzb_b %>% group_by(river_type) %>% arrange(threshold) %>% slice(1),
+        #           aes(x = threshold - 0.05, label=river_type), hjust=0) + 
+        # guides(colour=FALSE) +
+        ggtitle("genus - richness"  ) + 
         viridis::scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("b threshold") + 
@@ -90,10 +87,7 @@ gg_sa_rich_mzb_b_gen =
 gg_sa_rich_mzb_b_fol = 
         ggplot(dt_mzb_b, aes(x = threshold, y = n_all)) +
         geom_line(size = 1.2, aes(col=river_type)) +
-        geom_text(data=dt_mzb_b %>% group_by(river_type) %>% arrange(threshold) %>% slice(1),
-                  aes(x = threshold - 0.05, label=river_type), hjust=0) + 
-        guides(colour=FALSE) +
-        ggtitle("families: richness"  ) + 
+        ggtitle("family or lower - richness"  ) + 
         viridis::scale_color_viridis(discrete=T) + 
         ylab("richness") + 
         xlab("b threshold") + 
@@ -104,7 +98,7 @@ gg_sa_uniq_mzb_a =
         ggplot(dt_mzb_a, aes(x = threshold, y = u_all)) + 
         #geom_hline(yintercept = 1/length(unique(dt_mzb_a$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("all levels: uniqueness") + 
+        ggtitle("all levels - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("a threshold") + 
@@ -113,7 +107,7 @@ gg_sa_uniq_mzb_a_spe =
         ggplot(dt_mzb_a, aes(x = threshold, y = u_all)) + 
         #geom_hline(yintercept = 1/length(unique(dt_mzb_a$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("species: uniqueness") + 
+        ggtitle("species - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("a threshold") + 
@@ -122,7 +116,7 @@ gg_sa_uniq_mzb_a_gen =
         ggplot(dt_mzb_a, aes(x = threshold, y = u_all)) + 
         #geom_hline(yintercept = 1/length(unique(dt_mzb_a$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("genera: uniqueness") + 
+        ggtitle("genera - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("a threshold") + 
@@ -131,7 +125,7 @@ gg_sa_uniq_mzb_a_fam =
         ggplot(dt_mzb_a, aes(x = threshold, y = u_all)) + 
         #geom_hline(yintercept = 1/length(unique(dt_mzb_a$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("families: Uniqueness") + 
+        ggtitle("families or lower - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("a threshold") + 
@@ -142,34 +136,34 @@ gg_sa_uniq_mzb_b =
         ggplot(dt_mzb_b, aes(x = threshold, y = u_all)) + 
         #geom_hline(yintercept = 1/length(unique(dt_mzb_b$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("all levels: uniqueness") + 
+        ggtitle("all levels - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("b threshold") + 
         labs(col = "river type")
 gg_sa_uniq_mzb_b_spe = 
-        ggplot(dt_mzb_b, aes(x = threshold, y = u_all)) + 
+        ggplot(dt_mzb_b, aes(x = threshold, y = u_spe)) + 
        # geom_hline(yintercept = 1/length(unique(dt_mzb_b$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("species: uniqueness") + 
+        ggtitle("species - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("b threshold") + 
         labs(col = "river type")
 gg_sa_uniq_mzb_b_gen = 
-        ggplot(dt_mzb_b, aes(x = threshold, y = u_all)) + 
+        ggplot(dt_mzb_b, aes(x = threshold, y = u_gen)) + 
        # geom_hline(yintercept = 1/length(unique(dt_mzb_b$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("genera: uniqueness") + 
+        ggtitle("genera - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("b threshold") + 
         labs(col = "river type")
 gg_sa_uniq_mzb_b_fol = 
-        ggplot(dt_mzb_b, aes(x = threshold, y = u_all)) + 
+        ggplot(dt_mzb_b, aes(x = threshold, y = u_fol)) + 
       #  geom_hline(yintercept = 1/length(unique(dt_mzb_b$river_type)), linetype = 2) + 
         geom_line(size = 1.2, aes(col=river_type)) +
-        ggtitle("families: uniqueness") + 
+        ggtitle("families - uniqueness") + 
         scale_color_viridis(discrete = T) + 
         ylab("uniqueness score") + 
         xlab("b threshold") + 
