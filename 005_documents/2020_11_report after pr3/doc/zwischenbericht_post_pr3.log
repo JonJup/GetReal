@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.18)  20 NOV 2020 12:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.11.18)  20 NOV 2020 13:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -704,7 +704,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 x.map}] [2
 
 ]
-<zwischenbericht_post_pr3_files/figure-latex/mzb-thresh-plot-1.pdf, id=92, 469.
+<zwischenbericht_post_pr3_files/figure-latex/mzb-thresh-plot-1.pdf, id=97, 469.
 755pt x 216.81pt>
 File: zwischenbericht_post_pr3_files/figure-latex/mzb-thresh-plot-1.pdf Graphic
  file (type pdf)
@@ -735,7 +735,7 @@ red
                                                   
 l.243 
       ]
-<zwischenbericht_post_pr3_files/figure-latex/plot-sa-mzb-1.pdf, id=130, 433.62p
+<zwischenbericht_post_pr3_files/figure-latex/plot-sa-mzb-1.pdf, id=135, 433.62p
 t x 361.35pt>
 File: zwischenbericht_post_pr3_files/figure-latex/plot-sa-mzb-1.pdf Graphic fil
 e (type pdf)
@@ -743,7 +743,7 @@ e (type pdf)
 Package pdftex.def Info: zwischenbericht_post_pr3_files/figure-latex/plot-sa-mz
 b-1.pdf  used on input line 246.
 (pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
-<zwischenbericht_post_pr3_files/figure-latex/plot-sa-dia-1.pdf, id=137, 433.62p
+<zwischenbericht_post_pr3_files/figure-latex/plot-sa-dia-1.pdf, id=142, 433.62p
 t x 361.35pt>
 File: zwischenbericht_post_pr3_files/figure-latex/plot-sa-dia-1.pdf Graphic fil
 e (type pdf)
@@ -763,7 +763,7 @@ re.3}) has been already used, duplicate ignored
                                                   
 l.295 
        <./zwischenbericht_post_pr3_files/figure-latex/plot-sa-dia-1.pdf>]
-<zwischenbericht_post_pr3_files/figure-latex/plot-mzb-n-taxa-1.pdf, id=171, 722
+<zwischenbericht_post_pr3_files/figure-latex/plot-mzb-n-taxa-1.pdf, id=176, 722
 .7pt x 361.35pt>
 File: zwischenbericht_post_pr3_files/figure-latex/plot-mzb-n-taxa-1.pdf Graphic
  file (type pdf)
@@ -772,7 +772,7 @@ Package pdftex.def Info: zwischenbericht_post_pr3_files/figure-latex/plot-mzb-n
 -taxa-1.pdf  used on input line 319.
 (pdftex.def)             Requested size: 469.76045pt x 234.88023pt.
 [8]
-<zwischenbericht_post_pr3_files/figure-latex/plot-uni-1.pdf, id=185, 722.7pt x 
+<zwischenbericht_post_pr3_files/figure-latex/plot-uni-1.pdf, id=190, 722.7pt x 
 289.08pt>
 File: zwischenbericht_post_pr3_files/figure-latex/plot-uni-1.pdf Graphic file (
 type pdf)
@@ -786,7 +786,7 @@ has been already used, duplicate ignored
                                                   
 l.333 
        <./zwischenbericht_post_pr3_files/figure-latex/plot-mzb-n-taxa-1.pdf>]
-<zwischenbericht_post_pr3_files/figure-latex/pcoa-1.pdf, id=198, 469.755pt x 36
+<zwischenbericht_post_pr3_files/figure-latex/pcoa-1.pdf, id=203, 469.755pt x 36
 1.35pt>
 File: zwischenbericht_post_pr3_files/figure-latex/pcoa-1.pdf Graphic file (type
  pdf)
@@ -798,86 +798,86 @@ Package pdftex.def Info: zwischenbericht_post_pr3_files/figure-latex/pcoa-1.pdf
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.359 
+l.361 
        <./zwischenbericht_post_pr3_files/figure-latex/plot-uni-1.pdf>] [11pdfTe
 X warning (ext4): destination with the same identifier (name{figure.6}) has bee
 n already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.359 
+l.361 
        <./zwischenbericht_post_pr3_files/figure-latex/pcoa-1.pdf>]
-<zwischenbericht_post_pr3_files/figure-latex/sampling-map2-1.pdf, id=226, 469.7
+<zwischenbericht_post_pr3_files/figure-latex/sampling-map2-1.pdf, id=232, 469.7
 55pt x 252.945pt>
 File: zwischenbericht_post_pr3_files/figure-latex/sampling-map2-1.pdf Graphic f
 ile (type pdf)
 <use zwischenbericht_post_pr3_files/figure-latex/sampling-map2-1.pdf>
 Package pdftex.def Info: zwischenbericht_post_pr3_files/figure-latex/sampling-m
-ap2-1.pdf  used on input line 362.
+ap2-1.pdf  used on input line 364.
 (pdftex.def)             Requested size: 469.75386pt x 252.94438pt.
-<zwischenbericht_post_pr3_files/figure-latex/plot-nmds-1.pdf, id=230, 469.755pt
+<zwischenbericht_post_pr3_files/figure-latex/plot-nmds-1.pdf, id=236, 469.755pt
  x 252.945pt>
 File: zwischenbericht_post_pr3_files/figure-latex/plot-nmds-1.pdf Graphic file 
 (type pdf)
 <use zwischenbericht_post_pr3_files/figure-latex/plot-nmds-1.pdf>
 Package pdftex.def Info: zwischenbericht_post_pr3_files/figure-latex/plot-nmds-
-1.pdf  used on input line 374.
+1.pdf  used on input line 376.
 (pdftex.def)             Requested size: 469.75386pt x 252.94438pt.
-<zwischenbericht_post_pr3_files/figure-latex/plot-gdm-1.pdf, id=235, 469.755pt 
+[12pdfTeX warning (ext4): destination with the same identifier (name{figure.7})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.388 
+       <./zwischenbericht_post_pr3_files/figure-latex/sampling-map2-1.pdf>]
+<zwischenbericht_post_pr3_files/figure-latex/plot-gdm-1.pdf, id=254, 469.755pt 
 x 216.81pt>
 File: zwischenbericht_post_pr3_files/figure-latex/plot-gdm-1.pdf Graphic file (
 type pdf)
 <use zwischenbericht_post_pr3_files/figure-latex/plot-gdm-1.pdf>
 Package pdftex.def Info: zwischenbericht_post_pr3_files/figure-latex/plot-gdm-1
-.pdf  used on input line 389.
+.pdf  used on input line 391.
 (pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
-[12pdfTeX warning (ext4): destination with the same identifier (name{figure.7})
+[13pdfTeX warning (ext4): destination with the same identifier (name{figure.8})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.394 \end{figure}
-                   <./zwischenbericht_post_pr3_files/figure-latex/sampling-map2
--1.pdf>] [13pdfTeX warning (ext4): destination with the same identifier (name{f
-igure.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.395 
+l.397 
        <./zwischenbericht_post_pr3_files/figure-latex/plot-nmds-1.pdf>] [14pdfT
 eX warning (ext4): destination with the same identifier (name{figure.9}) has be
 en already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.425 
+l.427 
       pdfTeX warning (ext4): destination with the same identifier (name{table.2
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.425 
+l.427 
        <./zwischenbericht_post_pr3_files/figure-latex/plot-gdm-1.pdf>] [15pdfTe
 X warning (ext4): destination with the same identifier (name{table.3}) has been
  already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.484 \newpage
+l.486 \newpage
               pdfTeX warning (ext4): destination with the same identifier (name
 {table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.484 \newpage
+l.486 \newpage
               pdfTeX warning (ext4): destination with the same identifier (name
 {table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.484 \newpage
+l.486 \newpage
               ] [16] [17] (./zwischenbericht_post_pr3.aux)
 Package rerunfilecheck Info: File `zwischenbericht_post_pr3.out' has not change
 d.
-(rerunfilecheck)             Checksum: 915B7901FE1EC5350524AD5DB82B65AB;1863.
+(rerunfilecheck)             Checksum: 826A8E9C3135D2066F6DED7883704D42;2053.
  ) 
 Here is how much of TeX's memory you used:
- 12501 strings out of 481433
- 183670 string characters out of 5918561
+ 12505 strings out of 481433
+ 183748 string characters out of 5918561
  494624 words of memory out of 5000000
- 28921 multiletter control sequences out of 15000+600000
+ 28923 multiletter control sequences out of 15000+600000
  582087 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  66i,9n,72p,1124b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -891,10 +891,10 @@ e1/public/lm/lmr12.pfb><c:/Users/jonat/AppData/Roaming/TinyTeX/texmf-dist/fonts
 /type1/public/lm/lmr17.pfb><c:/Users/jonat/AppData/Roaming/TinyTeX/texmf-dist/f
 onts/type1/public/lm/lmr8.pfb><c:/Users/jonat/AppData/Roaming/TinyTeX/texmf-dis
 t/fonts/type1/public/lm/lmri12.pfb>
-Output written on zwischenbericht_post_pr3.pdf (17 pages, 596816 bytes).
+Output written on zwischenbericht_post_pr3.pdf (17 pages, 597813 bytes).
 PDF statistics:
- 342 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
- 118 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 349 PDF objects out of 1000 (max. 8388607)
+ 301 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

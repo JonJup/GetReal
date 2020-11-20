@@ -5,7 +5,7 @@
 # ----------------------------------------- #
 
 # date written/modified: 02.09.20 + 15.
-# date used: 02.09.20 + 08. + 15. + 09.11
+# date used: 02.09.20 + 08. + 15. + 09.11 + 20.
 # Jonathan Jupke 
 # Get Real WP 2
 # Diatoms 
@@ -13,146 +13,138 @@
 
 # Setup  --------------------------------------------------------------
 
+# LIBRARIES
 pacman::p_load(data.table,
                dplyr,
                fuzzySim,
                here,
                magrittr,
-               stringr
+               stringr,
+               sf
                )
-
-dir_dia = here("002_working_package_02/003_seasonality/003_results/diatoms/")
-
-# Read in and prepare data ------------------------------------------------
-data  = readRDS(file.path(dir_dia, "001_2020-11-09_diatoms_w_rt.RDS"))
-
-data[, final_taxon := str_trim(final_taxon, side = "both")]
-
-# Subset  --------------------------------------------------------------
-data$gr_sample_id %<>% as.character()
-
-sub_1 <- data[(is.na(year) | year >= 2000) & !is.na(season)]
-
-unique(sub_1$season)
-
-rt_large = sub_1[rt %in% c("RT1", "RT2", "RT4", "RT5", "RT8", "RT16", "RT17", "RT18", "RT19"), rt := "RT_large"]
-rt_10    = sub_1[rt %in% c("RT10")]
-rt_11    = sub_1[rt %in% c("RT11")]
-rt_14    = sub_1[rt %in% c("RT14")]
-rt_15    = sub_1[rt %in% c("RT15")]
-
-ch_14_sites = c(
-        "ÉseraPlan de l'Hospital de Benasque",
-        "Aguas LimpiasE. Sarra",
-        "GállegoBiescas",
-        "Noguera PallaresaIsil",
-        "Noguera PallaresaLlavorsí",
-        "Noguera CardósLladorre",
-        "VallfarreraAlins",
-        "SegreLlivia",
-        "GállegoFormigal",
-        "VeralZuriza",
-        "BarrosaParzán",
-        "Noguera de TorLlesp",
-        "UrbiónViniegra de Abajo",
-        "MayorAguas Abajo Villoslada de Cameros",
-        "AragónCandanchú - Puente de Santa Cristina",
-        "AlhamaMagana",
-        "Noguera RibagorzanaPont de Suert",
-        "Noguera de TortBoi",
-        "IreguaPuente De Almarza",
-        "LumbrerasVilloslada de Cameros",
-        "BrievaBrieva de Cameros",
-        "GaronaCampo Golf Salardhu",
-        "YnolaUnha",
-        "Aiguamoix /Tredos",
-        "GaronaArties",
-        "GaronaAguas Abajo Aubert",
-        "Noguera RibagorzanaSenet",
-        "GaronaCasarilh",
-        "CaldaresPanticosa",
-        "EscarraEscarrilla",
-        "IzasHotel Santa Cristina-Antigua central Hidroeléctrica",
-        "GállegoEmbalse del Gállego",
-        "NajerillaVentrosa (Puente de la Hiedra)",
-        "GaronaBossost",
-        "GaronaGessa",
-        "Noguera de TorBarruera",
-        "Noguera RibagorzanaVilaller",
-        "SegreAguas abajo de Martinet",
-        "ValiraAduana",
-        "Noguera PallaresaSant Romá de Tavernoles",
-        "ÉseraCamping Aneto",
-        "Noguera PallaresaGerri de la Sal",
-        "NeilaVillavelayo",
-        "CarolPuigcerdá",
-        "CHASSEZAC A ST-FREZAL-D'ALBUGES",
-        "CHASSEZAC A CHASSERADES",
-        "SEGRE A LLO",
-        "SEGRE A LLIVIA",
-        "REC DE JUELL A ANGOUSTRINE",
-        "TOSSA A VALCEBOLLERE",
-        "RIU DE QUEROL A ENVEITG 2",
-        "RIU DE QUEROL A LATOUR-DE-CAROL 2",
-        "RIU DE QUEROL A LATOUR-DE-CAROL 1",
-        "RIU LLAVENERA A PALAU-DE-CERDAGNE",
-        "ALTIER A CUBIERES 2"
+## DIRECTORES 
+DIR = list(dia  = here("002_working_package_02/003_seasonality/003_results/diatoms/"), 
+           pd   = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/"),
+           save = here("002_working_package_02/003_seasonality/003_results/diatoms/001_speciesXsites_tables/")
 )
 
-rt_large = rt_large[season != "winter" & !data.set %in% c("JJM", "dia_Ecosurv")]
-rt_10    = rt_10[season != "spring" & data.set != "dia_Miguel_Iglesias"]
-rt_11    = rt_11[season != "spring" & data.set != "dia_Miguel_Iglesias"]
-rt_14    = rt_14[season != "winter" & original_site_name %in% ch_14_sites]
-rt_15    = rt_15[season != "spring" & data.set != "dia_Miguel_Iglesias"]
+# Read in and prepare data ------------------------------------------------
+dt_data  = readRDS(file.path(DIR$dia, "001_2020-11-09_diatoms_w_rt.RDS"))
+
+dt_data[, final_taxon := str_trim(final_taxon, side = "both")]
+
+# Subset  --------------------------------------------------------------
+dt_data$gr_sample_id %<>% as.character()
+
+dt_data <- dt_data[(is.na(year) | year >= 2000) & !is.na(season)]
+
+unique(dt_data$season)
+
+dt_data   <- dt_data[rt %in% paste0("RT", c(1, 2, 3, 4, 5, 6, 8, 9, 12, 16, 17, 18, 19))]
+
+dt_data[rt %in% c("RT1", "RT17", "RT18", "RT19"), rt := "RT1_17_18_19"]
+dt_data[rt %in% c("RT2", "RT4"), rt := "RT2_4"]
+dt_data[rt %in% c("RT8", "RT9"), rt := "RT8_9"]
+dt_data[rt %in% c("RT8_9", "RT2_4"), rt := "RT2_4_8_9"]
+dt_data[rt %in% c("RT2_4_8_9", "RT1_17_18_19"), rt := "RT1_2_4_8_9_17_18_19"]
+
+ch_river_types = unique(dt_data$rt)
+ls_RT = list()
+ls_RT$RT1_2_4_8_9_17_18_19       = dt_data[rt == "RT1_2_4_8_9_17_18_19"]
+ls_RT$RT1_2_4_8_9_17_18_19_sub_1 = ls_RT$RT1_2_4_8_9_17_18_19[!season %in% c("winter", "spring")]
+
+st_spatial_subset = filter(
+        dt_data,
+        gr_sample_id %in% c(
+                "site_03147_date_00137_DIA_edwin_peters",
+                "site_00332_date_00004_dia_Saul_Blanco",
+                "site_00136_date_00252_dia_MiguelIglesias",
+                "site_00102_date_00038_dia_Ecosurv"
+        )
+) %>%
+        unique(by = "gr_sample_id") %>%
+        st_as_sf() %>%
+        st_bbox()
+
+ls_RT$RT1_2_4_8_9_17_18_19_sub_2 = ls_RT$RT1_2_4_8_9_17_18_19 %>% 
+        st_as_sf() %>% 
+        st_crop(st_spatial_subset) %>% 
+        setDT
+
+ls_RT$RT3 = dt_data[rt == "RT3"]
+ls_RT$RT5 = dt_data[rt == "RT5"]
+ls_RT$RT5_sub = ls_RT$RT5[data.set %in% c("dia_Naiades", "IRSTEA")]
+ls_RT$RT16 = dt_data[rt == "RT16"] 
+ls_RT$RT16_sub1 = ls_RT$RT16[!season %in% c("spring", "autumn")] 
+
+st_spatial_subset = filter(
+        dt_data,
+        gr_sample_id %in% c("site_00793_date_00984_dia_Naiades", 
+                            "site_00855_date_00988_dia_Naiades",
+                            "site_00725_date_00993_dia_Naiades",
+                            "site_00738_date_00983_dia_Naiades")) %>%
+        unique(by = "gr_sample_id") %>%
+        st_as_sf() %>%
+        st_bbox()
+ls_RT$RT16_sub1 = ls_RT$RT16_sub1 %>% 
+        st_as_sf() %>% 
+        st_crop(st_spatial_subset) %>% 
+        setDT
+
+ls_RT$RT16_sub2 = ls_RT$RT16[!season %in% c("winter", "spring")]
+
+rm(st_spatial_subset);gc()
 
 
-rm(sub_1, data, ch_14_sites, dir_dia);gc()
+# subset columns
 
-files <- ls()
-
-for (i in seq_along(files)) {
-        ld <- get(files[i])
+for (i in seq_along(ls_RT)) {
+        
+        ld <- ls_RT[[i]]
         ld <- ld[,.(gr_sample_id, final_taxon, final_taxon_level, season)] 
-        assign(x = files[i],
-               value = ld)
+        ls_RT[[i]] = ld
         rm(ld, i)
 }
- 
+ls_spe = list() 
+ls_gen = list() 
+
 ## -- different levels
-for (i in c("spe", "gen")) {
-        taxon_var <- ifelse(i == "spe", "species", "genus")
-        for (k in files){
-                assign(x     = paste0(k, "_", i), 
-                       value = get(k)[final_taxon_level %in% taxon_var] 
-                )
-        }}
+
+        
+for (i in seq_along(ls_RT)) {
+        ls_spe[[i]] = ls_RT[[i]][final_taxon_level == "species"]
+        ls_gen[[i]] = ls_RT[[i]][final_taxon_level == "genus"]
+}
+
+# Turn to site X species matrix --------------------------------------------------------
 
  
-rm(list = files)
-rm (i, k, taxon_var, files);gc()
-files <- ls()
- 
-# Turn to site X species matrix --------------------------------------------------------
- 
-for (i in files) {
-        ld <- get(i)
-        ld[, final_taxon_level := NULL]
-        ldj <- copy(ld)
-        ldj[, final_taxon  := NULL]
-        ldj <- unique(ldj, by = "gr_sample_id")
-        assign( x = i,
-                value = splist2presabs(data = ld, sites.col = 1, sp.col = 2)
-                )
-         ld2 <- get(i)
-         setDT(ld2)
-         
-         ld3 <- ldj[ld2, on = "gr_sample_id"]
+for (i in seq_along(ls_RT)) {
         
-        assign(x = i,
-               value = ld3)
-        if (any(duplicated(ld3$gr_sample_id))) break()
+        ld_spe = ls_spe[[i]]
+        ld_gen = ls_gen[[i]]
         
-        rm(ld,ld2,ld3,i,ldj);gc()
+        ld_spe[, final_taxon_level := NULL]
+        ld_gen[, final_taxon_level := NULL]
+        
+        ldj_spe <- copy(ld_spe)
+        ldj_gen <- copy(ld_gen)
+        
+        ldj_spe[, final_taxon  := NULL]
+        ldj_gen[, final_taxon  := NULL]
+        
+        ldj_spe <- unique(ldj_spe, by = "gr_sample_id")
+        ldj_gen <- unique(ldj_gen, by = "gr_sample_id")
+        
+        spe_sxs =  splist2presabs(data = ld_spe, sites.col = 1, sp.col = 2) %>% setDT
+        gen_sxs =  splist2presabs(data = ld_gen, sites.col = 1, sp.col = 2) %>% setDT
+        
+        ld2_spe <- spe_sxs[ldj_spe, on = "gr_sample_id"]
+        ld2_gen <- spe_sxs[ldj_spe, on = "gr_sample_id"]
+        
+        ls_spe[[i]] = ld2_spe
+        ls_gen[[i]] = ld2_gen
+        rm(ld_spe,ld_gen,ldj_spe,i,ldj_gen,spe_sxs,gen_sxs,ld2_spe,ld2_gen);gc()
 
 }
 
@@ -160,47 +152,49 @@ for (i in files) {
 
 # rare taxa are taxa that occur in less that 1% of sampling sites. 
 
-dir_pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/")
-ls_rare = readRDS(file.path(dir_pd, "008_a_rare_names.RDS"))
 
-for (i in 1:length(files)) {
-        dt_loop = get(files[i])
-        if (str_detect(string=files[i], pattern = "spe")){
-                
-        } else if (str_detect(string=files[i], pattern = "gen")){
-                in_loop_id = which(names(dt_loop) %in% ls_rare[[2]])
-                dt_loop = dt_loop[,-in_loop_id, with = FALSE]
-        }
-        assign(x = files[i],
-               value = dt_loop)
-        rm(i);gc()
+ls_rare = readRDS(file.path(DIR$pd, "008_a_rare_names.RDS"))
+
+for (i in seq_along(ls_RT)) {
+        dt_loop = ls_spe[[i]]
+        ch_names_fixed = str_replace_all(
+                string = names(dt_loop),
+                pattern = "\\.",
+                replacement = " "
+        )
+        
+        in_loop_id = which(ch_names_fixed %in% ls_rare[[1]])
+        
+        dt_loop = dt_loop[, -in_loop_id, with = FALSE]
+        ls_spe[[i]] = dt_loop
+        rm(i, dt_loop, ch_names_fixed, in_loop_id)
 }
 
+rm(ls_rare);gc
 
-# Remove all entries with only two columns i.e. no taxa 
-for (i in files) {
-        ld <- get(i)
-        if (ncol(ld) < 3){
-                rm(list = i)
-                print(paste("removed", i))
-                id <- which(files == i)
-                files <- files[-id]
-        } 
-        rm(i);gc()
+# Are there any entires with only two columns i.e. no taxa ?
+for (i in seq_along(ls_RT)) {
+        dt_spe = ls_spe[[i]]
+        dt_gen = ls_gen[[i]]
+        
+        if (ncol(dt_spe) < 3) print("species in", names(ls_RT)[i])
+        if (ncol(dt_gen) < 3) print("genera in", names(ls_RT)[i])
+
+        rm(dt_spe,dt_gen,i);gc()
 }
 
 # Save data to file ---------------------------------------------------
 
-dir_save = "002_working_package_02/003_seasonality/003_results/diatoms/001_speciesXsites_tables/"
-
-for (i in seq_along(files)) {
-        save.name = paste0(files[i], ".RDS")
-        save.file = get(files[i])
-        saveRDS(object = save.file,
-                file = file.path(dir_save,
-                                 paste0(Sys.Date(),
-                                        "_",
-                                        save.name)))
+for (i in seq_along(ls_RT)) {
+        
+        dt_save_spe = ls_spe[[i]]
+        dt_save_gen = ls_gen[[i]]
+        ch_save_spe = paste0(names(ls_RT)[i],"_species.RDS")
+        ch_save_gen = paste0(names(ls_RT)[i],"_genus.RDS")
+        saveRDS(object = dt_save_spe,
+                file = file.path(DIR$save, ch_save_spe))
+        saveRDS(object = dt_save_gen,
+                file = file.path(DIR$save, ch_save_gen))
 } 
 
 ## -- ## 

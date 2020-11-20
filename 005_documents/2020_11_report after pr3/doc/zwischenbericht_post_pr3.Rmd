@@ -348,7 +348,7 @@ However the cumulative relative eigenvalues of the first two principal component
 A similar picture emerges in the PCoA of diatom TAs. 
 The large cluster and several other groups are divided from two other types by the first axis. 
 However in this case, the group around the large cluster is split into two subgroups along the second axis: small lowland rivers (RT3 and RT5) and the large cluster together with high altitude rivers.
-The two river types that are removed from this group are those with influence from histosol soils (RT6 and RT12), whose distinctive assemblages were already mentioned in the analysis of TA redundancy. Online, we provide the taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_11_report%20after%20pr3/doc/typical_assemblages_invertebrates_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_11_report%20after%20pr3/doc/typical_assemblages_diatoms_taxa_list.pdf) TAs.
+The two river types that are removed from this group are those with influence from histosol soils (RT6 and RT12), whose distinctive assemblages were already mentioned in the analysis of TA redundancy. Online, we provide the taxa lists for all [macroinvertebrate](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_11_report%20after%20pr3/doc/typical_assemblages_macroinvertebrate_taxa_list.pdf) and [diatom](https://github.com/JonJup/GetReal/blob/master/005_documents/2020_11_report%20after%20pr3/doc/typical_assemblages_diatoms_taxa_list.pdf) TAs.
 
 # Seasonal typical assemblages 
 
