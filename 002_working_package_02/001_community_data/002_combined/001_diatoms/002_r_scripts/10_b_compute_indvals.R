@@ -9,20 +9,10 @@
 # Working Package 2 
 # Diatoms  
 
-# Setup -------------------------------------------------------------------
-pacman::p_load(data.table, 
-               dplyr, 
-               here,
-               indicspecies,
-               magrittr, 
-               stringr)
-
-dir_pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/")
-
 
 # load data  --------------------------------------------------------------
-dt_spe = readRDS(file.path(dir_pd, "009_2020-11-04diatom_species_no_rare_w_LSRT.RDS"))
-dt_gen = readRDS(file.path(dir_pd, "009_2020-11-04diatom_genus_no_rare_w_LSRT.RDS"))
+dt_spe = readRDS(file.path(DIR$pd, "009_2020-11-04diatom_species_no_rare_w_LSRT.RDS"))
+dt_gen = readRDS(file.path(DIR$pd, "009_2020-11-04diatom_genus_no_rare_w_LSRT.RDS"))
 
 # join data ---------------------------------------------------------------
 ch_spe_names <- names(dt_spe)[-(1:4)]
@@ -54,14 +44,19 @@ ch_medium_types <- paste0("RT", c(1, 2, 3, 4, 5, 6, 8, 9, 12, 16, 17, 18, 19))
 # subset data sets according to the visual categorization of stream type representation
 dt_all   <- dt_all[ls_bd_20 %in% ch_medium_types]
 
-dt_all[ls_bd_20 %in% c("RT17", "RT4"), ls_bd_20 := "RT4_17"]
-dt_all[ls_bd_20 %in% c("RT4_17", "RT2"), ls_bd_20 := "RT2_4_17"]
-dt_all[ls_bd_20 %in% c("RT2_4_17", "RT1"), ls_bd_20 := "RT1_2_4_17"]
-dt_all[ls_bd_20 %in% c("RT1_2_4_17", "RT18"), ls_bd_20 := "RT1_2_4_17_18"]
-dt_all[ls_bd_20 %in% c("RT8", "RT19"), ls_bd_20 := "RT8_19"]
-dt_all[ls_bd_20 %in% c("RT1_2_4_17_18", "RT8_19"), ls_bd_20 := "RT_large"]
-dt_all[ls_bd_20 %in% c("RT16"), ls_bd_20 := "RT_large"]
-dt_all[ls_bd_20 %in% c("RT5"), ls_bd_20 := "RT_large"]
+dt_all[ls_bd_20 %in% c("RT1", "RT17", "RT18", "RT19"), ls_bd_20 := "RT1_17_18_19"]
+dt_all[ls_bd_20 %in% c("RT2", "RT4"), ls_bd_20 := "RT2_4"]
+dt_all[ls_bd_20 %in% c("RT8", "RT9"), ls_bd_20 := "RT8_9"]
+dt_all[ls_bd_20 %in% c("RT8_9", "RT2_4"), ls_bd_20 := "RT2_4_8_9"]
+dt_all[ls_bd_20 %in% c("RT2_4_8_9", "RT1_17_18_19"), ls_bd_20 := "RT1_2_4_8_9_17_18_19"]
+# dt_all[ls_bd_20 %in% c("RT17", "RT4"), ls_bd_20 := "RT4_17"]
+# dt_all[ls_bd_20 %in% c("RT4_17", "RT2"), ls_bd_20 := "RT2_4_17"]
+# dt_all[ls_bd_20 %in% c("RT2_4_17", "RT1"), ls_bd_20 := "RT1_2_4_17"]
+# dt_all[ls_bd_20 %in% c("RT1_2_4_17", "RT18"), ls_bd_20 := "RT1_2_4_17_18"]
+# dt_all[ls_bd_20 %in% c("RT8", "RT19"), ls_bd_20 := "RT8_19"]
+# dt_all[ls_bd_20 %in% c("RT1_2_4_17_18", "RT8_19"), ls_bd_20 := "RT_large"]
+# dt_all[ls_bd_20 %in% c("RT16"), ls_bd_20 := "RT_large"]
+# dt_all[ls_bd_20 %in% c("RT5"), ls_bd_20 := "RT_large"]
 
 ## -- quality check -- ## 
 # if (dt_all[ls_bd_20 %in% c("RT17", "RT4", "RT2", "RT1", "RT18", "RT8", "RT19"), .N] != 0 |
@@ -88,7 +83,7 @@ ls_groups = list()
 for (i in seq_along(ch_river_types)) {
         
         group_var = ch_river_types[i]
-        print(paste(group_var, "started @", format(Sys.time(), format="%H:%M:%S")))
+        print(paste(group_var, "start @", format(Sys.time(), format="%H:%M:%S")))
         i_print   = ifelse(i < 10, paste0("0", i), i)
         
         
@@ -133,12 +128,12 @@ for (i in seq_along(ls_groups)) {
 dt_groups = rbindlist(ls_groups)
 
 ## -- quality check -- ## 
-if (dt_groups[group %in% c("RT17", "RT4", "RT2", "RT1", "RT18", "RT8", "RT19"), .N] != 0 |
-    dt_groups[group %in% c("RT_large"), .N] == 0) {
-        print("quality check failed")
-} else {
-        print("quality check passed")
-}
+# if (dt_groups[group %in% c("RT17", "RT4", "RT2", "RT1", "RT18", "RT8", "RT19"), .N] != 0 |
+#     dt_groups[group %in% c("RT_large"), .N] == 0) {
+#         print("quality check failed")
+# } else {
+#         print("quality check passed")
+# }
 
 dt_spe <- dt_groups[taxon %in% ch_spe_names]
 dt_gen <- dt_groups[taxon %in% ch_gen_names]
@@ -152,9 +147,9 @@ if (nrow(dt_spe) + nrow(dt_gen) != nrow(dt_groups)) {
 
 # save to file ------------------------------------------------------------
 
-saveRDS(object = dt_spe, file = file.path(dir_pd, paste0("11_indicator_spe.RDS")))
-saveRDS(object = dt_gen, file = file.path(dir_pd, paste0("11_indicator_gen.RDS")))
+saveRDS(object = dt_spe, file = file.path(DIR$pd, paste0("11_indicator_spe.RDS")))
+saveRDS(object = dt_gen, file = file.path(DIR$pd, paste0("11_indicator_gen.RDS")))
 
 # empty environment 
-if (readline("Delete all? ") == "yes") rm(list = ls())
-
+#if (readline("Delete all? ") == "yes") rm(list = ls())
+print("#----------------------------------------#")

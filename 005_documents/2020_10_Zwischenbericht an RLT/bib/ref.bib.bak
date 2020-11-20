@@ -206,4 +206,42 @@
   mendeley-tags = {diatoms},
 }
 
+@Article{coring1999situation,
+  author  = {Coring, E},
+  journal = {Use of Algae for Monitoring Rivers III. Agence de l’Eau Artois-Picardie, Douai},
+  title   = {Situation and developments of algal (diatom)-based techniques for monitoring rivers in Germany},
+  year    = {1999},
+  pages   = {122--127},
+}
+
+@Article{Gothe2013,
+  author        = {G{\"{o}}the, Emma and Angeler, David G. and Gottschalk, Steffi and L{\"{o}}fgren, Stefan and Sandin, Leonard},
+  journal       = {PLoS ONE},
+  title         = {{The Influence of Environmental, Biotic and Spatial Factors on Diatom Metacommunity Structure in Swedish Headwater Streams}},
+  year          = {2013},
+  issn          = {19326203},
+  number        = {8},
+  volume        = {8},
+  abstract      = {Stream assemblages are structured by a combination of local (environmental filtering and biotic interactions) and regional factors (e.g., dispersal related processes). The relative importance of environmental and spatial (i.e., regional) factors structuring stream assemblages has been frequently assessed in previous large-scale studies, but biotic predictors (potentially reflecting local biotic interactions) have rarely been included. Diatoms may be useful for studying the effect of trophic interactions on community structure since: (1) a majority of experimental studies shows significant grazing effects on diatom species composition, and (2) assemblages can be divided into guilds that have different susceptibility to grazing. We used a dataset from boreal headwater streams in south-central Sweden (covering a spatial extent of ?14000 km2), which included information about diatom taxonomic composition, abundance of invertebrate grazers (biotic factor), environmental (physicochemical) and spatial factors (obtained through spatial eigenfunction analyses). We assessed the relative importance of environmental, biotic, and spatial factors structuring diatom assemblages, and performed separate analyses on different diatom guilds. Our results showed that the diatom assemblages were mainly structured by environmental factors. However, unique spatial and biological gradients, specific to different guilds and unrelated to each other, were also evident. We conclude that biological predictors, in combination with environmental and spatial variables, can reveal a more complete picture of the local vs. regional control of species assemblages in lotic environments. Biotic factors should therefore not be overlooked in applied research since they can capture additional local control and therefore increase accuracy and performance of predictive models. The inclusion of biotic predictors did, however, not significantly influence the unique fraction explained by spatial factors, which suggests low bias in previous assessments of unique regional control of stream assemblages. ? 2013 G?the et al.},
+  doi           = {10.1371/journal.pone.0072237},
+  file          = {:C$\backslash$:/Users/jonat/Documents/10{\_}Paper/G{\"{o}}the et al. - 2013 - The Influence of Environmental, Biotic and Spatial Factors on Diatom Metacommunity Structure in Swedish Headwater.PDF:PDF},
+  keywords      = {diatom,headwater},
+  mendeley-tags = {diatom,headwater},
+}
+
+@Article{Wang2019,
+  author          = {Wang, Jun and Hu, Jiancheng and Tang, Tao and Heino, Jani and Jiang, Xiaoming and Li, Zhengfei and Xie, Zhicai},
+  journal         = {Ecology and Evolution},
+  title           = {{Seasonal shifts in the assembly dynamics of benthic macroinvertebrate and diatom communities in a subtropical river}},
+  year            = {2019},
+  number          = {June},
+  pages           = {1--13},
+  abstract        = {Identifying seasonal shifts in community assembly for multiple biological groups is important to help enhance our understanding of their ecological dynamics. However, such knowledge on lotic assemblages is still limited. In this study, we used biologi- cal traits and functional diversity indices in association with null model analyses to detect seasonal shifts in the community assembly mechanisms of lotic macroinver- tebrates and diatoms in an unregulated subtropical river in China. We found that functional composition and functional diversity (FRic, FEve, FDis, MNN, and SDNN) showed seasonal variation for macroinvertebrate and diatom assemblages. Null mod- els suggested that environmental filtering, competitive exclusion, and neutral pro- cess were all important community assembly mechanisms for both biological groups. However, environmental filtering had a stronger effect on spring macroinvertebrate assemblages than autumn assemblages, but the effect on diatom assemblages was the same in both seasons. Moreover, macroinvertebrate and diatom assemblages were shaped by different environmental factors. Macroinvertebrates were filtered mainly by substrate types, velocity, and CODMn, while diatoms were mainly shaped by altitude, substrate types, and water quality. Therefore, our study showed (a) that different biological assemblages in a river system presented similarities and differ- ences in community assembly mechanisms, (b) that multiple processes play important roles in maintaining benthic community structure, and (c) that these patterns and underlying mechanisms are seasonally variable. Thus, we highlight the importance of exploring the community assembly mechanisms of multiple biological groups, es- pecially in different seasons, as this is crucial to improve the understanding of river community changes and their responses to environmental degradation.},
+  doi             = {10.1002/ece3.5904},
+  file            = {:C$\backslash$:/Users/jonat/Documents/10{\_}Paper/Wang et al. - 2019 - Seasonal shifts in the assembly dynamics of benthic macroinvertebrate and diatom communities in a subtropical river.pdf:pdf},
+  keywords        = {Chima,Chishui River,diatoms,freshwater,functional diversity,functional traits,lotic assemblages,macroinvertebrates,null model},
+  mendeley-groups = {004{\_}Projekte/GetReal/WP2/MZB,004{\_}Projekte/GetReal/WP2/Diatomen},
+  mendeley-tags   = {diatoms,freshwater,macroinvertebrates,Chima},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

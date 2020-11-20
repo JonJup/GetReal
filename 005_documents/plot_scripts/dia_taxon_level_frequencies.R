@@ -16,10 +16,11 @@ p_load(data.table,
        here, 
        magrittr)
 
-dir_rs = "~/01_Uni/02_getreal/002_working_package_02/001_community_data/002_combined/001_diatoms/002_r_scripts/"
-call_ta_setup = file.path(dir_rs, "11_a_setup_ta_analysis.R")
+DIR = list(rs = here("002_working_package_02/001_community_data/002_combined/001_diatoms/002_r_scripts/"),
+           pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/"))
+call_ta_setup = file.path(DIR$rs, "10_c_setup_ta_analysis.R")
 source(call_ta_setup)
-
+ch_river_types = unique(dt_bty$group)
 dt_ac_dia <- data.table(
         river_type = character(length(ch_river_types)),
         species    =   integer(length(ch_river_types)),
@@ -46,7 +47,7 @@ dt_acp_dia <- melt(
 dt_acp_dia$river_type %<>% stringr::str_remove_all(pattern = "RT")
 dt_acp_dia[river_type=="_large", river_type := "large"]
 dt_acp_dia[value == 0, value := NA]
-dt_acp_dia[, river_type := factor(river_type, levels = c("large", "3","6","9","12"))]
+#dt_acp_dia[, river_type := factor(river_type, levels = c("large", "3","6","9","12"))]
 gg_dia_per_level <-
         ggplot(data = dt_acp_dia, aes(x = river_type, y = value)) +
         geom_point(aes(col = variable), size = 3) +

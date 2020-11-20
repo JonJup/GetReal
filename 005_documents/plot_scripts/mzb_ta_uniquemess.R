@@ -16,8 +16,10 @@ p_load(data.table,
        here, 
        magrittr)
 
-dir_rs = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/002_r_scripts/")
-call_ta_setup = file.path(dir_rs, "09_a_setup_ta_analysis.R")
+DIR = list(rs = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/002_r_scripts/"),
+           pd = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/"))
+
+call_ta_setup = file.path(DIR$rs, "08_c_setup_ta_analysis.R")
 source(call_ta_setup)
 
 utm <- sort(unique(dt_bty$taxon))

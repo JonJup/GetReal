@@ -16,10 +16,13 @@ p_load(data.table,
        here, 
        magrittr)
 
-dir_rs = "~/01_Uni/02_getreal/002_working_package_02/001_community_data/002_combined/002_invertebrates/002_r_scripts/"
+DIR = list(rs = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/002_r_scripts/"),
+           pd = here("002_working_package_02/001_community_data/002_combined/002_invertebrates/003_processed_data/"))
 
-call_ta_setup = file.path(dir_rs, "09_a_setup_ta_analysis.R")
+call_ta_setup = file.path(DIR$rs, "08_c_setup_ta_analysis.R")
 source(call_ta_setup)
+
+ch_river_types = unique(dt_bty$group)
 
 dt_ac_mzb <- data.table(
         river_type = character(length(ch_river_types)),
@@ -47,7 +50,7 @@ dt_acp_mzb <- melt(
 
 dt_acp_mzb$river_type %<>% stringr::str_remove_all(pattern = "RT")
 dt_acp_mzb[value == 0, value := NA]
-dt_acp_mzb[, river_type := factor(river_type, levels = c("1", "2_3", "4_5", "8-11_15_16", "12", "14", "18"))]
+#dt_acp_mzb[, river_type := factor(river_type, levels = c("1", "2_3", "4_5", "8-11_15_16", "12", "14", "18"))]
 gg_mzb_per_level <-
         ggplot(data = dt_acp_mzb, aes(x = river_type, y = value)) +
         geom_point(aes(col = variable), size = 3) +
