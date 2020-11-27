@@ -17,6 +17,7 @@ p_load(ape,
        dplyr,
        fuzzySim,
        ggplot2,
+       ggrepel,
        here,
        vegan)
 ## DIRECTORIES 
@@ -25,25 +26,23 @@ DIR = list(rs = here("002_working_package_02/001_community_data/002_combined/002
            fu = here("005_documents/plot_scripts/") )
 
 ##FUNCTIONS 
-call_to_quiet_distance = file.path(DIR$fu, "f_quiet_sim_mat.R")
-source(call_to_quiet_distance)
+source(file.path(DIR$fu, "f_quiet_sim_mat.R"))
 ## PREVIOUS SCRIPTS 
-call_ta_setup = file.path(DIR$rs, "08_c_setup_ta_analysis.R")
-source(call_ta_setup)
+source(file.path(DIR$rs, "08_c_setup_ta_analysis.R"))
 # COLOR PALETTE
 my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
 #OPTIONS 
 OPT = list(
         compute_distance = TRUE,
-        NMDS = FALSE ,
+        NMDS = TRUE ,
         PCOA = TRUE ,
         REMOVE = TRUE 
 )
 # compute distance matrix -------------------------------------------------
 if (OPT$compute_distance){
-        mepa <- t(splist2presabs(data = dt_bty, 
-                                 sites.col = which(names(dt_bty) == "group"),
-                                 sp.col = which(names(dt_bty) == "taxon")))
+        mepa <- t(splist2presabs(data = dt_mzb, 
+                                 sites.col = which(names(dt_mzb) == "group"),
+                                 sp.col = which(names(dt_mzb) == "taxon")))
         colnames(mepa) = mepa[1,]
         mepa           = mepa[-1,]
         taxa_names     = rownames(mepa)
@@ -57,7 +56,7 @@ if (OPT$PCOA) {
         plot_mzb_pcoa = pcoa_obj$vectors %>%
                 as.data.frame() %>%         
                 ggplot(aes(x=Axis.1, y=Axis.2)) + 
-                geom_label(label = rownames(pcoa_obj$vectors)) +
+                geom_label_repel(label = rownames(pcoa_obj$vectors)) +
                 xlab(paste("Axis 1")) + 
                 ylab(paste("Axis 2")) + 
                 ggtitle("PCoA of typical macroinvertebrate assemblages") + 
@@ -70,10 +69,10 @@ if (OPT$NMDS) {
         dt_nmds   = data.table(
                 NMDS1 = scores(me_NMDS)[, 1],
                 NMDS2 = scores(me_NMDS)[, 2],
-                river_type = unique(dt_bty$group)
+                river_type = unique(dt_mzb$group)
         )
         plot_mzb_nmds = ggplot(data = dt_nmds, aes(x = NMDS1, y = NMDS2)) +
-                geom_label(aes(label = river_type)) +
+                geom_label_repel(aes(label = river_type)) +
                 ggtitle("NMDS of typical macroinvertebrate assemblages") +
                 labs(subtitle = paste("Stress: ", round(me_NMDS$stress, 2)))
 }
@@ -84,7 +83,7 @@ if (OPT$REMOVE) {
                 dir_pd,
                 dir_rs,
                 dt_bta,
-                dt_bty,
+                dt_mzb,
                 dt_fol,
                 dt_fta,
                 dt_fty,

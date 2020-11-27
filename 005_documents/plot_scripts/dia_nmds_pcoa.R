@@ -19,27 +19,26 @@ p_load(ape,
        fuzzySim,
        ggplot2,
        here,
-       vegan)
+       vegan,
+       ggrepel)
 ## DIRECTORIES 
 DIR = list(rs = here("002_working_package_02/001_community_data/002_combined/001_diatoms/002_r_scripts/"),
            pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/"),
            fu = here("005_documents/plot_scripts/"))
 ## FUNCTIONS 
-call_to_quiet_distance = file.path(DIR$fu, "f_quiet_sim_mat.R")
-source(call_to_quiet_distance)
+source(file.path(DIR$fu, "f_quiet_sim_mat.R"))
 ## PREVIOUS SCRIPTS 
-call_ta_setup = file.path(DIR$rs, "10_c_setup_ta_analysis.R")
-source(call_ta_setup)
+source(file.path(DIR$rs, "10_c_setup_ta_analysis.R"))
 # COLOR PALETTE 
 my_color_palette <- c("#7fc97f","#d95f02","#1b9e77","#666666","#bf5b17","#5f64ff","#ff9a14","#dcce00","#03eaff","#e6ab02","#66a61e","#e7298a","#7570b3","#ff00bf","#00fe04","#a6cee3","#a6761d","#386cb0","#fdc086","#beaed4")
 #OPTIONS 
-OPT = list(NMDS = FALSE ,
+OPT = list(NMDS = TRUE ,
            PCOA = TRUE ,
            REMOVE = TRUE)
 # Compute distance matrix  ------------------------------------------------
 
 mepa <- t(splist2presabs(data = dt_bty, 
-                         sites.col = 6,
+                         sites.col = 4,
                          sp.col = 1))
 colnames(mepa) <- mepa[1,]
 mepa           <- mepa[-1,]
@@ -61,7 +60,7 @@ if (OPT$PCOA) {
 }
 if (OPT$NMDS) {
         me_NMDS   = metaMDS(comm = d_me,
-                            try = 10000,
+                            try = 1000,
                             k = 2)
         dt_nmds   = data.table(
                 NMDS1 = scores(me_NMDS)[, 1],
@@ -69,7 +68,7 @@ if (OPT$NMDS) {
                 river_type = unique(dt_bty$group)
         )
         plot_dia_nmds = ggplot(data = dt_nmds, aes(x = NMDS1, y = NMDS2)) +
-                geom_label(aes(label = river_type)) +
+                geom_label_repel(aes(label = river_type)) +
                 ggtitle("NMDS of typical diatoms assemblages") +
                 labs(subtitle = paste("Stress: ", round(me_NMDS$stress, 2)))
 }

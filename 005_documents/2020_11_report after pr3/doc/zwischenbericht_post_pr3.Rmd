@@ -141,14 +141,18 @@ We have fewer sampling sites for diatoms than for macroinvertebrates which entai
 
 We derived typical assemblages using the commonness of each taxon in a respective river type. 
 Here, the commonness of a taxon refers to the fraction of sampling sites in a river type where that taxon is found.
-This is conceptually equal to the $B$ parameter used in the Species Indicator Value [@Caceres2009; @Dufrene1997]. 
+This is equal to the $B$ parameter used in the Species Indicator Value [@Caceres2009; @Dufrene1997]. 
 We also considered the second parameter of that statistic, the specificity $A$ which refers to the fraction of occurrences of a taxon that fall within one river type. 
 For example, $A=1$ indicates that all observations of taxon $x$ occurred in river type $y$ and hence that this taxon is highly specific to the given river type. 
 A commonness of 1 shows that a taxon is present in every sample taken within a river type and therefore that it is very typical for that river type. 
-A taxon belongs to the TA of a river type if it is more common that some threshold, which depends on the taxonomic level of the taxon, or if it is more specific than another treshold, which also depends on the taxonomic level. 
-The B-threshold for species is 0.25, for genera 0.35 and for family or lower resolutions 0.55. 
-In addition to the typical assemblages we also derived lists of specific taxa. 
-To be included in these the specificity had to be above 0.9 for a species, 0.8 for genus or 0.7 for family or lower taxonomic levels. 
+A taxon belongs to the TA of a river type if it is more common that some threshold, which depends on the taxonomic level of the taxon, or if it is more specific than another threshold, which also depends on the taxonomic level.
+To prevent rare species and singletons from exerting an undue influence on the TAs we first removed taxa that occurred in less than 5% of the samples. 
+Second, we only included highly specific taxa if they also surpassed a threshold in commonness. 
+The first step was undertaken for each river type separately so that the effective threshold varied between river types. 
+The B-threshold for species is 0.20, for genera 0.40 and for family or lower resolutions 0.60. 
+The A-threshold for species was 0.90 for a species, 0.85 for genus or 0.80 for family or lower taxonomic levels. 
+To be included, a highly specific taxon also had be have commonness
+above 0.05 for species, 0.10 for genera and 0.15 for families or lower taxonomic levels. 
 
 We did not systematically optimize these thresholds. 
 Such procedures would require optimization criteria, but we are not aware of any criterion that would work in this context. 
@@ -198,24 +202,16 @@ plot_grid(ggrid_uniq_mzb, ggrid_uniq_dia, ncol = 1)
 
 # Redundancy between typical assemblages {#sec:redundancy}
 
-We assessed the degree to which the different TAs overlap. 
-The degree of overlap is the percentage of taxa in a TA that is also present in the most similar (largest overlap) TA. 
-Again, choosing a threshold above which we consider two assemblages to be redundant is somewhat arbitrary. 
-We proceeded with 75% but are open to other suggestions. 
-After assessing the redundancy we joined the two river types with the highest redundancy, if that redundancy was above 0.8, and computed the new TAs. 
-This procedure was iterated until no redundancies were above 0.8.
-In macroinvertebrates, we combined RT2 and 3, RT 4 and 5 and RT 8,9,10,11,15 and 16. 
+We assessed how similar two TAs are with the Jaccard similarity of their species lists, which is the fraction of the combined taxa pool of both TAs that occurs in both. 
+We joined two river types if their similarity was at or above 0.8. 
+Following a combination we recomputed TAs and similarities until none were above 0.8. 
+In macroinvertebrates, we combined RT2 and 3, RT4 and 5 and RT 8,9,10,11 and RT 15 and 16. 
 RT2 and 3 are both lowland, siliceous rivers of medium to large (RT2) or very small to small (RT3) size. 
-Their combination is plausible resulting in very small to large lowland siliceous rivers. 
-Note that very large rivers (catchment area > 10.000 km$^2$) are a separate type (RT1). 
+Their combination is plausible and gives the river type lowland siliceous rivers. 
 RT4 and 5 follow the same logic as RT2 and 3. 
 They are lowland calcareous or mixed rivers of of medium to large (RT4) or very small to small (RT5) size.
-The larger cluster of RT 8,9,10,11,15, and 16 is driven by altitude. 
-The river types 8 to 11 are mid-altitude (200 - 800 m.a.s.l.) rivers differing in size and geology. 
-There are three mid-altitude river types that did not fall into this cluster: RT12 which represents siliceous rivers with histosol soils in more than 20% of the catchment area, RT13 which is exceedingly rare and was omitted from the analysis, and RT18 which delineates Mediterranean mid-altitude rivers. 
-The two river types RT15 and RT16 are two of three types of high altitude ($>$ 800 m.a.s.l.) rivers. 
-Both occur mainly in southern Europe with differentiates them from the northern high altitude rivers in RT14.  
-In summary this large cluster represents mid- to high-altitude rivers of various sizes and geologies.    
+The larger cluster of RT 8, 9, 10 and 11 represents mid-altitude (200 - 800 m.a.s.l.) rivers differing in size and geology. 
+RT15 and 16 are high altitude river types (> 800 m.a.s.l) that occur mainly in southern Europe, which differentiates them from the northern high altitude rivers in RT14.
 
 In diatoms,  the river types 1, 2, 4, 8, 9, 17, 18, and 19 are all combined into one large cluster.
 This cluster comprises large (RT2 and RT4) to very large (RT1) lowland rivers, all three types perennial Mediterranean rivers  (RT 17, 18 and 19) as well as some mid-altitude rivers (RT8 and RT9). 
@@ -288,7 +284,7 @@ The mean number of species was `r dt_acp_mzb_mean_species`, mean number of gener
 For diatoms, species is the prevalent taxonomic level in all TAs (Figure \@ref(fig:plot-mzb-n-taxa)B). 
 The mean number of species per TA is `r dt_acp_dia_mean_species`  and the mean number of genera `r dt_acp_dia_mean_genus`. 
 `r dia_max_rt` has the most taxa rich TA with `r dia_max_in` taxa and `r dia_min_rt` has the least taxa in its TA with `r dia_min_in`. 
-Note that RT3 or a combined river type including it (RT2_3) had the most taxa rich TA for both taxa and that diatom TAs encompass more taxa than macroinvertebrate TAs which supports the trends from the sensitivity analysis (Figure \@ref(fig:plot-sa-dia)).   
+Note that diatom TAs encompass more taxa than macroinvertebrate TAs which supports the trends from the sensitivity analysis (Figure \@ref(fig:plot-sa-dia)).   
 
 ```{r plot-mzb-n-taxa, echo=F, fig.height=5,fig.width=10, fig.cap="Numbers of taxa on each taxonomical level for all typical assemblages.", warning=F}
 pg = plot_grid(
@@ -324,7 +320,7 @@ plot_grid(
   ncol = 2
 )
 ```
-We used Principal Coordinate Analysis (PCoA, @gower1966some) to visualize the similarity of TAs, based on Jaccard distance matrices (Figure \@ref(fig:pcoa)).
+We used Non-metric multidimensional Scaling (NMDS, @gower1966some) to visualize the similarity of TAs, based on Jaccard distance matrices (Figure \@ref(fig:pcoa)).
 
 ```{r prepare pcoa, echo=F, results='hide', warning=FALSE, message=FALSE}
 source(file.path(dir_plots, "mzb_nmds_pcoa.R"))
@@ -333,8 +329,8 @@ source(file.path(dir_plots, "dia_nmds_pcoa.R"))
 
 ```{r pcoa, echo=FALSE, fig.height=5, fig.cap="Principal Coordinate Analysis ordinations of typical assemblages based on Jaccard distance matrices. A shows the typical asseblages of macroinvertebrates and B those of diatoms."}
 plot_grid(align='v', 
-          plot_mzb_pcoa, 
-          plot_dia_pcoa, 
+          plot_mzb_nmds, 
+          plot_dia_nmds, 
           labels = c('A', 'B'), 
           ncol = 1)
 ```

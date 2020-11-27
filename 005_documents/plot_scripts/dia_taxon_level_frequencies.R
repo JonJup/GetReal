@@ -18,8 +18,11 @@ p_load(data.table,
 
 DIR = list(rs = here("002_working_package_02/001_community_data/002_combined/001_diatoms/002_r_scripts/"),
            pd = here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/"))
-call_ta_setup = file.path(DIR$rs, "10_c_setup_ta_analysis.R")
-source(call_ta_setup)
+
+
+# load files  -------------------------------------------------------------
+source(file.path(DIR$rs, "10_c_setup_ta_analysis.R"))
+
 ch_river_types = unique(dt_bty$group)
 dt_ac_dia <- data.table(
         river_type = character(length(ch_river_types)),
@@ -31,8 +34,8 @@ for (i in seq_along(ch_river_types)) {
         river_type_var <- ch_river_types[i]
         dt_ac_dia[i, river_type := river_type_var]
         dt_ac_dia[i, c("species", "genus") :=
-                      .(dt_sty[group == river_type_var, .N],
-                        dt_gty[group == river_type_var, .N])]
+                      .(ls_dia$spe[group == river_type_var, .N],
+                        ls_dia$gen[group == river_type_var, .N])]
 }
 
 # drop stream types that were not considered
