@@ -6,22 +6,41 @@ output: pdf_document
 ---
 
 ## RT1    
-Ancylus, Baetis, Caenis, Chelicorophium, Corbicula, Dikerogammarus, Dreissena, Echinogammarus, Ecnomus, Ephoron, Gammarus, Hydropsyche, Jaera, Lithoglyphus, Potamopyrgus, Chironomidae  
+Borysthenia naticina, Obesogammarus obesus, Ancylus, Baetis, Caenis, Chelicorophium, Corbicula, Corophium, Dikerogammarus, Dina, Dreissena, Ecnomus, Ephoron, Ferrissia, Gammarus, Hydropsyche, Jaera, Leptocerus, Lithoglyphus, Musculium, Neureclipsis, Orconectes, Plea, Potamopyrgus, Sisyra, Chironomidae, Mysidae  
 
-## RT2_3    
-Peregriana peregra, Ancylus, Baetis, Caenis, Dicranota, Ecdyonurus, Elmis, Esolus, Gammarus, Hydropsyche, Isoperla, Lepidostoma, Leuctra, Limnius, Oulimnius, Pisidium, Polycentropus, Potamopyrgus, Protonemura, Rhithrogena, Rhyacophila, Baetidae, Chironomidae, Elmidae, Heptageniidae, Hydropsychidae, Limnephilidae, Lumbricidae, Naididae, Simuliidae   
+## RT2    
+Peregriana peregra, Serratella ignita, Ancylus, Baetis, Caenis, Ecdyonurus, Elmis, Gammarus, Hydropsyche, Leuctra, Limnius, Pisidium, Polycentropus, Potamopyrgus, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Lumbricidae, Naididae, Simuliidae   
 
-## RT4_5    
-Peregriana peregra, Ancylus, Asellus, Baetis, Caenis, Cladotanytarsus, Clinotanypus, Elmis, Erpobdella, Gammarus, Glossiphonia, Hydropsyche, Limnius, Notonecta, Oulimnius, Pisidium, Potamopyrgus, Sphaerium, Bithyniidae, Chironomidae, Crangonyctidae, Naididae, Valvatidae
+## RT3    
+Alainites muticus, Peregriana peregra, Serratella ignita, Ancylus, Baetis, Dicranota, Ecdyonurus, Elmis, Gammarus, Hydropsyche, Leuctra, Limnius, Oulimnius, Pisidium, Polycentropus, Protonemura, Rhithrogena, Rhyacophila, Stictochironomus, Velia, Baetidae, Chironomidae, Elmidae, Limnephilidae, Naididae, Odontoceridae, Ptychopteridae, Simuliidae  
 
-## RT8_9_10_11_15_16   
-Ancylus, Baetis, Ecdyonurus, Elmis, Ephemera, Esolus, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Limoniidae, Oligochaeta, Sericostomatidae, Simuliidae    
+## RT4    
+Armiger crista, Peregriana peregra, Serratella ignita, Ancylus, Anodonta, Asellus, Baetis, Caenis, Cladotanytarsus, Clinotanypus, Corynoneura, Crangonyx, Cryptochironomus, Dicrotendipes, Elmis, Endochironomus, Erpobdella, Gammarus, Glossiphonia, Glyptotendipes, Hemiclepsis, Hydropsyche, Laccophilus, Limnius, Molanna, Nebrioporus, Oulimnius, Pisidium, Potamopyrgus, Sphaerium, Synorthocladius, Theromyzon, Bithyniidae, Chironomidae, Crangonyctidae, Molannidae, Naididae, Neritidae, Unionidae    
 
-## RT12    
-Ameletus inopinatus, Nigrobaetis niger, Amphinemura, Baetis, Dicranota, Elmis, Ephemerella, Heptagenia, Hydraena, Isoperla, Leuctra, Polycentropus, Protonemura, Rhyacophila, Chironomidae, Empididae, Simuliidae   
+## RT5    
+Peregriana labiata, Agabus, Ancylus, Baetis, Elmis, Gammarus, Helophorus, Hydroporus, Hydropsyche, Hygrotus, Hyphydrus, Limnius, Noterus, Pisidium, Potamopyrgus, Chironomidae, Limnephilidae   
+
+## RT8    
+Serratella ignita, Ancylus, Baetis, Dicranota, Ecdyonurus, Elmis, Esolus, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Pedicia, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Limoniidae, Sericostomatidae, Simuliidae  
+
+## RT9    
+Ameletus inopinatus, Serratella ignita, Amphinemura, Baetis, Dicranota, Elmis, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Sericostomatidae, Simuliidae  
+
+## RT10    
+Propappus volki, Serratella ignita, Ancylus, Baetis, Conchapelopia, Ecdyonurus, Elmis, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Leuctra, Limnius, Rhithrogena, Rhyacophila, Riolus, Torleya, Chironomidae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae 
+  
+## RT11    
+Baetis, Ecdyonurus, Elmis, Ephemera, Esolus, Gammarus, Hydraena, Hydropsyche, Leuctra, Limnius, Odontocerum, Protonemura, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Limnephilidae, Limoniidae, Oligochaeta, Sericostomatidae, Simuliidae  
 
 ## RT14    
-Baetis, Ephemerella, Heptagenia, Hydraenida, Hydropsyche, Leuctra, Protonemura, Rhithrogena, Rhyacophila, Athericidae, Chironomidae, Empididae, Limnephilidae, Limoniidae, Oligochaeta, Perlidae, Sericostomatidae, Simuliidae    
-
+Baetis, Ephemerella, Gordiacea, Heptagenia, Hydraenida, Hydropsyche, Leuctra, Odontocera, Rhithrogena, Rhyacophila, Athericidae, Chironomidae, Culicidae, Dolichopodidae, Empididae, Helophorida, Limnephilidae, Limoniidae, Oligochaeta, Perlidae, Sciomyzidae, Sericostomatidae, Simuliidae 
+  
+## RT15    
+Baetis, Ecdyonurus, Elmis, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Empididae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae  
+  
+## RT16    
+Agriotypus, Ancylus, Baetis, Ecdyonurus, Elmis, Epeorus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Nemoura, Odontocerum, Parametriocnemus, Perlodes, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Empididae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae     
+ 
 ## RT18    
-Acentrella, Baetis, Caenis, Calopteryx, Ecdyonurus, Elmis, Ephemerella, Esolus, Gammarus, Helichus, Hydropsyche, Hydroptila, Leuctra, Limnius, Oligoneuriella, Onychogomphus, Oulimnius, Polycentropus, Potamopyrgus, Psychomyia, Rhyacophila, Ceratopogonidae, Chironomidae, Empididae, Gomphidae, Limoniidae, Naucoridae, Oligochaeta, Simuliidae, Tabanidae  
+Baetis, Boyeria, Caenis, Calopteryx, Chimarra, Choroterpes, Dryops, Ecdyonurus, Elmis, Ephemerella, Esolus, Gammarus, Hydropsyche, Hydroptila, Leuctra, Limnius, Metalype, Normandia, Oligoneuriella, Onychogomphus, Orthotrichia, Potamopyrgus, Pseudocentroptilum, Rhyacophila, Setodes, Chironomidae, Empididae, Gomphidae, Limoniidae, Naucoridae, Oligochaeta, Simuliidae    
+   

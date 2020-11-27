@@ -5,10 +5,10 @@
 
 # setup --------------------------------------------------------------------
 pacman::p_load(cowplot, dplyr, gdm, ggplot2, here)
-dir_da = here("002_working_package_02/003_seasonality/003_results/invertebrates/005_gdms/")
+dir_da = here("002_working_package_02/003_seasonality/003_results/invertebrates/gdm/")
 
 # data --------------------------------------------------------------------
-gdm_data = readRDS(file.path(dir_da, "2020-11-13_gdm_rt4_5.RDS"))
+gdm_data = readRDS(file.path(dir_da, "gdm_RT10_sub1.RDS"))
 splineDat  <- isplineExtract(gdm_data)
 splineDat_x <- splineDat$x %>% as.data.frame
 splineDat_y <- splineDat$y %>% as.data.frame
@@ -30,7 +30,7 @@ p1 <-
         xlab("Geographic Distance") +
         ylim(0, y_max) + theme_minimal_hgrid() +
         ggtitle(paste0("Macroinvertebrates")) +
-        labs(subtitle = "RT 4_5")
+        labs(subtitle = "subset of RT 10")
 p2 <- ggplot(data = splineDat, aes(x = x_season, y = y_season)) +
         geom_line() +
         ylab("partial ecological distance") +

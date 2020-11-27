@@ -1,27 +1,29 @@
 ---
 title: "Seasonal typical diatom assemblages"
 author: "Jonathan Jupke"
-date: "16.11.2020"
+date: "27.11.2020"
 output: pdf_document
 ---
 
+## RT16 summer 
+Achnanthidium atomoides, Achnanthidium eutrophilum, Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis placentula, Cocconeis pseudolineata, Cymbella excisa, Gomphonema angustivalva, Gomphonema parvulum Complex, Gomphonema pumilum complex, Nitzschia fonticola Complex, Planothidium lanceolatum, Reimeria sinuata, Fistulifera, Gomphonema, Mayamaea  
 
-## RT11 
-### Summer 
-Achnanthidium atomoides, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Caloneis bacillum Complex, Caloneis lancettula, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fallacia subhamulata helensis, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Melosira varians Complex, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula lanceolata complex, Navicula margalithii tripunctata, Navicula menisculus antonii, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia palea paleacea, Nitzschia sociabilis, Planothidium lanceolatum, Reimeria sinuata, Sellaphora submuralis Complex, Surirella brebissonii, Gomphonema, Mayamaea, Rhoicosphenia
+## RT16 winter 
+Achnanthidium atomoides, Achnanthidium minutissimum, Cocconeis euglypta, Cymbella compacta, Cymbella excisa, Diatoma ehrenbergii, Diatoma mesodon, Diatoma vulgaris, Fragilaria arcus, Fragilaria austriaca, Fragilaria capucina complex, Fragilaria tenera complex, Fragilaria virescens complex, Geissleria ignota complex, Gomphonema angustivalva, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Nitzschia fonticola Complex, Reimeria sinuata, Cymbella, Rhoicosphenia 
 
-### Autumn 
-Achnanthidium atomoides, Achnanthidium minutissimum, Achnanthidium subatomus, Amphora pediculus inariensis Complex, Caloneis lancettula, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cocconeis pseudolineata, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fallacia subhamulata helensis, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Halamphora montana, Melosira varians Complex, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula margalithii tripunctata, Navicula menisculus antonii, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia palea paleacea, Nitzschia pura linearis Complex, Nitzschia sociabilis, Planothidium lanceolatum, Reimeria sinuata, Diploneis, Gomphonema, Mayamaea, Rhoicosphenia, Simonsenia
+## RT17_18 spring   
+Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Planothidium lanceolatum, Reimeria sinuata, Ulnaria ulna complex, Gomphonema, Mayamaea 
 
-### Winter 
-Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis placentula, Diatoma ehrenbergii, Diatoma mesodon, Diatoma moniliformis tenuis, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fragilaria arcus, Fragilaria austriaca, Fragilaria virescens complex, Gomphonema angustivalva, Gomphonema cymbelliclinum, Gomphonema micropus Complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Meridion circulare Complex, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula krasskei egregia minuscula, Navicula lanceolata complex, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia sociabilis, Planothidium lanceolatum, Reimeria sinuata, Gomphonema, Rhoicosphenia
+## RT17_18 summer   
+Achnanthidium eutrophilum, Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Diatoma vulgaris, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Navicula capitatoradiata, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Planothidium lanceolatum, Reimeria sinuata, Ulnaria ulna complex, Gomphonema, Mayamaea, Rhoicosphenia  
 
-## RT15 
-### Summer 
-Achnanthidium atomoides, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Denticula tenuis, Diatoma moniliformis tenuis, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Gomphonema angustivalva, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Navicula cryptotenella cryptotenelloides, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia palea paleacea, Planothidium lanceolatum, Reimeria sinuata, Cymbella, Gomphonema
+## RT17_18 autumn  
+Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Denticula tenuis, Diatoma vulgaris, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Navicula capitatoradiata, Nitzschia amphibia Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Planothidium lanceolatum, Reimeria sinuata, Sellaphora submuralis Complex, Ulnaria ulna complex, Gomphonema, Rhoicosphenia 
 
-### Autumn 
-Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Diatoma moniliformis tenuis, Diatoma vulgaris, Encyonema silesicacum minutum lange bertalotii, Eolimna minima seminulum atomoides, Fragilaria capucina complex, Fragilaria tenera complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Navicula cryptotenella cryptotenelloides, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Nitzschia palea paleacea, Planothidium lanceolatum, Reimeria sinuata, Ulnaria ulna complex, Cymbella, Gomphonema
+## RT17_18 winter  
+Achnanthidium minutissimum, Caloneis bacillum Complex, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cocconeis pseudolineata, Cymbella excisa, Denticula tenuis, Diatoma vulgaris, Fragilaria tenera complex, Fragilaria virescens complex, Gomphonema angustatum Complex, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Navicula cryptocephala, Nitzschia sociabilis, Reimeria sinuata, Sellaphora submuralis Complex, Surirella brebissonii, Ulnaria ulna complex, Cymbella, Delicata, Fistulifera, Gomphonema, Tryblionella  
 
-### Winter 
-Achnanthidium atomoides, Achnanthidium minutissimum, Amphora pediculus inariensis Complex, Caloneis bacillum Complex, Cocconeis euglypta, Diatoma ehrenbergii, Diatoma mesodon, Diatoma moniliformis tenuis, Diatoma vulgaris, Encyonema silesicacum minutum lange bertalotii, Fragilaria arcus, Fragilaria austriaca, Fragilaria capucina complex, Fragilaria tenera complex, Fragilaria virescens complex, Gomphonema micropus Complex, Gomphonema olivaceum olivaceoides, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Meridion circulare Complex, Navicula cryptotenella cryptotenelloides, Navicula gregaria, Navicula lanceolata complex, Navicula margalithii tripunctata, Navicula reichardtiana caterva, Nitzschia dissipata recta Complex, Nitzschia fonticola Complex, Reimeria sinuata
+   
+
+   
+ 

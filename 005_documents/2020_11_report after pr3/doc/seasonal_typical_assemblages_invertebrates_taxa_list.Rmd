@@ -1,26 +1,27 @@
 ---
 title: "Seasonal typical macro-invertebrate assemblages"
 author: "Jonathan Jupke"
-date: "16.11.2020"
+date: "27.11.2020"
 output: pdf_document
 ---
 
-## RT2_3 
-### Summer
-Ancylus, Dikerogammarus, Gammarus, Potamopyrgus, Chironomidae
+## RT10 spring 
+Baetis, Dicranota, Elmis, Gammarus, Hydropsyche, Leuctra, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Simuliidae    
 
-### Autumn
-Ampullaceana balthica, Ancylus, Baetis, Caenis, Chelicorophium, Corbicula, Dikerogammarus, Echinogammarus, Elmis, Ephemera, Gammarus, Hydropsyche, Jaera, Limnius, Pisidium, Potamopyrgus, Psychomyia, Chironomidae
+## RT10 summer 
+Baetis, Elmis, Esolus, Gammarus, Hydropsyche, Hydroptila, Leuctra, Limnius, Rhyacophila, Riolus, Athericidae, Chironomidae, Empididae, Limnephilidae, Limoniidae, Simuliidae    
 
-## RT8-11_15_16 
-### Spring
-Baetis, Dicranota, Elmis, Gammarus, Hydropsyche, Isoperla, Leuctra, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Sericostomatidae, Simuliidae
+## RT10 autumn 
+Ancylus, Baetis, Calopteryx, Ecdyonurus, Elmis, Ephemera, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Leuctra, Limnius, Pisidium, Potamopyrgus, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Limoniidae, Simuliidae
 
-### Summer
-Baetis, Elmis, Esolus, Gammarus, Hydraena, Hydropsyche, Leuctra, Limnius, Rhyacophila, Athericidae, Chironomidae, Empididae, Limnephilidae, Limoniidae, Sericostomatidae, Simuliidae
+## RT10 winter 
+Baetis, Ecdyonurus, Epeorus, Gammarus, Hydropsyche, Leuctra, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Limoniidae, Simuliidae    
+ 
+## RT16 summer 
+Baetis, Ecdyonurus, Echinogammarus, Elmis, Ephemerella, Esolus, Gammarus, Hydraena, Hydropsyche, Leuctra, Protonemura, Rhithrogena, Rhyacophila, Anthomyiidae, Athericidae, Blephariceridae, Chironomidae, Dytiscidae, Empididae, Ephydridae, Glossiphoniidae, Hydropsychidae, Limnephilidae, Limoniidae, Simuliidae, Sphaeriidae    
 
-### Autumn
-Amphinemura, Ancylus, Baetis, Ecdyonurus, Elmis, Epeorus, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Isoperla, Leuctra, Limnius, Nemoura, Protonemura, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Limnephilidae, Limoniidae, Simuliidae
+## RT16 autumn 
+Acentrella, Baetis, Ecdyonurus, Epeorus, Hydropsyche, Isoperla, Leuctra, Nemoura, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Empididae, Limnephilidae, Limoniidae, Simuliidae, Tipulidae  
 
-
-
+## RT16 winter 
+Baetis, Ecdyonurus, Isoperla, Leuctra, Rhithrogena, Rhyacophila, Chironomidae, Empididae, Limnephilidae, Limoniidae, Simuliidae    

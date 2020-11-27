@@ -43,4 +43,4 @@ source(file.path(DIR$rs, "08_d_redundancy.R"))
 # source(file.path(DIR$rs, "08_e_sensitivity_analysis.R"))
 
 # make lists -----------------------------------------------------
-#source(file.path(DIR$rs, "08_f_make_ta_lists.R"))
+source(file.path(DIR$rs, "08_f_make_ta_lists.R"))

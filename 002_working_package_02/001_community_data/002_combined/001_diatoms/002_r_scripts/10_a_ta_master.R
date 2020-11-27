@@ -46,6 +46,6 @@ source(file.path(DIR$rs, "10_d_redundancy.R"))
 # source(file.path(DIR$rs, "10_e_sensitivity_analysis.R"))
 
 # make TA list -----------------------------------------------------
-#source(file.path(DIR$rs, "10_f_make_ta_lists.R"))
+source(file.path(DIR$rs, "10_f_make_ta_lists.R"))
 
 dt_bty$B %>% summary()
