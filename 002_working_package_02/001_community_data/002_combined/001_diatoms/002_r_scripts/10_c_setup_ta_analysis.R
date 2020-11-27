@@ -10,13 +10,27 @@
 # Diatoms
 
 # load data ---------------------------------------------------------------
-dt_spe = readRDS(file.path(DIR$pd, "11_indicator_spe.RDS"))
-dt_gen = readRDS(file.path(DIR$pd, "11_indicator_gen.RDS"))
+ls_dia = readRDS(file.path(DIR$pd, "09_indicator_list.RDS"))
+
+if (!"x_ls_combine" %in% ls()){
+        source(
+                textConnection(
+                        readLines(
+                                file.path(DIR$rs, 
+                                          "10_a_ta_master.R")
+                        )[c(28,29)]
+                )
+        )
+}
 
 # Deriving initial TAs ---------------------------------------------------
-dt_sty = dt_spe[B > 0.25 | A > 0.9]
-dt_gty = dt_gen[B > 0.35 | A > 0.8]
-dt_bty = rbindlist(list(dt_sty,
-                         dt_gty))
+ls_dia$spe = ls_dia$spe[B > x_ls_thesholds$spe$b | (A > x_ls_thesholds$spe$a & B > x_ls_thesholds$spe$b2)]
+ls_dia$gen = ls_dia$gen[B > x_ls_thesholds$gen$b | (A > x_ls_thesholds$gen$a & B > x_ls_thesholds$spe$b2)]
 
-rm(dt_spe, dt_gen)
+dt_bty = rbindlist(ls_dia)
+
+# dt_bty[A > 0.9 & B < .25, pathway := "A"]
+# dt_bty[A > 0.9 & B > .25, pathway := "AB"]
+# dt_bty[A < 0.9 & B > .25, pathway := "B"]
+# 
+# table(dt_bty[group == "RT3"]$pathway)

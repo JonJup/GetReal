@@ -10,13 +10,12 @@
 # Macroinvertebrates
 
 #function
-call_redundant_function = file.path(DIR$pd, "../002_r_scripts/f_01_redundant.R")
-source(call_redundant_function)
-ch_river_types = unique(dt_bty$group)
-for (j in ch_river_types){
-        redundant(x = j, data = dt_bty)
-        rm(j)
-}
+source(file.path(DIR$pd, "../002_r_scripts/f_01_redundant.R"))
 
-rm(call_redundant_function, redundant, ch_river_types)
+ma_redundnat = redundant(dt_mzb)
+print(ma_redundnat)
+x11()
+corrplot::corrplot.mixed(ma_redundnat, lower = "shade", upper = "number", is.corr = FALSE, order = "FPC") 
+rm(redundant)
+
 print("#--------------------------------------------------------#")

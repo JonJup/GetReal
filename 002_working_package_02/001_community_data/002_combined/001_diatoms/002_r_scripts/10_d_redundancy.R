@@ -10,15 +10,15 @@
 # Diatoms
 
 source(file.path(DIR$rs, "10_c_setup_ta_analysis.R"))
-ch_river_types = unique(dt_bty$group)
-#function
-call_redundant_function = file.path(DIR$rs, "f_001_redundant.R")
-source(call_redundant_function)
+source(file.path(DIR$red, "f_01_redundant.R"))
 
-for (j in ch_river_types){
-        redundant(j)
-        rm(j)
-}
+ma_redundnat = redundant(dt_bty)
+print(ma_redundnat)
+x11()
+corrplot::corrplot.mixed(ma_redundnat, lower = "shade", upper = "number",
+                         is.corr = FALSE,  order = "FPC") 
+rm(redundant)
+
 print("#----------------------------------------#")
-rm(ch_river_types, redundant)
+
 
