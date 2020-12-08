@@ -24,7 +24,7 @@ dt_loop_out = data.table(threshold=rep(70:95, each=2),
                          n_taxa=numeric(0),
                          taxon_level=rep(c("species","genus"), times=15))
 
-for (l2 in c(95:70)) { #BEGIN FOR-LOOP 1 NOT-NESTED OVER:
+for (l2 in c(95:50)) { #BEGIN FOR-LOOP 1 NOT-NESTED OVER:
                        #Threshold for how many percent of data must be below the current level for it to continue downward.
         
         dt_set_all_loop <- copy(set_all)
