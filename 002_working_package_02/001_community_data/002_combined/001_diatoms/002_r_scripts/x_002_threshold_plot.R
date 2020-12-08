@@ -97,5 +97,5 @@ legend <- cowplot::get_legend(
         threshplot_percent + theme(legend.position = "bottom")
 )
 plot_thresh = plot_grid(prow, legend, ncol = 1, rel_heights = c(1,.1))
-ggsave(pt_save, filename="../004_plots/threshold_plot/threshold_plot_diatoms.jpeg")
+ggsave(plot_thresh, filename="../004_plots/threshold_plot/threshold_plot_diatoms.jpeg")
 
