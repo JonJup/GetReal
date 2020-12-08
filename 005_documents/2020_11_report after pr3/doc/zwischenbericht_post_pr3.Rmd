@@ -161,10 +161,10 @@ A taxon belongs to the TA of a river type if it is more common that some thresho
 To prevent rare species and singletons from exerting an undue influence on the TAs we first removed taxa that occurred in less than 5% of the samples. 
 Second, we only included highly specific taxa if they also surpassed a threshold in commonness. 
 The first step was undertaken for each river type separately so that the effective threshold varied between river types. 
-The B-threshold for species was `r x_ls_thesholds$spe$b`, for genera `r x_ls_thesholds$gen$b` and for family or lower resolutions `r x_ls_thesholds$fam$b`. 
-The A-threshold for species was `r x_ls_thesholds$spe$a` for a species, `r x_ls_thesholds$gen$a` for genus or `r x_ls_thesholds$fam$a` for family or lower taxonomic levels. 
+The B-threshold for species was `r x_ls_thesholds$spe$b`, for genera `r x_ls_thesholds$gen$b` and for family or lower resolutions `r x_ls_thesholds$foh$b`. 
+The A-threshold for species was `r x_ls_thesholds$spe$a` for a species, `r x_ls_thesholds$gen$a` for genus or `r x_ls_thesholds$foh$a` for family or lower taxonomic levels. 
 To be included, a highly specific (i.e. A > the respective threshold value) taxon also had have commonness
-above `r x_ls_thesholds$spe$b2` for species, `r x_ls_thesholds$gen$b2` for genera and `r x_ls_thesholds$fam$b2` for families or lower taxonomic levels. 
+above `r x_ls_thesholds$spe$b2` for species, `r x_ls_thesholds$gen$b2` for genera and `r x_ls_thesholds$foh$b2` for families or lower taxonomic levels. 
 
 We did not systematically optimize these thresholds. 
 Such procedures would require optimization criteria, but we are not aware of any criterion that would work in this context. 

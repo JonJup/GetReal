@@ -4,13 +4,13 @@
 # getreal 
 
 # setup -------------------------------------------------------------------
-pacman::p_load(here, magrittr, data.table, ggplot2)
+pacman::p_load(here, magrittr, data.table, ggplot2, cowplot)
 
 setwd(here("002_working_package_02/001_community_data/002_combined/001_diatoms/003_processed_data/"))
 set_all   =readRDS("005_2020-08-17_clean_diatoms_observations.RDS")
-dt_genus  =readRDS("006_2020-08-18_taxon_list_genus.RDS")
-dt_family =readRDS("006_2020-08-18_taxon_list_family.RDS")
-dt_order  =readRDS("006_2020-08-18_taxon_list_order.RDS")
+dt_genus  =readRDS("006_2020-11-04_taxon_list_genus.RDS")
+dt_family =readRDS("006_2020-11-04_taxon_list_family.RDS")
+dt_order  =readRDS("006_2020-11-04_taxon_list_order.RDS")
 
 set_all <- set_all[- which(set_all$species == "Fontigonium rectangulare")]
 set_all[, c("genus_check2", "genus_new2", "double_checked", "species_new", "species_clean", "comment", "species_old") := NULL]
@@ -63,8 +63,39 @@ for (l2 in c(95:70)) { #BEGIN FOR-LOOP 1 NOT-NESTED OVER:
         print(l2)
 }
 
-pt_save <- dt_loop_out %>% 
-        ggplot(aes(x=threshold, y=n_observations,col=taxon_level)) + 
-        geom_line()+
-        geom_point()
+
+dt_loop_out[,total_obs := sum(n_observations), by = threshold]
+dt_loop_out[,percent := n_observations/total_obs * 100]
+
+
+threshplot_total = dt_loop_out %>% 
+        ggplot(aes(x = threshold, y = n_observations, col = taxon_level)) + 
+        geom_line(size = 1.3)  + 
+        scale_y_log10() + 
+        xlab(label="number of observations") + 
+        xlab("theshold [%]") +
+        labs(col = "taxon level") +
+        theme(panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(), 
+              panel.background = element_blank(), 
+              axis.line = element_line(colour = "black"))
+threshplot_percent = dt_loop_out %>% 
+        ggplot(aes(x = threshold, y = percent, col = taxon_level)) + 
+        geom_line(size = 1.3)  + 
+        xlab(label="percent of observations") + 
+        xlab("theshold [%]") +
+        labs(col = "taxon level") +
+        theme(panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(), 
+              panel.background = element_blank(), 
+              axis.line = element_line(colour = "black"))
+prow = cowplot::plot_grid(
+        threshplot_total   + theme(legend.position = "none"), 
+        threshplot_percent + theme(legend.position = "none"),
+        labels = c("A", "B"))
+legend <- cowplot::get_legend(
+        threshplot_percent + theme(legend.position = "bottom")
+)
+plot_thresh = plot_grid(prow, legend, ncol = 1, rel_heights = c(1,.1))
 ggsave(pt_save, filename="../004_plots/threshold_plot/threshold_plot_diatoms.jpeg")
+

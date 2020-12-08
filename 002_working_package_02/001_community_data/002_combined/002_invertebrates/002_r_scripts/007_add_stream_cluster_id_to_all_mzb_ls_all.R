@@ -48,3 +48,4 @@ sum(is.na(ls_joind$foh$ls_bd_20)) == 0
 
 # save to file  -------------------------------------------------------------------
 saveRDS(object = ls_joind,  file = file.path(DIR$pd, "06_sxs_w_LS20.RDS"))
+

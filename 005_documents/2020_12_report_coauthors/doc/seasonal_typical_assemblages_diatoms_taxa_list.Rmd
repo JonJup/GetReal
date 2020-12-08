@@ -1,0 +1,29 @@
+---
+title: "Seasonal typical diatom assemblages"
+author: "Jonathan Jupke"
+date: "27.11.2020"
+output: pdf_document
+---
+
+## RT16 summer 
+Achnanthidium atomoides, Achnanthidium eutrophilum, Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis placentula, Cocconeis pseudolineata, Cymbella excisa, Gomphonema angustivalva, Gomphonema parvulum Complex, Gomphonema pumilum complex, Nitzschia fonticola Complex, Planothidium lanceolatum, Reimeria sinuata, Fistulifera, Gomphonema, Mayamaea  
+
+## RT16 winter 
+Achnanthidium atomoides, Achnanthidium minutissimum, Cocconeis euglypta, Cymbella compacta, Cymbella excisa, Diatoma ehrenbergii, Diatoma mesodon, Diatoma vulgaris, Fragilaria arcus, Fragilaria austriaca, Fragilaria capucina complex, Fragilaria tenera complex, Fragilaria virescens complex, Geissleria ignota complex, Gomphonema angustivalva, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Nitzschia fonticola Complex, Reimeria sinuata, Cymbella, Rhoicosphenia 
+
+## RT17_18 spring   
+Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Planothidium lanceolatum, Reimeria sinuata, Ulnaria ulna complex, Gomphonema, Mayamaea 
+
+## RT17_18 summer   
+Achnanthidium eutrophilum, Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Diatoma vulgaris, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Navicula capitatoradiata, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Planothidium lanceolatum, Reimeria sinuata, Ulnaria ulna complex, Gomphonema, Mayamaea, Rhoicosphenia  
+
+## RT17_18 autumn  
+Achnanthidium minutissimum, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cymbella excisa, Denticula tenuis, Diatoma vulgaris, Fragilaria capucina complex, Fragilaria virescens complex, Gomphonema parvulum Complex, Gomphonema pumilum complex, Melosira varians Complex, Navicula capitatoradiata, Nitzschia amphibia Complex, Nitzschia fonticola Complex, Nitzschia inconspicua Complex, Planothidium lanceolatum, Reimeria sinuata, Sellaphora submuralis Complex, Ulnaria ulna complex, Gomphonema, Rhoicosphenia 
+
+## RT17_18 winter  
+Achnanthidium minutissimum, Caloneis bacillum Complex, Cocconeis euglypta, Cocconeis pediculus, Cocconeis placentula, Cocconeis pseudolineata, Cymbella excisa, Denticula tenuis, Diatoma vulgaris, Fragilaria tenera complex, Fragilaria virescens complex, Gomphonema angustatum Complex, Gomphonema parvulum Complex, Gomphonema perolivaceoides, Gomphonema pumilum complex, Navicula cryptocephala, Nitzschia sociabilis, Reimeria sinuata, Sellaphora submuralis Complex, Surirella brebissonii, Ulnaria ulna complex, Cymbella, Delicata, Fistulifera, Gomphonema, Tryblionella  
+
+   
+
+   
+ 

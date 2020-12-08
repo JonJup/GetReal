@@ -1,0 +1,39 @@
+---
+title: "Typical macroinvertebrate assemblages"
+author: "Jonathan Jupke"
+date: "20.11.2020"
+output: pdf_document
+---
+
+## RT1    
+Borysthenia naticina, Ancylus, Baetis, Caenis, Chelicorophium, Dikerogammarus, Gammarus, Hydropsyche, Jaera, Potamopyrgus, Chironomidae, Mysidae    
+
+## RT2_3    
+Peregriana peregra, Serratella ignita, Ancylus, Baetis, Dicranota, Ecdyonurus, Elmis, Gammarus, Hydropsyche, Leuctra, Limnius, Pisidium, Polycentropus, Rhithrogena, Rhyacophila, Baetidae, Chironomidae, Limnephilidae, Lumbricidae, Naididae, Simuliidae    
+
+## RT4    
+Peregriana peregra, Serratella ignita, Ancylus, Asellus, Baetis, Caenis, Elmis, Erpobdella, Gammarus, Glossiphonia, Hydropsyche, Limnius, Oulimnius, Pisidium, Potamopyrgus, Sphaerium, Chironomidae, Molannidae, Naididae, Unionidae  
+
+## RT5   
+Ancylus, Baetis, Elmis, Gammarus, Hydropsyche, Limnius, Pisidium, Potamopyrgus, Chironomidae, Limnephilidae 
+
+## RT8_9    
+Serratella ignita, Ancylus, Baetis, Dicranota, Ecdyonurus, Elmis, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Limnephilidae, Sericostomatidae, Simuliidae    
+
+## RT10_11    
+Serratella ignita, Ancylus, Baetis, Ecdyonurus, Elmis, Ephemera, Esolus, Gammarus, Hydraena, Hydropsyche, Hydroptila, Leuctra, Limnius, Protonemura, Rhithrogena, Rhyacophila, Riolus, Chironomidae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae 
+
+## RT12    
+Ameletus inopinatus, Diura nanseni, Nigrobaetis digitatus, Nigrobaetis niger, Amphinemura, Apatania, Baetis, Dicranota, Elmis, Ephemerella, Heptagenia, Hydraena, Isoperla, Leuctra, Polycentropus, Protonemura, Rhyacophila, Chironomidae, Empididae, Simuliidae    
+
+## RT13    
+Alainites muticus, Ampullaceana balthica, Peregriana peregra, Serratella ignita, Amphinemura, Baetis, Caenis, Dicranota, Ecdyonurus, Elmis, Gammarus, Hydroptila, Leuctra, Limnius, Nemoura, Rhithrogena, Rhyacophila, Baetidae, Chironomidae, Elmidae, Heptageniidae, Lumbricidae, Nemouridae, Perlidae   
+
+## RT14   
+Baetis, Ephemerella, Heptagenia, Hydropsyche, Leuctra, Odontocera, Rhithrogena, Rhyacophila, Athericidae, Chironomidae, Empididae, Limnephilidae, Limoniidae, Oligochaeta, Perlidae, Sericostomatidae, Simuliidae 
+
+## RT15_16   
+Baetis, Ecdyonurus, Elmis, Epeorus, Gammarus, Hydraena, Hydropsyche, Isoperla, Leuctra, Limnius, Nemoura, Protonemura, Rhithrogena, Rhyacophila, Chironomidae, Empididae, Limnephilidae, Limoniidae, Oligochaeta, Simuliidae    
+
+## RT18   
+Baetis, Caenis, Calopteryx, Ecdyonurus, Elmis, Ephemerella, Esolus, Gammarus, Hydropsyche, Hydroptila, Leuctra, Limnius, Onychogomphus, Potamopyrgus, Rhyacophila, Chironomidae, Empididae, Limoniidae, Oligochaeta, Simuliidae    

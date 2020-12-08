@@ -26,7 +26,7 @@ x_ls_thesholds = list(spe = list(a = .90, b = .20, b2 = 0.05),
                       gen = list(a = .85, b = .40, b2 = 0.10),
                       foh = list(a = .80, b = .60, b2 = 0.15))
 
-x_ls_combine = list()
+x_ls_combine = list(c(2,3), c(4,5), c(8,9,10,11,15,16))
 #x_ls_combine = list(c(2,3),c(4,5), c(8,9,10,11), c(15,16))
 
 

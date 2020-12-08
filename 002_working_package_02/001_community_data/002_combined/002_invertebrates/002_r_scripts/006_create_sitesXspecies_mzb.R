@@ -31,16 +31,19 @@ OPT=list(flow=TRUE)
 # load data 
 dt_mzb  = readRDS(file.path(DIR$pd, "004_2020-11-03_mzb_data1585_low_impact.RDS"))
 
+# fix hydaenida 
+
+
 # trim names 
 dt_mzb[, final_taxon := str_trim(final_taxon, side = "both")]
 
 #unique(dt_mzb$final_taxon) %>% sort
 
+dt_mzb[final_taxon == "Hydraenida", c("final_taxon", "final_taxon_level") := .("Hydraenidae", "family")]
 dt_mzb[final_taxon == "Stratiomyiidae", final_taxon := "Stratiomyidae"]
 dt_mzb[final_taxon == "Notonectidae", final_taxon_level := "family"]
 dt_mzb$gr_sample_id %<>% as.character()
 dt_mzb = dt_mzb[(is.na(year) | year >= 2000)]
-
 
 # 03. Drop columns --------------------------------------------------------
 dt_mzb = dt_mzb[,.(gr_sample_id, final_taxon, final_taxon_level, ls_bd_20)]
@@ -106,65 +109,65 @@ if (!OPT$flow) {
 
 # 1% cutoff
 
-nu_rate_cutoff = dt_mzb[, uniqueN(gr_sample_id), by = ls_bd_20]
-nu_rate_cutoff[, one_percent :=  round(V1 * 0.05,0)]
-
-# stream types with less than 25 samples 
-nu_rate_cutoff = nu_rate_cutoff[V1 > 25]
-                                
-ls_mzb$spe = ls_mzb$spe[ls_bd_20 %in% nu_rate_cutoff$ls_bd_20]
-ls_mzb$gen = ls_mzb$gen[ls_bd_20 %in% nu_rate_cutoff$ls_bd_20]
-ls_mzb$foh = ls_mzb$foh[ls_bd_20 %in% nu_rate_cutoff$ls_bd_20]
+# nu_rate_cutoff = dt_mzb[, uniqueN(gr_sample_id), by = ls_bd_20]
+# nu_rate_cutoff[, one_percent :=  round(V1 * 0.05,0)]
+# 
+# # stream types with less than 25 samples 
+# nu_rate_cutoff = nu_rate_cutoff[V1 > 25]
+#                                 
+# ls_mzb$spe = ls_mzb$spe[ls_bd_20 %in% nu_rate_cutoff$ls_bd_20]
+# ls_mzb$gen = ls_mzb$gen[ls_bd_20 %in% nu_rate_cutoff$ls_bd_20]
+# ls_mzb$foh = ls_mzb$foh[ls_bd_20 %in% nu_rate_cutoff$ls_bd_20]
 
 # -- rare taxa -- #
 
 # I cannot completely remove the taxa but I can set occurences within the stream type to zero
 
-ls_rare = vector("list", nrow(nu_rate_cutoff))
-
-for (i in 1:nrow(nu_rate_cutoff)){
-        ls_loop        = list()
-        ls_loop$rt     = nu_rate_cutoff$ls_bd_20[i]
-        ls_loop$cutoff = nu_rate_cutoff$one_percent[i]
-        ls_loop$spe    = ls_mzb$spe[ls_bd_20 == ls_loop$rt]
-        ls_loop$gen    = ls_mzb$gen[ls_bd_20 == ls_loop$rt]
-        ls_loop$foh    = ls_mzb$foh[ls_bd_20 == ls_loop$rt]
-        ls_loop$spe_sum = colSums(x = ls_loop$spe[,-(1:2)])
-        ls_loop$gen_sum = colSums(x = ls_loop$gen[,-(1:2)])
-        ls_loop$foh_sum = colSums(x = ls_loop$foh[,-(1:2)])
-        ls_loop$spe_names = names(ls_loop$spe_sum)[ls_loop$spe_sum < ls_loop$cutoff]
-        ls_loop$gen_names = names(ls_loop$gen_sum)[ls_loop$gen_sum < ls_loop$cutoff]
-        ls_loop$foh_names = names(ls_loop$foh_sum)[ls_loop$foh_sum < ls_loop$cutoff]
-        
-        
-        if (sum(ls_mzb$spe[ls_bd_20 == ls_loop$rt, lapply(.SD, FUN = sum), .SDcols = ls_loop$spe_names]) != 0){
-                for (k in seq_along(ls_loop$spe_names)){
-                        ls_mzb$spe[ls_bd_20 == ls_loop$rt, ls_loop$spe_names[k] := 0]
-                }
-        }
-        if (sum(ls_loop$gen[, lapply(.SD, FUN = sum), .SDcols = ls_loop$gen_names]) != 0){
-                for (k in seq_along(ls_loop$gen_names)){
-                        ls_mzb$gen[ls_bd_20 == ls_loop$rt, ls_loop$gen_names[k] := 0]
-                }
-        }
-        if (sum(ls_loop$foh[, lapply(.SD, FUN = sum), .SDcols = ls_loop$foh_names]) != 0){
-                for (k in seq_along(ls_loop$foh_names)){
-                        ls_mzb$foh[ls_bd_20 == ls_loop$rt, ls_loop$foh_names[k] := 0]
-                }
-        }
-        
-        ls_rare[[i]]$spe = ls_loop$spe_names
-        ls_rare[[i]]$gen = ls_loop$gen_names
-        ls_rare[[i]]$foh = ls_loop$foh_names
-        names(ls_rare)[i] = ls_loop$rt
-
-        print(i)
-        rm(ls_loop,i);gc()
-}
-
-saveRDS(ls_rare, file.path(DIR$pd, "0x_rare_taxa_list.RDS"))
-
-rm(nu_rate_cutoff)
+# ls_rare = vector("list", nrow(nu_rate_cutoff))
+# 
+# for (i in 1:nrow(nu_rate_cutoff)){
+#         ls_loop        = list()
+#         ls_loop$rt     = nu_rate_cutoff$ls_bd_20[i]
+#         ls_loop$cutoff = nu_rate_cutoff$one_percent[i]
+#         ls_loop$spe    = ls_mzb$spe[ls_bd_20 == ls_loop$rt]
+#         ls_loop$gen    = ls_mzb$gen[ls_bd_20 == ls_loop$rt]
+#         ls_loop$foh    = ls_mzb$foh[ls_bd_20 == ls_loop$rt]
+#         ls_loop$spe_sum = colSums(x = ls_loop$spe[,-(1:2)])
+#         ls_loop$gen_sum = colSums(x = ls_loop$gen[,-(1:2)])
+#         ls_loop$foh_sum = colSums(x = ls_loop$foh[,-(1:2)])
+#         ls_loop$spe_names = names(ls_loop$spe_sum)[ls_loop$spe_sum < ls_loop$cutoff]
+#         ls_loop$gen_names = names(ls_loop$gen_sum)[ls_loop$gen_sum < ls_loop$cutoff]
+#         ls_loop$foh_names = names(ls_loop$foh_sum)[ls_loop$foh_sum < ls_loop$cutoff]
+#         
+#         
+#         if (sum(ls_mzb$spe[ls_bd_20 == ls_loop$rt, lapply(.SD, FUN = sum), .SDcols = ls_loop$spe_names]) != 0){
+#                 for (k in seq_along(ls_loop$spe_names)){
+#                         ls_mzb$spe[ls_bd_20 == ls_loop$rt, ls_loop$spe_names[k] := 0]
+#                 }
+#         }
+#         if (sum(ls_loop$gen[, lapply(.SD, FUN = sum), .SDcols = ls_loop$gen_names]) != 0){
+#                 for (k in seq_along(ls_loop$gen_names)){
+#                         ls_mzb$gen[ls_bd_20 == ls_loop$rt, ls_loop$gen_names[k] := 0]
+#                 }
+#         }
+#         if (sum(ls_loop$foh[, lapply(.SD, FUN = sum), .SDcols = ls_loop$foh_names]) != 0){
+#                 for (k in seq_along(ls_loop$foh_names)){
+#                         ls_mzb$foh[ls_bd_20 == ls_loop$rt, ls_loop$foh_names[k] := 0]
+#                 }
+#         }
+#         
+#         ls_rare[[i]]$spe = ls_loop$spe_names
+#         ls_rare[[i]]$gen = ls_loop$gen_names
+#         ls_rare[[i]]$foh = ls_loop$foh_names
+#         names(ls_rare)[i] = ls_loop$rt
+# 
+#         print(i)
+#         rm(ls_loop,i);gc()
+# }
+# 
+# saveRDS(ls_rare, file.path(DIR$pd, "0x_rare_taxa_list.RDS"))
+# 
+# rm(nu_rate_cutoff)
 
 # old approach  # co 25.11.20
 # rare_id_all_spe      <- which(colSums(x = bio2_all_spe[,-1]) < nu_rate_cutoff) + 1

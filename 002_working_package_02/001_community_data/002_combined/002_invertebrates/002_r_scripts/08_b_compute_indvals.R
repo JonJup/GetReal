@@ -49,7 +49,7 @@ rm(j, ls_mzb);gc()
 
 # clean data --------------------------------------------------------------
 # How well a stream type is represented was decided visudt_ally based on sample site /stream type maps
-ch_g   = paste0("RT", c(4,5,9:13, 16))
+ch_g   = paste0("RT", c(4,5,9:12, 16))
 ch_m   = paste0("RT", c(1:3, 8, 14, 15, 18))
 ch_acc = c(ch_g,ch_m)
 
